@@ -1,0 +1,15 @@
+{
+  "name": "next-starter-heydays",
+  "version": "0.0.4",
+  "private": true,
+  "scripts": {
+    "start": "cd web && yarn dev",
+    "cms": "yarn workspace cms start"
+  },
+  "workspaces": [
+    "cms",
+    "web"
+  ],
+  "devDependencies": {},
+  "dependencies": {}
+}
