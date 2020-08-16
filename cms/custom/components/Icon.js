@@ -1,5 +1,5 @@
 import React from 'react'
-import cc from 'classcat'
+// import cc from 'classcat'
 
 /*
  *   Usage
@@ -19,11 +19,11 @@ const Wrapper = ({ children, className, size = 40 }) => {
       width={`${size}px`}
       height={`${size}px`}
       viewBox="0 0 24 24"
-      className={cc({
-        Icon: true,
-        [className]: className,
-        [`Icon--${size}`]: size
-      })}
+      // className={cc({
+      //   Icon: true,
+      //   [className]: className,
+      //   [`Icon--${size}`]: size
+      // })}
     >
       {children}
     </svg>

@@ -1,6 +1,5 @@
 import React from 'react'
 import BaseBlockContent from '@sanity/block-content-to-react'
-import cc from 'classcat'
 
 import LinkResolver from '@heydays/LinkResolver'
 import Quote from './Quote'
@@ -103,12 +102,7 @@ export const serializers = {
 
 const Editor = ({ blocks, className }) => {
   return (
-    <div
-      className={cc({
-        Editor: true,
-        [className]: className
-      })}
-    >
+    <div className={`Editor ${className ? className : ''}`}>
       <BaseBlockContent
         className="Editor__blocks"
         blocks={blocks}
