@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import Layout from '../Layout'
-
 const templates = {
   article: 'Article',
   frontpage: 'Page',
@@ -34,9 +32,5 @@ export default function TemplateResolver({ page }) {
 
   if (!Component) return <div style={{ minHeight: '100vh' }} />
 
-  return (
-    <Layout page={page}>
-      <Component {...page} />
-    </Layout>
-  )
+  return <Component {...page} />
 }

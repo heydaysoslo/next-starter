@@ -10,14 +10,21 @@ const Switch = ({ className, onClick, state, size }) => {
       onClick={onClick}
       onMouseDown={e => e.preventDefault()}
     >
-      <div className="inner">
+      <motion.div
+        className="inner"
+        animate={
+          state ? { background: 'darkslategray' } : { background: 'cornsilk' }
+        }
+      >
         <motion.div
           className="switch"
+          whileHover={{ scale: 1.25 }}
+          whileTap={{ scale: 1.1 }}
           animate={state ? { x: size - size / 2.2 } : { x: 0 }}
         >
           <Emoji>{state ? '🌚' : '🌝'}</Emoji>
         </motion.div>
-      </div>
+      </motion.div>
     </button>
   )
 }
@@ -32,15 +39,25 @@ export default styled(Switch)(
     .inner {
       width: ${size}px;
       border-radius: ${size / 2.2}px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
       margin: 0 ${size / 4};
     }
 
     .switch {
+      position: relative;
       width: ${size / 2.2}px;
       height: ${size / 2.2}px;
       border-radius: ${size / 2.2}px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateX(-50%);
+        height: 100%;
+        width: ${size * 2}px;
+        z-index: -1;
+      }
     }
   `
 )

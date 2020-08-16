@@ -8,7 +8,6 @@ https://cloudinary.com/documentation/image_transformation_reference
 */
 
 const CloudinaryImage = ({ node, aspectRatio = null }) => {
-  console.log('CloudinaryImage -> node', node)
   if (!node) {
     return null
   }

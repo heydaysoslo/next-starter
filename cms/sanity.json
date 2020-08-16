@@ -4,8 +4,15 @@
     "projectId": "4tzgku1d",
     "dataset": "production"
   },
+  "env": {
+    "development": {
+      "api": {
+        "dataset": "production"
+      }
+    }
+  },
   "project": {
-    "name": "Heydays studio"
+    "name": "Next starter"
   },
   "plugins": [
     "@sanity/base",

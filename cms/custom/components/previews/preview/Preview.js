@@ -27,7 +27,10 @@ class Preview extends React.PureComponent {
       window.location.host.includes('localhost') ||
       window.location.host.includes('.local')
 
-    const url = `${isLocal ? '/preview' : '/preview'}${displayed._id}`
+    const url = `${isLocal ? 'http://localhost:3000/preview/' : '/preview'}${
+      displayed._id
+    }`
+    console.log('Preview -> render -> url', url)
 
     if (!displayed._id) return null
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import Link from 'next/link'
 import useLinkResolver from '../hooks/useLinkResolver'
 
 export const resolveLinkText = ({ children, customText, link }) => {
@@ -30,8 +30,8 @@ export const InternalLink = ({
   }
 
   return (
-    <Link to={link} className={className} {...props}>
-      {linkText || children || page.title}
+    <Link href={link} className={className} {...props}>
+      <a>{linkText || children || page.title}</a>
     </Link>
   )
 }
@@ -113,24 +113,3 @@ const LinkResolver = ({ link, className, children, ...props }) => {
 }
 
 export default LinkResolver
-
-export const query = graphql`
-  fragment Link on SanityArticleOrPage {
-    ... on SanityPage {
-      _id
-      _type
-      title
-      slug {
-        current
-      }
-    }
-    ... on SanityArticle {
-      _id
-      _type
-      title
-      slug {
-        current
-      }
-    }
-  }
-`

@@ -1,40 +1,18 @@
-import Head from 'next/head'
-import sanity from '../lib/sanity'
-import CloudinaryMediaResolver from '../components/resolvers/CloudinaryMediaResolver'
-
-const query = `*[_type == "frontpage"] {
-  _id,
-  title,
-  mainImage
-}[0]
-`
+import { getFrontpage, getArticles } from '../lib/sanity'
+import useFetch from '@heydays/useFetch'
+import TemplateResolver from '../components/resolvers/TemplateResolver'
 
 export const getStaticProps = async () => {
-  const data = await sanity.fetch(query)
+  const data = await getFrontpage()
+  const articles = await getArticles()
   return {
-    props: { data } // will be passed to the page component as props
+    props: { frontpage: data[0].frontpage, articles }
   }
 }
 
-export default function Home({ data }) {
-  const { title, mainImage } = data
-  const [res, setRes] = React.useState(null)
+export default function Home({ frontpage, articles }) {
+  const { response: res, error, isLoading } = useFetch('/api/hello')
+  console.log('Home -> res', res)
 
-  React.useEffect(() => {
-    fetch('/api/hello')
-      .then(res => res.json())
-      .then(res => setRes(res))
-  }, [])
-
-  return (
-    <div>
-      <Head>
-        <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <h1>{title}</h1>
-      {res?.name && <p>Hello, {res.name}</p>}
-      <CloudinaryMediaResolver node={mainImage} />
-    </div>
-  )
+  return <TemplateResolver page={frontpage} />
 }
