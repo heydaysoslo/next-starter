@@ -23,7 +23,7 @@ const PAGEBUILDER = `
 pagebuilder {
   sections[]{
     seeAllLink {
-      reference->{slug, title},
+      reference->{slug, title,_type},
       ...
     },
     cardsList[]{
