@@ -3,7 +3,6 @@ const { extract } = require('oembed-parser')
 
 export default (req, res) => {
   const { url } = JSON.parse(req.body)
-  console.log('url', url)
   extract(url)
     .then(data => {
       res.statusCode = 200
