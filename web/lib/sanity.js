@@ -1,5 +1,4 @@
 import sanityClient from '@sanity/client'
-console.log('AKLSJFSALJFLKASJFLAKSJ', process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)
 
 const options = {
   // Find your project ID and dataset in `sanity.json` in your studio project
@@ -81,20 +80,7 @@ export const getPreview = params => {
       person->,
       ...
     },
-    pagebuilder {
-      sections[]{
-        seeAllLink {
-          reference->{slug, title, _type},
-          ...
-        },
-        cardsList[]{
-          content->{...},
-          ...
-        },
-        ...
-      },
-      ...
-    },
+    ${PAGEBUILDER},
     ...
   } | order(_updatedAt desc)
   `
