@@ -9,7 +9,6 @@ const Oembed = ({ url, className }) => {
     method: 'POST',
     body: JSON.stringify({ url })
   })
-  console.log('Oembed -> embed', embed)
   // if (embed?.result?.provider_name) {
   //   console.info(
   //     `Provider ${embed?.result?.provider_name} is not allowed. Check isProviderAllowed()`
