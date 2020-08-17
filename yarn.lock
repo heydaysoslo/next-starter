@@ -8648,6 +8648,13 @@ observable-props@^2.0.0:
     is-observable "^0.2.0"
     xtend "^4.0.1"
 
+oembed-parser@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/oembed-parser/-/oembed-parser-1.4.0.tgz#ef68c40d25645281ae877a015616bf1ec26381c8"
+  integrity sha512-w318S9APsaSf2Ec2/afpxag0Irpk33HwNFJeNteVwDRIo859JaKgydkk/Ir+Hy/7kh20qH37dvl8GtC6yL03zg==
+  dependencies:
+    node-fetch "^2.6.0"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"

@@ -16,6 +16,7 @@
     "framer-motion": "^2.4.2",
     "lazysizes": "^5.2.2",
     "next": "9.5.2",
+    "oembed-parser": "^1.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-intersection-observer": "^8.26.2",
