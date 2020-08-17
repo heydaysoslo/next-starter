@@ -10,6 +10,7 @@ import TextImageSplit from './TextImageSplit'
 import VideoSection from './VideoSection'
 import Tabs from '../elements/Tabs'
 import { spacing } from '../../styles/utilities'
+import Stagger from '@heydays/animation/Stagger'
 
 const sectionTypes = {
   section: Section,
@@ -31,22 +32,24 @@ const StyledPageBuilder = styled.div`
 const PageBuilder = ({ sections }) => {
   return (
     <StyledPageBuilder>
-      {sections?.map((section, index) => {
-        const Component = sectionTypes[section._type] || null
-        return Component ? (
-          <div key={section._key} className="PageBuilder__item">
-            <Component
-              {...section}
-              prevComp={sections[index - 1] ? sections[index - 1] : null}
-              nextComp={sections[index + 1] ? sections[index + 1] : null}
-            />
-          </div>
-        ) : (
-          <p key={section._key} style={{ background: 'yellow' }}>
-            Component {section._type} not found
-          </p>
-        )
-      })}
+      <Stagger>
+        {sections?.map((section, index) => {
+          const Component = sectionTypes[section._type] || null
+          return Component ? (
+            <div key={section._key} className="PageBuilder__item">
+              <Component
+                {...section}
+                prevComp={sections[index - 1] ? sections[index - 1] : null}
+                nextComp={sections[index + 1] ? sections[index + 1] : null}
+              />
+            </div>
+          ) : (
+            <p key={section._key} style={{ background: 'yellow' }}>
+              Component {section._type} not found
+            </p>
+          )
+        })}
+      </Stagger>
     </StyledPageBuilder>
   )
 }
