@@ -1,5 +1,7 @@
 import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
+import { motion, AnimatePresence } from 'framer-motion'
+
 import 'lazysizes/plugins/respimg/ls.respimg.js'
 import 'lazysizes/plugins/attrchange/ls.attrchange.js'
 import 'lazysizes'
@@ -17,7 +19,9 @@ function MyApp({ Component, pageProps }) {
       />
       <Header isDark={isDark} setIsDark={setIsDark} />
       <GlobalStyle />
-      <Component {...pageProps} />
+      <AnimatePresence exitBeforeEnter>
+        <Component {...pageProps} />
+      </AnimatePresence>
     </ThemeProvider>
   )
 }
