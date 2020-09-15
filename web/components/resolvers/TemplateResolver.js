@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 const templates = {
   article: 'Article',
-  frontpage: 'Page',
+  frontpage: 'FrontPage',
   contact: 'ContactPage',
   news: 'NewsPage',
   default: 'Page'

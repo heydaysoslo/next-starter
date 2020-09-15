@@ -5,11 +5,13 @@ import Pagebuilder from '../pagebuilder/Pagebuilder'
 import { H1, P } from '@heydays/Typography'
 import Container from '@heydays/Container'
 import { spacing } from '../../styles/utilities'
+import Button from '@heydays/Button'
 
-const FrontPage = ({ className, title, content, pagebuilder, ...props }) => {
+const FrontPage = ({ className, title, pagebuilder }) => {
   return (
     <div className={className}>
       <Container className="Page__container">
+        <Button modifiers="active">Button</Button>
         <header className="Page__header">
           <P>FrontPage</P>
           {title && <H1>{title}</H1>}

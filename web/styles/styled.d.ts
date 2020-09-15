@@ -1,6 +1,8 @@
 // import original module declarations
 import 'styled-components'
 import { BorderProps, BreakPoints, responsiveFontDeclaration } from '../types'
+// https://styled-components.com/docs/api#usage-with-typescript
+import {} from 'styled-components/cssprop'
 
 // and extend them!
 declare module 'styled-components' {
@@ -13,7 +15,7 @@ declare module 'styled-components' {
       border?: string
       background?: string
     }
-    breakpoints: Breakpoints
+    breakpoints: BreakPoints
     spacingUnit: {
       xs?: string
       sm?: string

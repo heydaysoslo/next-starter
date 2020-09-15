@@ -1,13 +1,13 @@
 import React from 'react'
-import { applyStyleModifiers } from 'styled-components-modifiers'
 import styled, { css } from 'styled-components'
+import { bp, color, applyModifier } from '../../styles/utilities'
 
-type Modifiers = 'secondary' | 'small'
+type Modifiers = 'secondary' | 'small' | 'active'
 
 type Props = {
   children: React.ReactNode
   className?: string
-  modifiers?: Modifiers | Modifiers[]
+  modifiers?: Modifiers | Modifiers[] | undefined
   onClick?: () => void
 }
 
@@ -23,36 +23,42 @@ const Button: React.FC<Props> = ({ children, className, ...props }) => {
   )
 }
 
-const BUTTON_MODIFIERS = {
-  secondary: () => css`
-    background: orange;
-    border-color: orange;
-
-    &:hover {
-      background-color: none;
-      color: orange;
-    }
-  `,
-  small: () => css`
-    padding: 10px;
-  `
-}
-
-export default styled(Button)(
+export default styled(Button)<Props>(
+  // @ts-ignore
   ({ theme }) => css`
     appearance: none;
     background: none;
     display: inline-block;
-    border: 1px solid ${theme.colors.border};
+    border: 2px solid transparent;
+    background-color: ${theme.colors.text};
+    color: ${theme.colors.background};
     font-size: 2rem;
     padding: 20px;
     transition: 0.15s ease background-color, color;
+    cursor: pointer;
 
     &:hover {
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
+      border-color: black;
     }
 
-    ${applyStyleModifiers(BUTTON_MODIFIERS)}
+    ${bp.above.md`
+      background: orange;
+    `}
+
+    ${applyModifier(
+      'small',
+      css`
+        padding: 0;
+      `
+    )}
+
+    ${applyModifier(
+      'active',
+      css`
+        background: orange;
+      `
+    )}
   `
 )

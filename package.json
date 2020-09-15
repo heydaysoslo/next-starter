@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cd web && yarn dev",
     "build": "cd web && yarn build",
-    "cms": "yarn workspace cms start"
+    "cms": "yarn workspace cms start",
+    "prod": "cd web && yarn start"
   },
   "workspaces": [
     "cms",

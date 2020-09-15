@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css, CSSObject } from 'styled-components'
 import { spacing } from './Spacing'
 
 /**
@@ -57,4 +57,8 @@ export const parseCssUnit = cssUnit => {
   }
   const unit = cssUnit.replace(/^[-\d.]+/, '')
   return { number, unit }
+}
+
+export const applyModifier = (modifier, css) => ({ modifiers }) => {
+  return modifiers === modifier || modifiers.includes(modifier) ? css : null
 }

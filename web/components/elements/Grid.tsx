@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
 import { bp, spacing } from '../../styles/utilities'
 import {
   FlexBoxAlignItems,
@@ -11,7 +11,6 @@ import {
 
 type Props = {
   className?: string
-  columns?: ResponsiveColumns | number // This will override span in GridItem
   reverse?: ResponsiveReverse | boolean
   align?: FlexBoxAlignItems
   justify?: FlexBoxJustifyContent
@@ -21,10 +20,12 @@ type Props = {
   gapX?: object | boolean
 }
 
+type Columns = ResponsiveColumns | number
+
 type GridItemProps = {
   className?: string
-  offset?: ResponsiveColumns | number
-  span?: ResponsiveColumns | number
+  offset?: Columns
+  span?: Columns
 }
 
 const BaseGrid: React.FC<Props> = ({ className, children }) => {
@@ -47,7 +48,10 @@ const BaseGridItem: React.FC<GridItemProps> = ({ children, className }) => {
   return <div className={className}>{children}</div>
 }
 
-const setGridItemSpan = ({ span, theme }) => {
+const setGridItemSpan: ({
+  span: Columns,
+  theme: DefaultTheme
+}) => FlattenSimpleInterpolation | any[] | undefined = ({ span, theme }) => {
   if (span === 'auto') {
     return css`
       flex: 0 0 auto;
@@ -109,22 +113,6 @@ export const GridItem = styled(BaseGridItem)<GridItemProps>(
   `
 )
 
-const setResponsiveColumns = columns => {
-  switch (typeof columns) {
-    case 'number':
-      return css`
-        flex-basis: ${100 / columns}%;
-        max-width: ${100 / columns}%;
-      `
-    case 'object':
-      return Object.keys(columns).map(
-        key => bp.above[key]`
-          ${setResponsiveColumns(columns[key])};
-        `
-      )
-  }
-}
-
 /*
 Possible to pass the following units:
 - Hard unit: vw, px, %, rem, etc
@@ -156,7 +144,7 @@ const setResponsiveGaps = ({ gap, cssProps, multiplier }) => {
 }
 
 export default styled(BaseGrid)<Props>(
-  ({ columns, gap, gapY, gapX, reverse, align, justify, theme }) => css`
+  ({ gap, gapY, gapX, reverse, align, justify, theme }) => css`
     display: flex;
     flex: 0 1 auto;
     flex-direction: ${reverse ? 'row-reverse' : 'row'};
@@ -230,8 +218,6 @@ export default styled(BaseGrid)<Props>(
           multiplier: 1,
           cssProps: 'pb'
         })}
-
-        ${columns && setResponsiveColumns(columns)}
 
     }
   `
