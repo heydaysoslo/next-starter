@@ -60,5 +60,7 @@ export const parseCssUnit = cssUnit => {
 }
 
 export const applyModifier = (modifier, css) => ({ modifiers }) => {
+  console.log('applyModifier -> modifiers', modifiers)
+  if (!modifiers) return null
   return modifiers === modifier || modifiers.includes(modifier) ? css : null
 }
