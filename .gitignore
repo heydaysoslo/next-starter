@@ -7,14 +7,9 @@ node_modules/
 # lerna files
 /lerna-debug.log
 
-# Gatsby
-.cache
-/web/public
+# Next files
+.next
 
 # Env files
 .env
 
-# Theme
-# /gatsby-theme-heydays
-# Local Netlify folder
-.netlify
