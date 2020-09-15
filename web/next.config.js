@@ -13,7 +13,7 @@ const nextConfig = {
     // Perform customizations to webpack config
     config.plugins.push(
       new FaviconsWebpackPlugin({
-        logo: './public/favicon/favicon.png',
+        logo: path.resolve(__dirname, 'public/favicon/favicon.png'),
         inject: true
       })
     )
