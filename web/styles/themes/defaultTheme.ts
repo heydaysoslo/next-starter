@@ -1,7 +1,10 @@
 import { css, DefaultTheme } from 'styled-components'
 
-import { remSize } from './utilities/Converters'
-import { BorderProps } from '../types'
+import { remSize } from '../utilities/Converters'
+import breakpointsFactory from '../utilities/breakpointsFactory'
+import spacingFactory from '../utilities/spacingFactory'
+import fontFactory from 'styles/utilities/fontFactory'
+import color from 'styles/utilities/Colors'
 
 export const colors = {
   primary: 'red',
@@ -11,7 +14,7 @@ export const colors = {
   background: 'white'
 }
 
-export const breakpoints = {
+export const breakpoints: DefaultTheme['breakpoints'] = {
   xs: 0,
   sm: 550,
   md: 870,
@@ -20,17 +23,19 @@ export const breakpoints = {
   xxl: 1800
 }
 
-export const spacingUnit = {
+export const spacingUnit: DefaultTheme['spacingUnit'] = {
   xs: remSize(5),
   sm: remSize(10),
   md: remSize(15),
   lg: remSize(40),
-  xl: remSize(80),
   section: remSize(160),
-  gutter: remSize(40)
+  gutter: remSize(40),
+  gap: remSize(20),
+  container: remSize(1440),
+  pixel: '1px'
 }
 
-export const responsiveSpacing = {
+export const responsiveSpacing: DefaultTheme['responsiveSpacing'] = {
   xs: {
     xs: remSize(5),
     lg: remSize(10)
@@ -64,11 +69,11 @@ export const responsiveSpacing = {
   }
 }
 
-export const grid = {
+export const grid: DefaultTheme['grid'] = {
   columns: 12
 }
 
-export const fontFamily = {
+export const fontFamily: DefaultTheme['fontFamily'] = {
   sans: `'SuisseIntl', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;`,
   serif: `'Suisse Works', times, serif`
@@ -78,7 +83,7 @@ const fontDefs = {
   xs: '16px/1.2'
 }
 
-export const responsiveFonts = {
+export const responsiveFonts: DefaultTheme['responsiveFonts'] = {
   small: fontDefs.xs,
   body: {
     xs: fontDefs.xs,
@@ -107,7 +112,7 @@ export const responsiveFonts = {
   }
 }
 
-export const aspect = {
+export const aspect: DefaultTheme['aspect'] = {
   portrait: 7 / 6,
   landscape: 2 / 3,
   square: 1,
@@ -115,65 +120,67 @@ export const aspect = {
   panorama: 11 / 16
 }
 
-export const contentWidth = {
+export const contentWidth: DefaultTheme['contentWidth'] = {
   small: remSize(600),
   large: remSize(1200)
 }
 
-export const icons = {
+export const icons: DefaultTheme['icons'] = {
   small: remSize(40),
   medium: remSize(80),
   large: remSize(160)
 }
 
-export const trans = {
+export const trans: DefaultTheme['trans'] = {
   fast: `0.1s ease`,
   slow: `1s ease`
 }
 
-export const borderWidth = {
+export const borderWidth: DefaultTheme['borderWidth'] = {
   small: remSize(1),
   large: remSize(3)
 }
 
-export const border = {
-  large: (prop: BorderProps) => ({ theme }: { theme: DefaultTheme }) => css`
-    ${prop}: ${theme.borderWidth.large} solid ${theme.colors.border};
-  `,
-  small: (prop: BorderProps) => ({ theme }: { theme: DefaultTheme }) => css`
-    ${prop}: ${theme.borderWidth.small} solid ${theme.colors.border};
-  `
+/**
+ * Usage:
+ * {
+ *  border-left: ${theme.border.large()}
+ * }
+ */
+export const border: DefaultTheme['border'] = {
+  large: () => ({ theme }) =>
+    `${theme.borderWidth.large} solid ${theme.colors.border};`,
+  small: () => ({ theme }) =>
+    `${theme.borderWidth.small} solid ${theme.colors.border};`
 }
 
-export const theme: DefaultTheme = {
+const bp = breakpointsFactory(breakpoints)
+const spacing = spacingFactory({
+  spacingUnits: responsiveSpacing,
+  bp: {
+    sm: bp.sm,
+    md: bp.md,
+    lg: bp.lg,
+    xl: bp.xl,
+    xxl: bp.xxl
+  }
+})
+
+const fonts = fontFactory({ responsiveFonts, bp })
+
+export default {
   colors,
-  breakpoints,
+  color,
+  bp,
   spacingUnit,
   grid,
   fontFamily,
   aspect,
-  responsiveFonts,
+  fonts,
+  spacing,
   contentWidth,
   trans,
   icons,
   borderWidth,
   border
 }
-
-export const darkTheme = {
-  ...theme,
-  colors: {
-    primary: 'green',
-    secondary: 'orange',
-    text: 'white',
-    border: 'red',
-    background: 'rgba(0,0,0,.8)'
-  },
-  defaultStyle: ({ theme }) => css`
-    body {
-      background: ${theme?.colors?.background};
-    }
-  `
-}
-
-export default theme

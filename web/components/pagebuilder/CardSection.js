@@ -13,7 +13,7 @@ const CardSection = ({ title, seeAllLink, cardsList = [], ...props }) => {
         {cardsList.map(card => {
           const { content, cardOverride } = card
           return (
-            <GridItem span={{ xs: 12, md: 4 }} key={card?._key}>
+            <GridItem gap={true} span={{ xs: 12, md: 4 }} key={card?._key}>
               <Animate>
                 <Card
                   title={cardOverride?.title || content?.title}

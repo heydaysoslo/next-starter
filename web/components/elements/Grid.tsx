@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
-import { bp, spacing } from '../../styles/utilities'
 import {
   FlexBoxAlignItems,
   ResponsiveColumns,
@@ -61,10 +60,16 @@ const setGridItemSpan: ({
   }
   switch (typeof span) {
     case 'object':
-      return Object.keys(span).map(
-        key => bp.above[key]`
-        ${setGridItemSpan({ span: span[key], theme })};
-          `
+      return Object.keys(span).map(key =>
+        key === 'xs'
+          ? css`
+              ${setGridItemSpan({ span: span[key], theme })};
+            `
+          : css`
+              ${theme.bp[key]} {
+                ${setGridItemSpan({ span: span[key], theme })};
+              }
+            `
       )
     case 'number':
       if (span >= 1) {
@@ -84,10 +89,16 @@ const setGridItemSpan: ({
 const setGridItemOffset = ({ offset, theme }) => {
   switch (typeof offset) {
     case 'object':
-      return Object.keys(offset).map(
-        key => bp.above[key]`
-        ${setGridItemOffset({ offset: offset[key], theme })};
-          `
+      return Object.keys(offset).map(key =>
+        key === 'xs'
+          ? css`
+              ${setGridItemOffset({ offset: offset[key], theme })};
+            `
+          : css`
+              ${theme.bp[key]} {
+                ${setGridItemOffset({ offset: offset[key], theme })};
+              }
+            `
       )
     case 'number':
       if (offset >= 1) {
@@ -119,26 +130,32 @@ Possible to pass the following units:
 - Theme spacing unit: 'gutter', 'lg'
 - Boolean: true (default spacing unit), false (no gutter at all)
 */
-const setResponsiveGaps = ({ gap, cssProps, multiplier }) => {
+const setResponsiveGaps = ({ gap, cssProps, multiplier }) => ({ theme }) => {
   switch (typeof gap) {
     case 'object':
-      return Object.keys(gap).map(
-        key => bp.above[key]`
-          ${setResponsiveGaps({ gap: gap[key], multiplier, cssProps })}
-        `
+      return Object.keys(gap).map(key =>
+        key === 'xs'
+          ? css`
+              ${setResponsiveGaps({ gap: gap[key], multiplier, cssProps })}
+            `
+          : css`
+              ${theme.bp[key]} {
+                ${setResponsiveGaps({ gap: gap[key], multiplier, cssProps })}
+              }
+            `
       )
     case 'number':
-      return spacing({ val: `${gap}px`, cssProps, multiplier })
+      return theme.spacing({ val: `${gap}px`, cssProps, multiplier })
     case 'boolean':
       const defaultGapUnit = 'gutter'
-      return spacing[defaultGapUnit](cssProps, {
+      return theme.spacing[defaultGapUnit](cssProps, {
         multiplier: gap ? multiplier : 0
       })
     default:
-      if (spacing[gap]) {
-        return spacing[gap](cssProps, { multiplier })
+      if (theme.spacing[gap]) {
+        return theme.spacing[gap](cssProps, { multiplier })
       } else {
-        return spacing({ val: gap, cssProps, multiplier })
+        return theme.spacing({ val: gap, cssProps, multiplier })
       }
   }
 }

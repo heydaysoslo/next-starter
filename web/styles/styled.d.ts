@@ -1,38 +1,98 @@
+// import {} from 'styled-components'
+// import theme from '../themes/DefaultTheme'
+// declare module 'styled-components' {
+//   type Theme = typeof theme
+//   export interface DefaultTheme extends Theme {}
+// }
+
 // import original module declarations
 import 'styled-components'
-import { BorderProps, BreakPoints, responsiveFontDeclaration } from '../types'
+import {
+  BorderProps,
+  breakpoints,
+  BreakPoints,
+  spacing,
+  spacingProps
+} from '../types'
 // https://styled-components.com/docs/api#usage-with-typescript
 import {} from 'styled-components/cssprop'
+import {
+  CSSObject,
+  CSSProperties,
+  FlattenSimpleInterpolation,
+  FlattenSimpleInterpolation,
+  FlattenSimpleInterpolation,
+  FlattenSimpleInterpolation
+} from 'styled-components'
+
+type bpAbove = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+type bpBelow = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+type bpOnly = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+
+export type FontDeclarationObject = {
+  [key: string]:
+    | string
+    | {
+        size: string
+        css?: CSSProp
+      }
+}
+
+export type FontDeclaration = string | FontDeclarationObject
+
+const range = [...new Array(20)].map((_, i) => i * 0.1) as const
+type Percent = typeof range
 
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       main?: string
-      primary?: string
-      secondary?: string
+      primary: string
+      secondary: string
       text?: string
       border?: string
       background?: string
     }
-    breakpoints: BreakPoints
-    spacingUnit: {
-      xs?: string
-      sm?: string
-      md?: string
-      lg?: string
-      xl?: string
-      section?: string
-      gutter?: string
+    color: {
+      (color: any): any
+      darken(color: string, percent: number): any
+      lighten(color: string, percent: number): any
+      rotate(color: string, degree: number): any
+      rgba(color: string, alpha: number): any
+      hsla(color: string, alpha: number): any
+      isDark(color: string): any
+      isLight(color: string): any
     }
-    spacing?: {
-      xs?: (props?: string) => void | any
-      sm?: (props?: string) => void | any
-      md?: (props?: string) => void | any
-      lg?: (props?: string) => void | any
-      xl?: (props?: string) => void | any
-      section?: (props?: string) => void | any
-      gutter?: (props?: string) => void | any
+    breakpoints: BreakPoints
+    bp: {
+      sm: string
+      md: string
+      lg: string
+      xl: string
+      xxl: string
+      below: {
+        [bp in bpBelow]: string
+      }
+      only: {
+        [bp in bpOnly]: string
+      }
+    }
+    spacingUnit?: {
+      [size in spacing]: string
+    }
+    spacing: {
+      [size in spacing]: (
+        props: spacingProps | spacingProps[]
+      ) => FlattenSimpleInterpolation
+    }
+    responsiveSpacing?: {
+      [size in spacing]?: {
+        [bp in breakpoints]?: spacing | string
+      }
+    }
+    responsiveFonts?: {
+      [key: string]: FontDeclaration
     }
     grid?: {
       columns: number
@@ -41,7 +101,17 @@ declare module 'styled-components' {
       sans?: string
       serif?: string
     }
-    responsiveFonts: responsiveFontDeclaration
+    fonts: {
+      small: () => FlattenSimpleInterpolation
+      body: () => FlattenSimpleInterpolation
+      h1: () => FlattenSimpleInterpolation
+      h2: () => FlattenSimpleInterpolation
+      h3: () => FlattenSimpleInterpolation
+      h4?: () => FlattenSimpleInterpolation
+      h5?: () => FlattenSimpleInterpolation
+      title?: () => FlattenSimpleInterpolation
+      display?: () => FlattenSimpleInterpolation
+    }
     aspect: {
       portrait?: number
       landscape?: number
@@ -69,8 +139,8 @@ declare module 'styled-components' {
       large?: string
     }
     border: {
-      small?: (prop: BorderProps) => ({ theme: DefaultTheme }) => void
-      large?: (prop: BorderProps) => ({ theme: DefaultTheme }) => void
+      small?: () => ({ theme: DefaultTheme }) => string
+      large?: () => ({ theme: DefaultTheme }) => string
     }
     defaultStyle?: ({ theme }: { theme: DefaultTheme | undefined }) => void
   }

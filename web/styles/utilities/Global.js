@@ -1,8 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components'
-import themes from '../themes'
-import { bp } from './Breakpoints'
-import { fonts, globalTypeStyle } from './Typography'
-import { spacing } from './Spacing'
+import { globalTypeStyle } from './Typography'
 
 export const GlobalStyle = createGlobalStyle(
   ({ theme }) => css`
@@ -16,7 +13,7 @@ export const GlobalStyle = createGlobalStyle(
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       color: ${theme.colors.text};
-      ${fonts.body()}
+      ${theme.fonts.body()}
     }
 
     ::selection {
@@ -54,7 +51,7 @@ export const GlobalStyle = createGlobalStyle(
       padding: 0;
       vertical-align: baseline;
       font-family: ${theme.fontFamily.sans};
-      ${fonts.body()};
+      ${theme.fonts.body()};
 
       &:disabled {
         cursor: default;
@@ -68,7 +65,7 @@ export const GlobalStyle = createGlobalStyle(
       background: none;
       font-family: ${theme.fontFamily.sans};
 
-      ${fonts.body()}
+      ${theme.fonts.body()}
     }
 
     input {
@@ -116,15 +113,14 @@ export const GlobalStyle = createGlobalStyle(
       position: fixed;
       bottom: 0;
       left: 0;
-      ${spacing.xs('py,px')}
-      ${fonts.body()}
-
-      ${Object.keys(themes.breakpoints).map(
+      ${theme.spacing.xs(['py', 'px'])}
+      ${theme.fonts.body()}
+      /* ${Object.keys(theme.breakpoints).map(
         key =>
           css`
-            ${bp.above[key]`content: '${key}';`}
+            ${theme.bp[key]`content: '${key}';`}
           `
-      )}
+      )} */
     }
   `}
   `

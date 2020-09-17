@@ -2,7 +2,7 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import useMediaQuery from '../hooks/useMediaQuery'
 import useWindowSize from '../hooks/useWindowSize'
-import { breakpoints } from '../../styles/themes'
+import { breakpoints } from '../../styles/themes/defaultTheme'
 
 const StyledAspectContainer = styled.div`
   position: relative;

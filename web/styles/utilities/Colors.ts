@@ -1,6 +1,6 @@
 import Color from 'color'
 
-export const color = color => Color(color).hex()
+const color = color => Color(color).hex()
 
 color.darken = (color, percent) =>
   Color(color)
@@ -26,14 +26,14 @@ color.hsla = (color, alpha) =>
 color.isDark = color => Color(color).isDark()
 color.isLight = color => Color(color).isLight()
 
-export const createTints = (startColor, steps = 10) => {
-  const increment = 100 / steps
-  const color = Color(startColor).hsl()
-  return [...new Array(steps)].map((step, i) => {
-    color.color[2] = increment * (i + 1)
-    return color.hex()
-  })
-}
+// export const createTints = (startColor, steps = 10) => {
+//   const increment = 100 / steps
+//   const convertedColor = Color(startColor).hsl()
+//   return [...new Array(steps)].map((step, i) => {
+//     convertedColor.color[2] = increment * (i + 1)
+//     return convertedColor.hex()
+//   })
+// }
 
 export const createMixColorSteps = (startColor, endColor, steps = 10) => {
   const increment = 1 / steps
@@ -42,3 +42,5 @@ export const createMixColorSteps = (startColor, endColor, steps = 10) => {
     return color.mix(Color(endColor), increment * (i + 1))
   })
 }
+
+export default color

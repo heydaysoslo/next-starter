@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { bp, color, applyModifier } from '../../styles/utilities'
+import { applyModifier } from '../../styles/utilities'
 
 type Modifiers = 'secondary' | 'small' | 'active'
 
@@ -23,19 +23,21 @@ const Button: React.FC<Props> = ({ children, className, ...props }) => {
   )
 }
 
-export default styled(Button)<Props>(
-  // @ts-ignore
-  ({ theme }) => css`
+export default styled(Button)(
+  ({ theme: t }) => css`
     appearance: none;
     background: none;
     display: inline-block;
     border: 2px solid transparent;
-    background-color: ${theme.colors.text};
-    color: ${theme.colors.background};
+    background-color: ${t.colors.text};
+    color: ${t.colors.background};
     font-size: 2rem;
     padding: 20px;
     transition: 0.15s ease background-color, color;
     cursor: pointer;
+    ${t.fonts.h1()};
+    ${t.spacing.lg('mt')};
+    background-color: ${t.color.darken(t.colors.primary, 0.5)};
 
     &:hover {
       background-color: white;
@@ -43,9 +45,18 @@ export default styled(Button)<Props>(
       border-color: black;
     }
 
-    ${bp.above.md`
+    ${t.bp.sm} {
       background: orange;
-    `}
+    }
+    ${t.bp.md} {
+      background: red;
+    }
+    ${t.bp.lg} {
+      background: purple;
+    }
+    ${t.bp.xl} {
+      background: green;
+    }
 
     ${applyModifier(
       'small',
@@ -57,7 +68,7 @@ export default styled(Button)<Props>(
     ${applyModifier(
       'active',
       css`
-        background: orange;
+        /* background: orange; */
       `
     )}
   `

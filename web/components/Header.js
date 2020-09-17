@@ -24,9 +24,10 @@ const Header = ({ className, isDark, setIsDark }) => {
 }
 
 export default styled(Header)(
-  ({ theme }) => css`
+  ({ theme: t }) => css`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    ${t.spacing.md('mt')};
   `
 )

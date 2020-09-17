@@ -1,4 +1,33 @@
-import { CSSProp } from 'styled-components'
+// Helpers
+// https://github.com/microsoft/TypeScript/pull/40336
+
+export type breakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type spacing =
+  | 'xs'
+  | 'sm'
+  | 'md'
+  | 'lg'
+  | 'section'
+  | 'gutter'
+  | 'gap'
+  | 'container'
+  | 'pixel'
+export type spacingProps =
+  | 'm'
+  | 'ml'
+  | 'mt'
+  | 'mr'
+  | 'mb'
+  | 'my'
+  | 'mx'
+  | 'p'
+  | 'pl'
+  | 'pt'
+  | 'pr'
+  | 'pb'
+  | 'py'
+  | 'px'
+  | 'gap'
 
 export type FlexBoxAlignItems =
   | 'flex-start'
@@ -73,19 +102,4 @@ export type BreakPoints = {
   lg?: number
   xl?: number
   xxl?: number
-}
-
-export type FontDeclarationObject = {
-  [key: string]:
-    | string
-    | {
-        size: string
-        css?: CSSProp
-      }
-}
-
-export type FontDeclaration = string | FontDeclarationObject
-
-export type responsiveFontDeclaration = {
-  [key: string]: FontDeclaration
 }

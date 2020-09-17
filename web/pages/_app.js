@@ -6,7 +6,10 @@ import 'lazysizes/plugins/respimg/ls.respimg.js'
 import 'lazysizes/plugins/attrchange/ls.attrchange.js'
 import 'lazysizes'
 
-import theme, { darkTheme } from 'styles/themes'
+import 'styles/reset.css'
+
+import theme from 'styles/themes/defaultTheme'
+import darkTheme from 'styles/themes/darkTheme'
 import Header from 'components/Header'
 import SEO from 'components/SEO'
 import Favicon from 'components/Favicon'
