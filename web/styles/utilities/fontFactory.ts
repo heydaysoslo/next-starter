@@ -1,4 +1,7 @@
-import { css, DefaultTheme } from 'styled-components'
+import { css, FlattenSimpleInterpolation } from 'styled-components'
+
+import { responsiveFonts as fontDefs } from '../themes/defaultTheme'
+import { bp, BreakpointKeysWithoutXs } from './breakpointsFactory'
 
 import { remSize } from './Converters'
 
@@ -27,8 +30,32 @@ export const createFontSizeAndLineHeight = size => {
     ${size.css && size.css};
   `
 }
+type FontDefs = typeof fontDefs
+type FontSizes = keyof FontDefs
+type RequiredFontSizes = {
+  xs: string | { size: string; css: FlattenSimpleInterpolation }
+}
+type AllFontSizes = RequiredFontSizes &
+  {
+    [bp in BreakpointKeysWithoutXs]?:
+      | string
+      | { size: string; css: FlattenSimpleInterpolation }
+  }
 
-const fontFactory = ({ responsiveFonts, bp }) =>
+export type ResponsiveFonts = {
+  [size in FontSizes]: AllFontSizes | string
+}
+
+export type fontFuncs = {
+  [size in FontSizes]: () => FlattenSimpleInterpolation
+}
+
+type fontFactory = (args: {
+  responsiveFonts: ResponsiveFonts
+  bp: bp
+}) => fontFuncs
+
+const fontFactory: fontFactory = ({ responsiveFonts, bp }) =>
   Object.keys(responsiveFonts).reduce((acc, key) => {
     acc[key] = () => {
       if (responsiveFonts?.[key]) {
@@ -47,6 +74,6 @@ const fontFactory = ({ responsiveFonts, bp }) =>
       }
     }
     return acc
-  }, {})
+  }, {} as fontFuncs)
 
 export default fontFactory

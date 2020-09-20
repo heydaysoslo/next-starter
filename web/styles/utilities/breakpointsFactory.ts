@@ -1,9 +1,24 @@
-import { DefaultTheme } from 'styled-components'
 import { emSize } from './Converters'
+import { breakpoints } from '../themes/defaultTheme'
 
-type bp = (breakpoints: DefaultTheme['breakpoints']) => DefaultTheme['bp']
+export type Breakpoints = typeof breakpoints
+export type BreakpointKeys = keyof Breakpoints
 
-export const breakpointsFactory: bp = breakpoints => ({
+export type BreakpointSizes = Record<keyof Breakpoints, string>
+export type BreakpointSizesWithoutXs = Omit<BreakpointSizes, 'xs'>
+export type BreakpointKeysWithoutXs = Exclude<
+  keyof BreakpointSizesWithoutXs,
+  'xs'
+>
+
+export type bp = BreakpointSizesWithoutXs & {
+  below: BreakpointSizesWithoutXs
+  only: BreakpointSizes
+}
+
+type breakpointsFactory = (breakpoints: Breakpoints) => bp
+
+export const breakpointsFactory: breakpointsFactory = breakpoints => ({
   sm: `@media (min-width: ${emSize(breakpoints.sm)})`,
   md: `@media (min-width: ${emSize(breakpoints.md)})`,
   lg: `@media (min-width: ${emSize(breakpoints.lg)})`,

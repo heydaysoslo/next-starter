@@ -1,5 +1,6 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components'
-import { spacingProps } from 'types'
+import { responsiveSpacing } from 'styles/themes/defaultTheme'
+import { bp } from './breakpointsFactory'
 import { parseCssUnit } from './helpers'
 
 const shorthandDefs = {
@@ -21,13 +22,30 @@ const shorthandDefs = {
   px: ['padding-left', 'padding-right'],
   // Grid
   gap: ['grid-gap']
+} as const
+
+/**
+ * Testing
+ * https://www.typescriptlang.org/docs/handbook/utility-types.html
+ */
+
+const shorthandValues = Object.keys(shorthandDefs).reduce((res, key) => {
+  shorthandDefs[key].map(val => res.push(val))
+  return res
+}, [] as string[])
+
+export type spacingShorthands2 = Record<keyof typeof shorthandDefs, string>
+export type hello = typeof shorthandDefs
+export type hello2 = Omit<typeof shorthandValues, 'description'>
+export type hello3 = {
+  [K in keyof typeof shorthandDefs]: typeof shorthandDefs[K]
 }
 
 const shorthands = Object.keys(shorthandDefs).reduce((acc, key) => {
-  acc[key] = value => ({ theme }) => {
+  acc[key] = (value: string) => () => {
     return css`
       ${shorthandDefs[key].map(
-        prop => css`
+        (prop: string) => css`
           ${prop}: ${value};
         `
       )}
@@ -36,8 +54,19 @@ const shorthands = Object.keys(shorthandDefs).reduce((acc, key) => {
   return acc
 }, {})
 
+export type spacingShorthands = keyof typeof shorthandDefs
+
+export type spacingFunctionArgs = {
+  val: string
+  cssProps: spacingShorthands | spacingShorthands[]
+  options?: {
+    multiplier?: number
+    negative?: boolean
+  }
+}
+
 type addSpacingProps = (
-  props: spacingProps | spacingProps[],
+  props: spacingShorthands | spacingShorthands[],
   value: any
 ) => FlattenSimpleInterpolation
 
@@ -79,15 +108,32 @@ const applyPropValueOptions = (value, options) => {
   return value
 }
 
-const spacingFactory = ({ spacingUnits, bp }) => {
+export type SpacingSizes = keyof typeof responsiveSpacing
+
+export type SpacingFuncs = {
+  [size in SpacingSizes]: (
+    props: spacingShorthands | spacingShorthands[]
+  ) => FlattenSimpleInterpolation
+}
+
+export type SpacingFuncsWithFunc = SpacingFuncs & {
+  func: (args: spacingFunctionArgs) => FlattenSimpleInterpolation
+}
+
+export type spacingFactory = (args: {
+  responsiveSpacing: typeof responsiveSpacing
+  bp: Omit<bp, 'below' | 'only'>
+}) => SpacingFuncsWithFunc
+
+const spacingFactory: spacingFactory = ({ responsiveSpacing, bp }) => {
   // Generate spacing functions
-  const spacingFunctions = Object.keys(spacingUnits).reduce((acc, key) => {
+  const spacingFunctions = Object.keys(responsiveSpacing).reduce((acc, key) => {
     // Make spacing key accessible as object (ie: spacing.gutter)
     acc[key] = (props, options = {}) => ({ theme }) => {
       // Map through all breakpoints for current spacing setting
-      return Object.keys(spacingUnits[key]).map(bpKey => {
+      return Object.keys(responsiveSpacing[key]).map(bpKey => {
         // value can either be a theme.spacingUnit.key or a regular unit (like 10px)
-        const value = spacingUnits[key][bpKey]
+        const value = responsiveSpacing[key][bpKey]
         const unit = theme?.spacingUnit?.[value] || value
         if (bp?.[bpKey]) {
           return css`
@@ -108,22 +154,20 @@ const spacingFactory = ({ spacingUnits, bp }) => {
       })
     }
     return acc
-  }, {})
+  }, {} as SpacingFuncs)
 
-  // Make spacing object accesible as function
-  const spacingObject = ({ val, cssProps, multiplier }) => {
+  // Make generic spacing function
+  const spacingFunction = ({ val, cssProps, options }: spacingFunctionArgs) => {
     return css`
-      ${addSpacingProps(cssProps, applyPropValueOptions(val, { multiplier }))};
+      ${addSpacingProps(cssProps, applyPropValueOptions(val, options))};
     `
   }
 
-  // Add spacing functions as keys to object
-  Object.keys({ ...spacingFunctions }).forEach(key => {
-    spacingObject[key] = spacingFunctions[key]
-  })
-
   // Export function object
-  return spacingObject
+  return {
+    ...spacingFunctions,
+    func: spacingFunction
+  }
 }
 
 export default spacingFactory

@@ -7,137 +7,57 @@
 
 // import original module declarations
 import 'styled-components'
-import {
-  BorderProps,
-  breakpoints,
-  BreakPoints,
-  spacing,
-  spacingProps
-} from '../types'
 // https://styled-components.com/docs/api#usage-with-typescript
 import {} from 'styled-components/cssprop'
+import { FlattenSimpleInterpolation } from 'styled-components'
 import {
-  CSSObject,
-  CSSProperties,
-  FlattenSimpleInterpolation,
-  FlattenSimpleInterpolation,
-  FlattenSimpleInterpolation,
-  FlattenSimpleInterpolation
-} from 'styled-components'
-
-type bpAbove = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-type bpBelow = 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-type bpOnly = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-
-export type FontDeclarationObject = {
-  [key: string]:
-    | string
-    | {
-        size: string
-        css?: CSSProp
-      }
-}
-
-export type FontDeclaration = string | FontDeclarationObject
-
-const range = [...new Array(20)].map((_, i) => i * 0.1) as const
-type Percent = typeof range
+  SpacingFuncs,
+  spacingFuncs,
+  SpacingFuncsWithFunc,
+  SpacingSizes
+} from './utilities/spacingFactory'
+import { fontFuncs } from './utilities/fontFactory'
+import {
+  responsiveFonts,
+  breakpoints,
+  contentWidth,
+  colors,
+  aspect,
+  fontFamily,
+  icons,
+  trans,
+  borderWidth
+} from './themes/defaultTheme'
+import { bp, BreakpointSizes } from './utilities/breakpointsFactory'
+import color from './utilities/Colors'
 
 // and extend them!
 declare module 'styled-components' {
   export interface DefaultTheme {
-    colors: {
-      main?: string
-      primary: string
-      secondary: string
-      text?: string
-      border?: string
-      background?: string
-    }
-    color: {
-      (color: any): any
-      darken(color: string, percent: number): any
-      lighten(color: string, percent: number): any
-      rotate(color: string, degree: number): any
-      rgba(color: string, alpha: number): any
-      hsla(color: string, alpha: number): any
-      isDark(color: string): any
-      isLight(color: string): any
-    }
-    breakpoints: BreakPoints
-    bp: {
-      sm: string
-      md: string
-      lg: string
-      xl: string
-      xxl: string
-      below: {
-        [bp in bpBelow]: string
-      }
-      only: {
-        [bp in bpOnly]: string
-      }
-    }
+    colors: typeof colors
+    color: typeof color
+    breakpoints: typeof breakpoints
+    bp: bp
     spacingUnit?: {
       [size in spacing]: string
     }
-    spacing: {
-      [size in spacing]: (
-        props: spacingProps | spacingProps[]
-      ) => FlattenSimpleInterpolation
-    }
-    responsiveSpacing?: {
-      [size in spacing]?: {
-        [bp in breakpoints]?: spacing | string
+    spacing: SpacingFuncsWithFunc
+    responsiveSpacing: {
+      [size in SpacingSizes]: {
+        [bp in BreakpointSizes]?: spacing | string
       }
     }
-    responsiveFonts?: {
-      [key: string]: FontDeclaration
-    }
+    responsiveFonts?: ResponsiveFonts
     grid?: {
       columns: number
     }
-    fontFamily: {
-      sans?: string
-      serif?: string
-    }
-    fonts: {
-      small: () => FlattenSimpleInterpolation
-      body: () => FlattenSimpleInterpolation
-      h1: () => FlattenSimpleInterpolation
-      h2: () => FlattenSimpleInterpolation
-      h3: () => FlattenSimpleInterpolation
-      h4?: () => FlattenSimpleInterpolation
-      h5?: () => FlattenSimpleInterpolation
-      title?: () => FlattenSimpleInterpolation
-      display?: () => FlattenSimpleInterpolation
-    }
-    aspect: {
-      portrait?: number
-      landscape?: number
-      square?: number
-      widescreen?: number
-      panorama?: number
-    }
-    contentWidth: {
-      small?: string
-      large?: string
-      text?: string
-      image?: string
-    }
-    icons: {
-      small?: string
-      medium?: string
-      large?: string
-    }
-    trans: {
-      fast?: string
-      slow?: string
-    }
-    borderWidth: {
-      small?: string
-      large?: string
-    }
+    fontFamily: typeof fontFamily
+    fonts: fontFuncs
+    aspect: typeof aspect
+    contentWidth: typeof contentWidth
+    icons: typeof icons
+    trans: typeof trans
+    borderWidth: typeof borderWidth
     border: {
       small?: () => ({ theme: DefaultTheme }) => string
       large?: () => ({ theme: DefaultTheme }) => string

@@ -1,15 +1,14 @@
 import { css, DefaultTheme } from 'styled-components'
-import { remSize } from 'styles/utilities'
-import fontFactory from 'styles/utilities/fontFactory'
-import spacingFactory from 'styles/utilities/spacingFactory'
-import theme from './defaultTheme'
+import fontFactory, { ResponsiveFonts } from 'styles/utilities/fontFactory'
+import defaultTheme from 'styles/themes/defaultTheme'
 
-export const responsiveFonts: DefaultTheme['responsiveFonts'] = {
+export const responsiveFonts: ResponsiveFonts = {
   small: '14px/1.2',
   body: {
     xs: '200px/1,2',
     lg: '18px/1.2'
   },
+  title: '50px/1.2',
   h1: {
     xs: {
       size: '80px/50px',
@@ -29,8 +28,8 @@ export const responsiveFonts: DefaultTheme['responsiveFonts'] = {
   }
 }
 
-export default {
-  ...theme,
+const theme: DefaultTheme = {
+  ...defaultTheme,
   colors: {
     primary: 'green',
     secondary: 'orange',
@@ -38,10 +37,12 @@ export default {
     border: 'red',
     background: 'rgba(0,0,0,.8)'
   },
-  fonts: fontFactory({ responsiveFonts, bp: theme.bp }),
+  fonts: fontFactory({ responsiveFonts, bp: defaultTheme.bp }),
   defaultStyle: ({ theme }) => css`
     body {
       background: ${theme?.colors?.background};
     }
   `
 }
+
+export default theme

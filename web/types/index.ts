@@ -1,34 +1,6 @@
 // Helpers
 // https://github.com/microsoft/TypeScript/pull/40336
 
-export type breakpoints = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
-export type spacing =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'section'
-  | 'gutter'
-  | 'gap'
-  | 'container'
-  | 'pixel'
-export type spacingProps =
-  | 'm'
-  | 'ml'
-  | 'mt'
-  | 'mr'
-  | 'mb'
-  | 'my'
-  | 'mx'
-  | 'p'
-  | 'pl'
-  | 'pt'
-  | 'pr'
-  | 'pb'
-  | 'py'
-  | 'px'
-  | 'gap'
-
 export type FlexBoxAlignItems =
   | 'flex-start'
   | 'flex-end'
@@ -43,42 +15,6 @@ export type FlexBoxJustifyContent =
   | 'space-between'
   | 'space-around'
 
-export type SpacingMixins =
-  | 'm'
-  | 'ml'
-  | 'mt'
-  | 'mr'
-  | 'mb'
-  | 'my'
-  | 'mx'
-  | 'p'
-  | 'pl'
-  | 'pt'
-  | 'pr'
-  | 'pb'
-  | 'py'
-  | 'px'
-  | 'gap'
-  | string
-
-export type ResponsiveColumns = {
-  xs?: number
-  sm?: number
-  md?: number
-  lg?: number
-  xl?: number
-  xxl?: number
-}
-
-export type ResponsiveReverse = {
-  xs?: boolean
-  sm?: boolean
-  md?: boolean
-  lg?: boolean
-  xl?: boolean
-  xxl?: boolean
-}
-
 export type BorderProps =
   | 'border'
   | 'border-top'
@@ -86,20 +22,25 @@ export type BorderProps =
   | 'border-bottom'
   | 'border-left'
 
-export type SpacingUnits =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'lg'
-  | 'xl'
-  | 'section'
-  | 'gutter'
-
-export type BreakPoints = {
-  xs?: number
-  sm?: number
-  md?: number
-  lg?: number
-  xl?: number
-  xxl?: number
-}
+export type NormalizedNumber =
+  | 0
+  | 0.05
+  | 0.1
+  | 0.15
+  | 0.2
+  | 0.25
+  | 0.3
+  | 0.35
+  | 0.4
+  | 0.45
+  | 0.5
+  | 0.55
+  | 0.6
+  | 0.65
+  | 0.7
+  | 0.75
+  | 0.8
+  | 0.85
+  | 0.9
+  | 0.95
+  | 1

@@ -1,30 +1,31 @@
 import Color from 'color'
+import { NormalizedNumber } from 'types'
 
-const color = color => Color(color).hex()
-
-color.darken = (color, percent) =>
-  Color(color)
-    .darken(percent)
-    .hex()
-color.lighten = (color, percent) =>
-  Color(color)
-    .lighten(percent)
-    .hex()
-color.rotate = (color, degree) =>
-  Color(color)
-    .rotate(degree)
-    .hex()
-color.rgba = (color, alpha) =>
-  Color(color)
-    .alpha(alpha)
-    .string()
-color.hsla = (color, alpha) =>
-  Color(color)
-    .alpha(alpha)
-    .hsl()
-    .string()
-color.isDark = color => Color(color).isDark()
-color.isLight = color => Color(color).isLight()
+const color = {
+  darken: (color: string, percent: NormalizedNumber | number) =>
+    Color(color)
+      .darken(percent)
+      .hex(),
+  lighten: (color: string, percent: NormalizedNumber | number) =>
+    Color(color)
+      .lighten(percent)
+      .hex(),
+  rotate: (color: string, degree: NormalizedNumber | number) =>
+    Color(color)
+      .rotate(degree)
+      .hex(),
+  rgba: (color: string, alpha: NormalizedNumber | number) =>
+    Color(color)
+      .alpha(alpha)
+      .string(),
+  hsla: (color: string, alpha: NormalizedNumber | number) =>
+    Color(color)
+      .alpha(alpha)
+      .hsl()
+      .string(),
+  isDark: (color: string) => Color(color).isDark(),
+  isLight: (color: string) => Color(color).isLight()
+}
 
 // export const createTints = (startColor, steps = 10) => {
 //   const increment = 100 / steps

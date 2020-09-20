@@ -1,9 +1,11 @@
 import { css, DefaultTheme } from 'styled-components'
 
 import { remSize } from '../utilities/Converters'
-import breakpointsFactory from '../utilities/breakpointsFactory'
+import breakpointsFactory, {
+  bp as bpObject
+} from '../utilities/breakpointsFactory'
 import spacingFactory from '../utilities/spacingFactory'
-import fontFactory from 'styles/utilities/fontFactory'
+import fontFactory, { fontFuncs } from 'styles/utilities/fontFactory'
 import color from 'styles/utilities/Colors'
 
 export const colors = {
@@ -14,7 +16,7 @@ export const colors = {
   background: 'white'
 }
 
-export const breakpoints: DefaultTheme['breakpoints'] = {
+export const breakpoints = {
   xs: 0,
   sm: 550,
   md: 870,
@@ -23,7 +25,7 @@ export const breakpoints: DefaultTheme['breakpoints'] = {
   xxl: 1800
 }
 
-export const spacingUnit: DefaultTheme['spacingUnit'] = {
+export const spacingUnit = {
   xs: remSize(5),
   sm: remSize(10),
   md: remSize(15),
@@ -35,7 +37,7 @@ export const spacingUnit: DefaultTheme['spacingUnit'] = {
   pixel: '1px'
 }
 
-export const responsiveSpacing: DefaultTheme['responsiveSpacing'] = {
+export const responsiveSpacing = {
   xs: {
     xs: remSize(5),
     lg: remSize(10)
@@ -69,11 +71,11 @@ export const responsiveSpacing: DefaultTheme['responsiveSpacing'] = {
   }
 }
 
-export const grid: DefaultTheme['grid'] = {
+export const grid = {
   columns: 12
 }
 
-export const fontFamily: DefaultTheme['fontFamily'] = {
+export const fontFamily = {
   sans: `'SuisseIntl', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;`,
   serif: `'Suisse Works', times, serif`
@@ -83,7 +85,7 @@ const fontDefs = {
   xs: '16px/1.2'
 }
 
-export const responsiveFonts: DefaultTheme['responsiveFonts'] = {
+export const responsiveFonts = {
   small: fontDefs.xs,
   body: {
     xs: fontDefs.xs,
@@ -112,7 +114,7 @@ export const responsiveFonts: DefaultTheme['responsiveFonts'] = {
   }
 }
 
-export const aspect: DefaultTheme['aspect'] = {
+export const aspect = {
   portrait: 7 / 6,
   landscape: 2 / 3,
   square: 1,
@@ -120,23 +122,23 @@ export const aspect: DefaultTheme['aspect'] = {
   panorama: 11 / 16
 }
 
-export const contentWidth: DefaultTheme['contentWidth'] = {
+export const contentWidth = {
   small: remSize(600),
   large: remSize(1200)
 }
 
-export const icons: DefaultTheme['icons'] = {
+export const icons = {
   small: remSize(40),
   medium: remSize(80),
   large: remSize(160)
 }
 
-export const trans: DefaultTheme['trans'] = {
+export const trans = {
   fast: `0.1s ease`,
   slow: `1s ease`
 }
 
-export const borderWidth: DefaultTheme['borderWidth'] = {
+export const borderWidth = {
   small: remSize(1),
   large: remSize(3)
 }
@@ -147,16 +149,16 @@ export const borderWidth: DefaultTheme['borderWidth'] = {
  *  border-left: ${theme.border.large()}
  * }
  */
-export const border: DefaultTheme['border'] = {
+export const border = {
   large: () => ({ theme }) =>
     `${theme.borderWidth.large} solid ${theme.colors.border};`,
   small: () => ({ theme }) =>
     `${theme.borderWidth.small} solid ${theme.colors.border};`
 }
 
-const bp = breakpointsFactory(breakpoints)
+const bp: bpObject = breakpointsFactory(breakpoints)
 const spacing = spacingFactory({
-  spacingUnits: responsiveSpacing,
+  responsiveSpacing,
   bp: {
     sm: bp.sm,
     md: bp.md,
@@ -166,10 +168,20 @@ const spacing = spacingFactory({
   }
 })
 
-const fonts = fontFactory({ responsiveFonts, bp })
+const fonts: fontFuncs = fontFactory({ responsiveFonts, bp })
 
-export default {
+/**
+ * TODO: Add types properly with
+ * const theme: DefaultTheme = {
+ *  ...
+ * }
+ *
+ * export default theme
+ */
+
+const theme: DefaultTheme = {
   colors,
+  breakpoints,
   color,
   bp,
   spacingUnit,
@@ -177,10 +189,14 @@ export default {
   fontFamily,
   aspect,
   fonts,
+  responsiveFonts,
   spacing,
+  responsiveSpacing,
   contentWidth,
   trans,
   icons,
   borderWidth,
   border
 }
+
+export default theme

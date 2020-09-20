@@ -36,8 +36,7 @@ export default styled(Button)(
     transition: 0.15s ease background-color, color;
     cursor: pointer;
     ${t.fonts.h1()};
-    ${t.spacing.lg('mt')};
-    background-color: ${t.color.darken(t.colors.primary, 0.5)};
+    ${t.spacing.section('mt')}
 
     &:hover {
       background-color: white;
@@ -55,7 +54,7 @@ export default styled(Button)(
       background: purple;
     }
     ${t.bp.xl} {
-      background: green;
+      background: ${t.color.darken('red', 0.25)};
     }
 
     ${applyModifier(

@@ -1,25 +1,21 @@
 import React from 'react'
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
-import {
-  FlexBoxAlignItems,
-  ResponsiveColumns,
-  ResponsiveReverse,
-  SpacingUnits,
-  FlexBoxJustifyContent
-} from '../../types'
+import { BreakpointKeys } from 'styles/utilities/breakpointsFactory'
+import { SpacingSizes } from 'styles/utilities/spacingFactory'
+import { FlexBoxAlignItems, FlexBoxJustifyContent } from '../../types'
 
 type Props = {
   className?: string
-  reverse?: ResponsiveReverse | boolean
+  reverse?: Record<BreakpointKeys, boolean | undefined> | undefined | boolean
   align?: FlexBoxAlignItems
   justify?: FlexBoxJustifyContent
-  gapUnit?: SpacingUnits
+  gapUnit?: SpacingSizes
   gap?: object | boolean
   gapY?: object | boolean
   gapX?: object | boolean
 }
 
-type Columns = ResponsiveColumns | number
+type Columns = Record<BreakpointKeys, number | undefined> | number
 
 type GridItemProps = {
   className?: string
@@ -145,7 +141,7 @@ const setResponsiveGaps = ({ gap, cssProps, multiplier }) => ({ theme }) => {
             `
       )
     case 'number':
-      return theme.spacing({ val: `${gap}px`, cssProps, multiplier })
+      return theme.spacing.func({ val: `${gap}px`, cssProps, multiplier })
     case 'boolean':
       const defaultGapUnit = 'gutter'
       return theme.spacing[defaultGapUnit](cssProps, {
@@ -155,7 +151,7 @@ const setResponsiveGaps = ({ gap, cssProps, multiplier }) => ({ theme }) => {
       if (theme.spacing[gap]) {
         return theme.spacing[gap](cssProps, { multiplier })
       } else {
-        return theme.spacing({ val: gap, cssProps, multiplier })
+        return theme.spacing.func({ val: gap, cssProps, multiplier })
       }
   }
 }
