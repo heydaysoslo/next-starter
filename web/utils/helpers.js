@@ -34,8 +34,12 @@ export const camel2title = camelCase =>
     .replace(/([A-Z])/g, match => ` ${match}`)
     .replace(/^./, match => match.toUpperCase())
 
-export const random = (min, max) =>
-  Math.floor(Math.random() * (max - min)) + min
+export const random = (min, max, { float = false } = {}) =>
+  float
+    ? Math.random() * (max - min) + min
+    : Math.floor(Math.random() * (max - min)) + min
+
+export const uniq: (arr: any[]) => any[] = arr => [...new Set(arr)]
 
 export const removeTrailingSlash = string => {
   return string.replace(/\/$/, '')
