@@ -38,12 +38,6 @@ pagebuilder {
 
 const client = sanityClient(options)
 
-export const previewClient = sanityClient({
-  ...options,
-  useCdn: false,
-  token: process.env.SANITY_TOKEN
-})
-
 export const getFrontpage = () => {
   const query = `
   *[_id == 'siteSettings'] {
@@ -73,17 +67,7 @@ export const getArticle = params => {
   return client.fetch(query, params)
 }
 
-export const getPreview = params => {
-  const query = `
-  *[_id in [$id]]{
-    authors[]{
-      person->,
-      ...
-    },
-    ${PAGEBUILDER},
-    ...
-  } | order(_updatedAt desc)
-  `
+export const getPreview = (previewClient, query, params) => {
   return previewClient.fetch(query, params)
 }
 
