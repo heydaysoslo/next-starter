@@ -24,7 +24,7 @@ const BASE_ARTICLE = /* groq */ `
   mainImage
 `
 
-const PAGEBUILDER = /* groq */ `
+export const PAGEBUILDER = /* groq */ `
 pagebuilder {
   sections[]{
     seeAllLink {
