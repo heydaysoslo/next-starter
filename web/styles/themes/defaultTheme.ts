@@ -5,8 +5,8 @@ import breakpointsFactory, {
   bp as bpObject
 } from '../utilities/breakpointsFactory'
 import spacingFactory from '../utilities/spacingFactory'
-import fontFactory, { fontFuncs } from 'styles/utilities/fontFactory'
-import color from 'styles/utilities/Colors'
+import fontFactory, { fontFuncs } from '../utilities/fontFactory'
+import color from '../utilities/Colors'
 
 export const colors = {
   primary: 'red',
