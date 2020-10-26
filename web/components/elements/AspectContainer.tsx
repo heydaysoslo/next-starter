@@ -9,11 +9,12 @@ type Props = {
   /**
    * Takes the aspect ratio as a string, number or responsive object.
    *
-   * String must correspond to a aspect ratio in the defaultTheme eg. portrait.
+   * @note String must correspond to a aspect ratio in the defaultTheme eg. portrait.
    *
-   * Examples:
+   * @example ```jsx
    * <AspectContainer aspect={{xs: 'portrait', md: 2.4}} />
    * <AspectContainer aspect="portrait" />
+   * ```
    */
   aspect: aspect
   /**
