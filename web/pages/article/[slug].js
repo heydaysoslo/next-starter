@@ -2,9 +2,9 @@ import { getArticle, getArticles } from '@cms'
 import TemplateResolver from '../../components/resolvers/TemplateResolver'
 
 export const getStaticProps = async ({ params, preview = false }) => {
-  const data = await getArticle(params)
+  const [article] = await getArticle(params)
   return {
-    props: { article: data[0] } // will be passed to the page component as props
+    props: { article } // will be passed to the page component as props
   }
 }
 
