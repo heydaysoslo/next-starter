@@ -1,8 +1,18 @@
-import { createGlobalStyle, css } from 'styled-components'
+import {
+  createGlobalStyle,
+  css,
+  DefaultTheme,
+  Interpolation,
+  ThemedStyledProps
+} from 'styled-components'
 import { globalTypeStyle } from './Typography'
 
 export const GlobalStyle = createGlobalStyle(
   ({ theme }) => css`
+    :root {
+      --header-height: 0px;
+    }
+
     html {
       font-size: 62.5%;
     }
@@ -109,18 +119,18 @@ export const GlobalStyle = createGlobalStyle(
     ${process.env.NODE_ENV === 'development' &&
       css`
     body:after {
+      content: "${theme.breakpoints[0]}";
       background: rgba(255, 255, 255, 0.5);
       position: fixed;
-      bottom: 0;
-      left: 0;
-      ${theme.spacing.xs(['py', 'px'])}
+      ${theme.spacing.xs(['py', 'px', 'bottom', 'left'])}
       ${theme.fonts.body()}
-      /* ${Object.keys(theme.breakpoints).map(
-        key =>
-          css`
-            ${theme.bp[key]`content: '${key}';`}
-          `
-      )} */
+      ${Object.keys(theme.breakpoints).map(key => {
+        return css`
+          ${theme?.bp?.[key]} {
+            content: "${key}";
+          }
+        `
+      })}
     }
   `}
   `

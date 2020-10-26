@@ -4,39 +4,87 @@ import { BreakpointKeys } from 'styles/utilities/breakpointsFactory'
 import { SpacingSizes } from 'styles/utilities/spacingFactory'
 import { FlexBoxAlignItems, FlexBoxJustifyContent } from '../../types'
 
+type gapItem = boolean | number | SpacingSizes
+
+type gap = Partial<Record<BreakpointKeys, gapItem>> | gapItem
+
 type Props = {
   className?: string
-  reverse?: Record<BreakpointKeys, boolean | undefined> | undefined | boolean
+  /**
+   * Flips the order
+   */
+  reverse?: Partial<Record<BreakpointKeys, boolean>> | boolean
+  /**
+   * Align items
+   */
   align?: FlexBoxAlignItems
+  /**
+   * Justify items
+   */
   justify?: FlexBoxJustifyContent
-  gapUnit?: SpacingSizes
-  gap?: object | boolean
-  gapY?: object | boolean
-  gapX?: object | boolean
+  /**
+   * Horizontal + Vertical gap on columns.
+   *
+   * Boolean sets gutter as spacing. If false it removes the gap.
+   *
+   * Number sets a pixel value.
+   *
+   * String must match a spacing function value eg. xs
+   */
+  gap?: gap
+  /**
+   * Vertical gap on columns.
+   *
+   * Boolean sets gutter as spacing. If false it removes the gap.
+   *
+   * Number sets a pixel value.
+   *
+   * String must match a spacing function value eg. xs
+   */
+  gapY?: gap
+  /**
+   * Horizontal gap on columns.
+   *
+   * Boolean sets gutter as spacing. If false it removes the gap.
+   *
+   * Number sets a pixel value.
+   *
+   * String must match a spacing function value eg. xs
+   */
+  gapX?: gap
 }
 
-type Columns = Record<BreakpointKeys, number | undefined> | number
+type Columns = Partial<Record<BreakpointKeys, number>>
 
 type GridItemProps = {
+  /**
+   * Amount of columns to span. Takes a reponsive object with values between 0 and usually 12
+   * (the number set in your theme under grid.columns)
+   *
+   * @example
+   * ```jsx
+   * <Grid span={{xs: 6, md: 0}} />
+   * ```
+   *
+   * xs defaults to full width
+   */
+  span: Columns
   className?: string
+  /**
+   * Amount of offset. Takes a reponsive object with values between 0 and usually 12
+   * (the number set in your theme under grid.columns)
+   *
+   * eg:
+   * <Grid offset={{md: 6}} />
+   *
+   * Offset only takes effect from where it begins eg. in case above xs && sm === 0
+   */
   offset?: Columns
-  span?: Columns
 }
 
 const BaseGrid: React.FC<Props> = ({ className, children }) => {
   if (!children) return null
-  return (
-    <div className={className}>
-      {/* TODO: Fix the any type */}
-      {React.Children.map(children, (child: any, i: number) => {
-        if (child?.type?.target?.name === 'BaseGridItem') {
-          return child
-        } else {
-          return <GridItem key={`Grid__item-${i}`}>{child}</GridItem>
-        }
-      })}
-    </div>
-  )
+  return <div className={className}>{children}</div>
 }
 
 const BaseGridItem: React.FC<GridItemProps> = ({ children, className }) => {
@@ -59,7 +107,7 @@ const setGridItemSpan: ({
       return Object.keys(span).map(key =>
         key === 'xs'
           ? css`
-              ${setGridItemSpan({ span: span[key], theme })};
+              ${setGridItemSpan({ span: span[key] || 12, theme })};
             `
           : css`
               ${theme.bp[key]} {
@@ -114,6 +162,9 @@ export const GridItem = styled(BaseGridItem)<GridItemProps>(
     box-sizing: border-box;
     flex: 1 1 0;
     max-width: 100%;
+    /* Default to 100% mainly for xs screens */
+    flex-basis: 100%;
+    max-width: 100%;
 
     ${setGridItemSpan({ span, theme })};
     ${setGridItemOffset({ offset, theme })};
@@ -122,7 +173,6 @@ export const GridItem = styled(BaseGridItem)<GridItemProps>(
 
 /*
 Possible to pass the following units:
-- Hard unit: vw, px, %, rem, etc
 - Theme spacing unit: 'gutter', 'lg'
 - Boolean: true (default spacing unit), false (no gutter at all)
 */

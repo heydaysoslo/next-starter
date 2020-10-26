@@ -6,10 +6,7 @@ export type BreakpointKeys = keyof Breakpoints
 
 export type BreakpointSizes = Record<keyof Breakpoints, string>
 export type BreakpointSizesWithoutXs = Omit<BreakpointSizes, 'xs'>
-export type BreakpointKeysWithoutXs = Exclude<
-  keyof BreakpointSizesWithoutXs,
-  'xs'
->
+export type BreakpointKeysWithoutXs = keyof BreakpointSizesWithoutXs
 
 export type bp = BreakpointSizesWithoutXs & {
   below: BreakpointSizesWithoutXs
@@ -19,6 +16,7 @@ export type bp = BreakpointSizesWithoutXs & {
 type breakpointsFactory = (breakpoints: Breakpoints) => bp
 
 export const breakpointsFactory: breakpointsFactory = breakpoints => ({
+  xs: `@media (min-width: ${emSize(breakpoints.xs)})`,
   sm: `@media (min-width: ${emSize(breakpoints.sm)})`,
   md: `@media (min-width: ${emSize(breakpoints.md)})`,
   lg: `@media (min-width: ${emSize(breakpoints.lg)})`,

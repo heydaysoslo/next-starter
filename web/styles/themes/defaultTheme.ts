@@ -122,6 +122,13 @@ export const aspect = {
   panorama: 11 / 16
 }
 
+export const elevation = {
+  1: 9,
+  2: 99,
+  3: 999,
+  4: 9999
+}
+
 export const contentWidth = {
   small: remSize(600),
   large: remSize(1200)
@@ -170,16 +177,8 @@ const spacing = spacingFactory({
 
 const fonts: fontFuncs = fontFactory({ responsiveFonts, bp })
 
-/**
- * TODO: Add types properly with
- * const theme: DefaultTheme = {
- *  ...
- * }
- *
- * export default theme
- */
-
 const theme: DefaultTheme = {
+  name: 'defaultTheme',
   colors,
   breakpoints,
   color,
@@ -188,6 +187,7 @@ const theme: DefaultTheme = {
   grid,
   fontFamily,
   aspect,
+  elevation,
   fonts,
   responsiveFonts,
   spacing,

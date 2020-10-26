@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ComponentType, Component } from 'react'
 import styled, { css } from 'styled-components'
+import {icons} from '../../styles/themes/defaultTheme'
 
 /**
  *
@@ -27,7 +28,7 @@ type Name =
   | 'twitter'
   | 'rss'
 
-type Modifiers = 'small' | 'medium' | 'large'
+type Modifiers = keyof typeof icons
 
 type Props = {
   name: Name

@@ -15,7 +15,7 @@ const Button: React.FC<Props> = ({ children, className, ...props }) => {
   return (
     <button
       className={className}
-      onMouseDown={e => e.preventDefault}
+      onMouseDown={e => e.preventDefault()}
       {...props}
     >
       {children}

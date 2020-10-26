@@ -6,10 +6,19 @@ import Editor from '../editor'
 import styled, { css } from 'styled-components'
 import { P } from './Typography'
 import CloudinaryImage from './CloudinaryImage'
+import { CloudinaryNode } from 'types'
 
-const Card = ({ className, title, image, excerpt, link }) => {
+type Props = {
+  className?: string
+  title?: string
+  image?: CloudinaryNode
+  excerpt?: any
+  link?: any
+}
+
+const Card: React.FC<Props> = ({ className, title, image, excerpt, link }) => {
   return (
-    <LinkResolver link={link}>
+    <LinkResolver link={link} className={className}>
       <div className="media">
         {image ? (
           <CloudinaryImage node={image} aspectRatio="portrait" />

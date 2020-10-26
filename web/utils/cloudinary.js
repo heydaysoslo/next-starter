@@ -20,7 +20,7 @@ export const cldVideoFormats = [
 export const cldGetVideoUrl = ({ type, public_id }, options) => {
   // const dpr = (typeof window !== undefined && window.devicePixelRatio) || 1
   const transformations = `f_auto,q_auto:best${
-    options.blur ? ',e_blur:2000' : ''
+    options?.blur ? ',e_blur:2000' : ''
   }` // `q_auto:best,dpr_${dpr}`
   return cldVideoFormats.map(({ ext, format }) => {
     return {

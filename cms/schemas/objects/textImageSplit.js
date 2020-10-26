@@ -30,9 +30,9 @@ export default {
       type: 'link'
     },
     {
-      name: 'image',
-      title: 'Image',
-      type: 'mainImage',
+      name: 'media',
+      title: 'Media',
+      type: 'cloudinaryMedia',
       fieldset: 'image'
     },
     {

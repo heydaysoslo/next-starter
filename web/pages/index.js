@@ -11,8 +11,5 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({ frontpage, articles }) {
-  const { response: res, error, isLoading } = useFetch('/api/hello')
-  console.log('Home -> res', res)
-
   return <TemplateResolver page={frontpage} />
 }

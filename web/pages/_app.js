@@ -14,7 +14,7 @@ import Header from 'components/Header'
 import SEO from 'components/SEO'
 import Favicon from 'components/Favicon'
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
   const [isDark, setIsDark] = React.useState(false)
   return (
     <ThemeProvider theme={isDark ? darkTheme : theme}>
@@ -31,4 +31,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+export default App

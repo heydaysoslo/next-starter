@@ -5,10 +5,12 @@ import Pagebuilder from '../pagebuilder/Pagebuilder'
 import { H1, P } from '@heydays/Typography'
 import Container from '@heydays/Container'
 import Button from '@heydays/Button'
+import TS from 'components/TS'
 
 const FrontPage = ({ className, title, pagebuilder }) => {
   return (
     <div className={className}>
+      <TS />
       <Container className="Page__container">
         <Button modifiers="active">Button</Button>
         <header className="Page__header">

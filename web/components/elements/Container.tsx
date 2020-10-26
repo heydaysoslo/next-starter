@@ -1,7 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-const Container = ({ children, className }) => {
+type Props = {
+  className?: string
+}
+
+const Container: React.FC<Props> = ({ children, className }) => {
   return <div className={className}>{children}</div>
 }
 

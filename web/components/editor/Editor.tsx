@@ -74,9 +74,11 @@ export const serializers = {
       return <Figure node={props.node} />
     },
     oembed(props) {
+      // @ts-ignore
       return <Oembed url={props.node.url} />
     },
     accordion(props) {
+      // @ts-ignore
       return <Accordion items={props.node.items} exclusive defaultActive={2} />
     }
   },
@@ -86,8 +88,9 @@ export const serializers = {
       if (!link) return props.children
       return (
         <LinkResolver
+          className=""
           openInNewTab={props?.mark?.externalLink?.blank}
-          data={link}
+          link={link}
         >
           {props.children ||
             props?.mark?.title ||
@@ -98,7 +101,12 @@ export const serializers = {
   }
 }
 
-const Editor = ({ blocks, className }) => {
+type Props = {
+  blocks: any
+  className?: string
+}
+
+const Editor: React.FC<Props> = ({ blocks, className }) => {
   return (
     <div className={`Editor ${className ? className : ''}`}>
       <BaseBlockContent
