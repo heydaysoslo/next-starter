@@ -102,6 +102,9 @@ const editor = {
     },
     {
       type: 'accordion'
+    },
+    {
+      type: 'spacer'
     }
   ]
 }

@@ -46,6 +46,7 @@ import address from './objects/address'
 import tabs from './objects/tabs'
 import tabsItem from './objects/tabsItem'
 import videoSection from './objects/videoSection'
+import spacer from './objects/spacer'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -90,6 +91,7 @@ export default createSchema({
     tabs,
     tabsItem,
     videoSection,
+    spacer,
 
     // The following are document types which will appear
     // in the studio.
