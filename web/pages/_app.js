@@ -13,8 +13,20 @@ import darkTheme from 'styles/themes/darkTheme'
 import Header from 'components/Header'
 import SEO from 'components/SEO'
 import Favicon from 'components/Favicon'
+import { SanityProvider } from 'components/context/sanityContext'
+import { AppProvider } from 'components/context/appContext'
 
-function App({ Component, pageProps }) {
+const App = props => {
+  return (
+    <SanityProvider>
+      <AppProvider>
+        <Inner {...props} />
+      </AppProvider>
+    </SanityProvider>
+  )
+}
+
+const Inner = ({ Component, pageProps }) => {
   const [isDark, setIsDark] = React.useState(false)
   return (
     <ThemeProvider theme={isDark ? darkTheme : theme}>
