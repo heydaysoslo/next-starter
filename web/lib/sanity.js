@@ -10,7 +10,12 @@ const options = {
   // data always (potentially slightly slower and a bit more expensive).
 }
 
-const BASE_ARTICLE = `
+/**
+ * @note Prefix template literals with `/* groq /*` for syntax highligthing
+ * https://github.com/sanity-io/vscode-sanity
+ */
+
+const BASE_ARTICLE = /* groq */ `
   _id,
   title,
   slug {
@@ -19,7 +24,7 @@ const BASE_ARTICLE = `
   mainImage
 `
 
-const PAGEBUILDER = `
+const PAGEBUILDER = /* groq */ `
 pagebuilder {
   sections[]{
     seeAllLink {
@@ -39,19 +44,59 @@ pagebuilder {
 const client = sanityClient(options)
 
 export const getFrontpage = () => {
-  const query = `
+  const query = /* groq */ `
   *[_id == 'siteSettings'] {
     frontpage->{
       ...,
       ${PAGEBUILDER}
     }
-    }
+  }`
+  return client.fetch(query)
+}
+
+export const getPage = params => {
+  const query = /* groq */ `
+  *[_type == 'page' && slug.current == $slug]{
+    ...,
+    ${PAGEBUILDER}
+  }
   `
+  return client.fetch(query, params)
+}
+export const getPages = () => {
+  const query = /* groq */ `
+  *[_type == 'page']`
+
+  return client.fetch(query)
+}
+
+export const getSettings = () => {
+  const query = /* groq */ `*[_type == 'siteSettings']{
+    ...,
+    primaryMenu->,
+    secondaryMenu->,
+    frontpage->{
+      ...,
+      ${PAGEBUILDER}
+    },
+    privacypage->,
+    designTokens->
+  }`
+  return client.fetch(query).then(res => res[0])
+}
+
+export const getCompanyInfo = () => {
+  const query = /* groq */ `*[_type == 'companyInfo']`
+  return client.fetch(query)
+}
+
+export const getGlobalSettings = () => {
+  const query = /* groq */ `*[_type == 'global']`
   return client.fetch(query)
 }
 
 export const getArticles = () => {
-  const query = `*[_type == 'article'] {
+  const query = /* groq */ `*[_type == 'article'] {
     ${BASE_ARTICLE},
     seo
   }
@@ -60,7 +105,7 @@ export const getArticles = () => {
 }
 
 export const getArticle = params => {
-  const query = `*[_type == 'article' && slug.current == $slug] {
+  const query = /* groq */ `*[_type == 'article' && slug.current == $slug] {
     ${BASE_ARTICLE}
   }
   `
