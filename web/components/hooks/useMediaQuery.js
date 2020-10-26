@@ -45,8 +45,8 @@ function useMedia(queries, values, defaultValue) {
  */
 
 export default function useMediaQuery() {
-  const theme = useTheme()
-  const keys = Object.keys(theme.breakpoints)
+  const { breakpoints } = useTheme()
+  const keys = Object.keys(breakpoints)
   const cssBreakpoints = keys.map(
     (key, index) =>
       `(min-width: ${breakpoints[key]}px) ${
