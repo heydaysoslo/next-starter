@@ -14,7 +14,6 @@
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/client": "^1.149.18",
     "color": "^3.1.2",
-    "favicons-webpack-plugin": "^4.2.0",
     "flickity": "^2.2.1",
     "framer-motion": "^2.4.2",
     "lazysizes": "^5.2.2",

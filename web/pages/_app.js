@@ -1,3 +1,4 @@
+import React from 'react'
 import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
