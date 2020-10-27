@@ -68,3 +68,9 @@
 // }
 
 // export default ChildPage
+
+const ChildPage = () => {
+  return <h1>I'm child page</h1>
+}
+
+export default ChildPage
