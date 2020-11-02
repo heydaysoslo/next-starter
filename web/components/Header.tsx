@@ -1,17 +1,14 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
-import Switch from '@heydays/Switch'
 import Container from './elements/Container'
 import useWindowSize from '@heydays/useWindowSize'
 
 type Props = {
   className?: string
-  isDark: boolean
-  setIsDark: (cb: (prevState: boolean) => void) => void
 }
 
-const Header: React.FC<Props> = ({ className, isDark, setIsDark }) => {
+const Header: React.FC<Props> = ({ className }) => {
   const headerRef = useRef<HTMLElement | null>(null)
   const windowSize = useWindowSize({ debounce: 200 })
 
@@ -33,11 +30,6 @@ const Header: React.FC<Props> = ({ className, isDark, setIsDark }) => {
             <a>NEXT STARTER</a>
           </Link>
         </h1>
-        <Switch
-          size={60}
-          state={isDark}
-          onClick={() => setIsDark(prevState => !prevState)}
-        />
       </header>
     </Container>
   )

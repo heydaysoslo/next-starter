@@ -1,13 +1,15 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import BaseBlockContent from '@sanity/block-content-to-react'
 
 import LinkResolver from '@heydays/LinkResolver'
 import Quote from './Quote'
 import Figure from './Figure'
-import Oembed from '../Oembed'
 import { H3, H2, P } from '@heydays/Typography'
 import Button from '@heydays/Button'
-import Accordion from '@heydays/Accordion'
+
+const Oembed = dynamic(() => import('../Oembed'))
+const Accordion = dynamic(() => import('@heydays/Accordion'))
 
 export const serializers = {
   types: {

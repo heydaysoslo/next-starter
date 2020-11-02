@@ -105,6 +105,10 @@ export const GlobalStyle = createGlobalStyle(
       cursor: pointer;
     }
 
+    pre {
+      overflow: scroll;
+    }
+
     ul {
       list-style: none;
     }

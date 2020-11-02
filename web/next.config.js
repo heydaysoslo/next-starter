@@ -1,6 +1,6 @@
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === 'true'
 })
 // const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const path = require('path')
@@ -21,6 +21,9 @@ const nextConfig = {
     // Important: return the modified config
     return config
   },
+  images: {
+    domains: ['res.cloudinary.com']
+  }
 }
 
 module.exports = withPlugins(
@@ -29,11 +32,11 @@ module.exports = withPlugins(
       withSvgr,
       {
         svgrOptions: {
-          configFile: path.resolve(__dirname, '.svgrrc.js'),
-        },
-      },
+          configFile: path.resolve(__dirname, '.svgrrc.js')
+        }
+      }
     ],
-    withBundleAnalyzer,
+    withBundleAnalyzer
   ],
   nextConfig
 )
