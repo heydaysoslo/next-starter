@@ -1,6 +1,5 @@
 import React from 'react'
 import Grid, { GridItem } from '../elements/Grid'
-import Animate from '@heydays/animation/Animate'
 
 import Card from '../elements/Card'
 import LinkResolver from '@heydays/LinkResolver'
