@@ -1,7 +1,6 @@
 import React from 'react'
 import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
-import { AnimatePresence } from 'framer-motion'
 
 import theme from 'styles/themes/defaultTheme'
 import Header from 'components/Header'
@@ -28,9 +27,7 @@ const Inner = ({ Component, pageProps }) => {
       <Favicon />
       <Header />
       <GlobalStyle />
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} />
-      </AnimatePresence>
+      <Component {...pageProps} />
     </ThemeProvider>
   )
 }

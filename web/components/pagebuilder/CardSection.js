@@ -14,14 +14,12 @@ const CardSection = ({ title, seeAllLink, cardsList = [], ...props }) => {
           const { content, cardOverride } = card
           return (
             <GridItem span={{ md: 4 }} key={card?._key}>
-              <Animate>
-                <Card
-                  title={cardOverride?.title || content?.title}
-                  image={cardOverride?.image || content?.mainImage}
-                  excerpt={cardOverride?.content || content?.excerpt}
-                  link={cardOverride?.link || content}
-                />
-              </Animate>
+              <Card
+                title={cardOverride?.title || content?.title}
+                image={cardOverride?.image || content?.mainImage}
+                excerpt={cardOverride?.content || content?.excerpt}
+                link={cardOverride?.link || content}
+              />
             </GridItem>
           )
         })}
