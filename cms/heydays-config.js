@@ -11,7 +11,7 @@ import MdPerson from 'react-icons/lib/md/person'
 export default {
   previewUrl: {
     production: 'https://heydays-starter.netlify.com/preview/',
-    dev: 'http://localhost:3000/preview/'
+    development: 'http://localhost:3000/preview/'
   },
   access_token:
     'skrB5IUvRDgqr6Mwhagwf70EFjWv2EbKEVuwRljH98oSMg3LixNIsCDMwEnRzXDTmgk3AeKNLr4RuzK910YbGpiP2GGaxnra8bQiExsSrFPXqp71QHqEXSx3vGllZfLAewJj36KEjYLuOeoeBGbFMmrJQ5xCuR5j5whx0UVOvBJRwMMHwQMQ',
