@@ -241,9 +241,9 @@ export default styled(Carousel)(
       /* display: none; */
       position: absolute;
       z-index: 2;
-      background: ${theme.colors.secondary};
+      background: ${t.colors.secondary};
       border: none;
-      color: ${theme.colors.text};
+      color: ${t.colors.text};
 
       ${t.spacing.md('p')};
 
@@ -290,15 +290,15 @@ export default styled(Carousel)(
       border-radius: 50%;
       /* vertically center */
       transform: translateY(-50%);
-      transition: ${theme.trans.fast};
-      color: ${theme.colors.text};
+      transition: ${t.trans.fast};
+      color: ${t.colors.text};
 
       &:after {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        color: ${theme.colors.primary};
+        color: ${t.colors.primary};
       }
     }
 
@@ -367,18 +367,18 @@ export default styled(Carousel)(
         width: 100%;
         height: 2px;
         background: orange;
-        transition: ${theme.trans.fast};
+        transition: ${t.trans.fast};
       }
 
       &:hover {
         &:before {
-          background: ${theme.color.darken(theme.colors.text, 0.2)};
+          background: ${t.color.darken(t.colors.text, 0.2)};
         }
       }
 
       &.is-selected {
         &:before {
-          background: ${theme.colors.text};
+          background: ${t.colors.text};
         }
       }
     }

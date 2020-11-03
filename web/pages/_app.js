@@ -12,7 +12,7 @@ import 'styles/reset.css'
 import theme from 'styles/themes/defaultTheme'
 import darkTheme from 'styles/themes/darkTheme'
 import Header from 'components/Header'
-import SEO from 'components/SEO'
+
 import Favicon from 'components/Favicon'
 import { SanityProvider } from 'components/context/sanityContext'
 import { AppProvider } from 'components/context/appContext'
@@ -27,13 +27,10 @@ const App = props => {
   )
 }
 
-const Inner = ({ Component, pageProps }) => {
+const Inner = ({ Component, pageProps, ...props }) => {
   const [isDark, setIsDark] = React.useState(false)
   return (
     <ThemeProvider theme={isDark ? darkTheme : theme}>
-      <SEO
-        page={pageProps?.frontpage || pageProps?.article || pageProps?.page}
-      />
       <Favicon />
       <Header isDark={isDark} setIsDark={setIsDark} />
       <GlobalStyle />

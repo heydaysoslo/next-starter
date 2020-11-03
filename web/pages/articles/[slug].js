@@ -1,31 +1,37 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
-import TemplateResolver from '@heydays/TemplateResolver'
-import { getClient, usePreviewSubscription, pageQuery, pagesQuery } from '@cms'
-import Layout from '../components/Layout'
+import {
+  getClient,
+  articleQuery,
+  articlesQuery,
+  usePreviewSubscription
+} from '@cms'
 
-export default function Post({ data, preview }) {
+import TemplateResolver from '../../components/resolvers/TemplateResolver'
+import Layout from '../../components/Layout'
+
+export default function Article({ data, preview }) {
   const router = useRouter()
 
   if (!router.isFallback && !data.post?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
-  const { data: post } = usePreviewSubscription(pageQuery, {
+  const { data: post } = usePreviewSubscription(articleQuery, {
     params: { slug: data?.post?.slug?.current },
     initialData: data,
     enabled: preview
   })
 
   return (
-    <Layout preview={preview}>
+    <Layout page={post} preview={preview}>
       <TemplateResolver page={post} />
     </Layout>
   )
 }
 
 export const getStaticProps = async ({ params, preview = false }) => {
-  const post = await getClient(preview).fetch(pageQuery, {
+  const post = await getClient(preview).fetch(articleQuery, {
     slug: params.slug
   })
   return {
@@ -37,7 +43,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
 }
 
 export async function getStaticPaths() {
-  const paths = await getClient().fetch(pagesQuery)
+  const paths = await getClient().fetch(articlesQuery)
   return {
     paths: paths.map(slug => ({ params: { slug } })),
     fallback: true

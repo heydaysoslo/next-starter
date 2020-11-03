@@ -1,14 +1,26 @@
-import { getFrontpage, getArticles } from '../lib/sanity'
+import { getClient, usePreviewSubscription, frontpageQuery } from '@cms'
 import TemplateResolver from '../components/resolvers/TemplateResolver'
+import Layout from 'components/Layout'
 
-export const getStaticProps = async () => {
-  const [data] = await getFrontpage()
-  const articles = await getArticles()
-  return {
-    props: { frontpage: data.frontpage, articles }
-  }
+export default function Home({ data, preview }) {
+  const { data: post } = usePreviewSubscription(frontpageQuery, {
+    initialData: data,
+    enabled: preview
+  })
+
+  return (
+    <Layout page={post.frontpage} preview={preview}>
+      <TemplateResolver page={post.frontpage} />
+    </Layout>
+  )
 }
 
-export default function Home({ frontpage, articles }) {
-  return <TemplateResolver page={frontpage} />
+export const getStaticProps = async ({ preview = false }) => {
+  const post = await getClient(preview).fetch(frontpageQuery)
+  return {
+    props: {
+      preview,
+      data: { post }
+    }
+  }
 }

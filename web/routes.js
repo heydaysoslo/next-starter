@@ -4,27 +4,27 @@ export const routes = {
     return `/${slug.current}`
   },
   article: ({ slug }) => {
-    return `/article/${slug.current}`
+    return `/articles/${slug.current}`
   },
   frontpage: () => {
     return `/`
   }
 }
 
-export const resolveRoute = page => {
-  const type = page?._type
+export const resolveRoute = doc => {
+  const type = doc?._type
   if (!type) {
-    console.warn(`_type not defined`, page)
+    console.warn(`_type not defined`, doc)
     return null
   }
 
   const route = routes[type]
   if (route && typeof route === 'function') {
-    return route(page)
+    return route(doc)
   }
 
-  console.warn(`Could not resolve route`, page)
-  return null
+  console.warn(`Could not resolve route`, doc)
+  return '/'
 }
 
 export const docTypes = {
