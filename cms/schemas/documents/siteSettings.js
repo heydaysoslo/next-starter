@@ -5,7 +5,6 @@ export default {
   title: 'Site Settings',
   type: 'document',
   // liveEdit: false,
-  __experimental_actions: ['update', 'publish' /*'create', 'delete'*/],
   icon: MdSettings,
   fieldsets: [
     { name: 'important', title: 'Important pages' },
