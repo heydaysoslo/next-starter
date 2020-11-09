@@ -1,3 +1,6 @@
+import React from 'react'
+import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
+
 export default {
   name: 'card',
   title: 'Card',
@@ -24,7 +27,7 @@ export default {
     prepare({ title = 'No title', media }) {
       return {
         title: `Card: ${title}`,
-        media
+        media: <CloudinaryPreview media={media} fallback="🃏" />
       }
     }
   }

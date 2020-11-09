@@ -1,4 +1,5 @@
-import FaFileText from 'react-icons/lib/fa/file-text-o'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'textSection',
@@ -22,10 +23,7 @@ export default {
       return {
         title: text,
         subtitle: 'Text section',
-        media:
-          content.filter(block => block._type === 'mainImage').length > 0
-            ? content.filter(block => block._type === 'mainImage')[0].asset
-            : FaFileText
+        media: () => <EmojiIcon>✍️</EmojiIcon>
       }
     }
   }

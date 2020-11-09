@@ -1,3 +1,6 @@
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
 export default {
   name: 'cardSection',
   title: 'Card Section',
@@ -44,14 +47,13 @@ export default {
   ],
   preview: {
     select: {
-      title: 'cardsList.0.content.title',
-      media: 'cardsList.0.content.mainImage'
+      title: 'cardsList.0.content.title'
     },
-    prepare({ title = 'No title', media }) {
+    prepare({ title = 'No title' }) {
       return {
         title,
         subtitle: 'Card section',
-        media
+        media: <EmojiIcon>🃏</EmojiIcon>
       }
     }
   }

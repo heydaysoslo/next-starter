@@ -1,3 +1,6 @@
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
 export default {
   name: 'section',
   title: 'Section',
@@ -31,7 +34,8 @@ export default {
     prepare({ title }) {
       return {
         title,
-        subtitle: 'Section'
+        subtitle: 'Section',
+        media: () => <EmojiIcon>📰</EmojiIcon>
       }
     }
   }
