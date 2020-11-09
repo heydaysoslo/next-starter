@@ -33,15 +33,7 @@ export default {
    *
    * This also controls the order of the custom types
    */
-  customTypes: [
-    {
-      title: 'Person Order',
-      typeId: 'person',
-      typeTitle: 'Person',
-      orderTypeId: 'personOrder',
-      icon: MdPerson
-    }
-  ]
+  customTypes: []
 }
 
 /**

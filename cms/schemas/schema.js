@@ -9,7 +9,7 @@ import companyInfo from './documents/companyInfo'
 import menu from './documents/menu'
 import page from './documents/page'
 import person from './documents/person'
-import personOrder from './documents/personOrder'
+// import personOrder from './documents/personOrder'
 import article from './documents/article'
 // import articleOrder from './documents/articleOrder'
 import siteSettings from './documents/siteSettings'
@@ -100,7 +100,7 @@ export default createSchema({
     siteSettings,
     page,
     person,
-    personOrder,
+    // personOrder,
     article,
     // articleOrder,
     frontpage
