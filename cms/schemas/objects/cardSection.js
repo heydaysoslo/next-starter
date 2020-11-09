@@ -1,5 +1,6 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import d from '../defaults'
 
 const icon = '🃏'
 
@@ -23,6 +24,27 @@ export default {
           name: 'card',
           title: 'Card',
           type: 'card'
+        },
+        {
+          name: 'staticCard',
+          title: 'Static Card',
+          description:
+            'Use if you are not linking or fetching assets internally on the website.',
+          type: 'object',
+          fields: [
+            d.title,
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'mainImage'
+            },
+            d.editorMinimal,
+            {
+              name: 'link',
+              title: 'Link',
+              type: 'link'
+            }
+          ]
         }
       ]
     },
