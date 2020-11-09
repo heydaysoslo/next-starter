@@ -23,8 +23,8 @@ import mainImage from './objects/mainImage'
 import editor, { editorMinimal } from './objects/editor'
 import social from './objects/social'
 import office from './objects/office'
-// import content from './objects/content'
-// import contentConditional from './objects/contentConditional'
+import content from './objects/content'
+import contentConditional from './objects/contentConditional'
 import pagebuilder from './objects/pagebuilder'
 import card from './objects/card'
 import cardOverride from './objects/cardOverride'
@@ -68,8 +68,8 @@ export default createSchema({
     editorMinimal,
     social,
     office,
-    // content,
-    // contentConditional,
+    content,
+    contentConditional,
     pagebuilder,
     card,
     cardOverride,

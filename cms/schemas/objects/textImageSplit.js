@@ -48,10 +48,10 @@ export default {
       media: 'image'
     },
     prepare({ media, title }) {
-      // const newMedia = getCloudinaryImageSource(media?.cldImage, { width: 50 })
+      const newMedia = getCloudinaryImageSource(media?.cldImage, { width: 50 })
       return {
         title,
-        // media: newMedia ? <img src={newMedia} alt="" /> : null,
+        media: newMedia ? <img src={newMedia} alt="" /> : null,
         subtitle: 'Text Image Split'
       }
     }
