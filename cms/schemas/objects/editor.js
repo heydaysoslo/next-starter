@@ -125,6 +125,12 @@ export const editorMinimal = {
             style.value === 'small'
         )
       ]
+    },
+    {
+      type: 'spacer'
+    },
+    {
+      type: 'button'
     }
   ]
 }
