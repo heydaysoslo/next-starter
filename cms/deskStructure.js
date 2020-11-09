@@ -1,19 +1,56 @@
+import React from 'react'
 import S from '@sanity/desk-tool/structure-builder'
-import config, {
-  createMenuDeskStructure,
-  createCustomTypeDeskStructure
-} from './heydays-config'
+import config, { createCustomTypeDeskStructure } from './heydays-config'
 
-import MdSettings from 'react-icons/lib/md/settings'
-import MdBusiness from 'react-icons/lib/md/business'
-import EyeIcon from 'part:@sanity/base/eye-icon'
-import EditIcon from 'part:@sanity/base/edit-icon'
-import FaFileO from 'react-icons/lib/fa/file-text-o'
+import EmojiIcon from './custom/components/icons/EmojiIcon'
+// import EyeIcon from 'part:@sanity/base/eye-icon'
+// import EditIcon from 'part:@sanity/base/edit-icon'
 
 import SeoPreview from './custom/components/previews/seo/SeoPreviews'
 import Preview from './custom/components/previews/preview/Preview'
 
-// Create menus
+const EyeIcon = () => <EmojiIcon small>👀</EmojiIcon>
+const EditIcon = () => <EmojiIcon small>📝</EmojiIcon>
+
+export default () =>
+  S.list()
+    .title('Content')
+    .items([
+      createDocsList('menu'),
+      createDocsList('frontpage'),
+      createDocsList('page'),
+      // createDocsList('article'),
+      ...customTypesWithOrderPage,
+      // This returns an array of all the document types
+      // defined in schema.js. We filter out those that we have
+      // defined the structure above
+      ...S.documentTypeListItems().filter(hiddenDocTypes),
+      S.divider(),
+      // createDocsList('designTokens', {
+      //   withPreviews: true
+      // }),
+      createSingleton('companyInfo', {
+        withPreviews: false,
+        icon: () => <EmojiIcon>🏢</EmojiIcon>
+      }),
+      S.listItem()
+        .title('Settings')
+        .icon(() => <EmojiIcon>⚙️</EmojiIcon>)
+        .child(
+          S.list()
+            .title('Settings')
+            .items([
+              createSingleton('siteSettings', {
+                withPreviews: false,
+                icon: () => <EmojiIcon>⚙️</EmojiIcon>
+              })
+            ])
+        )
+    ])
+
+/**
+ * Helper functions
+ */
 
 const customTypesWithOrderPage = createCustomTypeDeskStructure(
   config.customTypes
@@ -24,6 +61,11 @@ const hiddenCustomTypes = config.customTypes.reduce((res, item) => {
   res.push(...typesToHide)
   return res
 }, [])
+
+const camel2title = camelCase =>
+  camelCase
+    .replace(/([A-Z])/g, match => ` ${match}`)
+    .replace(/^./, match => match.toUpperCase())
 
 const hiddenDocTypes = listItem =>
   ![
@@ -38,7 +80,7 @@ const hiddenDocTypes = listItem =>
 
 const createSingleton = (id, options = {}) => {
   const { withPreviews = true, icon = FaFileO } = options
-  const title = id
+  const title = camel2title(id)
   return S.listItem()
     .title(title)
     .icon(icon)
@@ -65,7 +107,7 @@ const createSingleton = (id, options = {}) => {
 
 const createDocsList = (id, options = {}) => {
   const { withPreviews = true } = options
-  const title = id
+  const title = camel2title(id)
   return S.listItem()
     .title(title)
     .schemaType(id)
@@ -92,33 +134,3 @@ const createDocsList = (id, options = {}) => {
         )
     )
 }
-
-export default () =>
-  S.list()
-    .title('Content')
-    .items([
-      createMenuDeskStructure(),
-      createDocsList('frontpage'),
-      createDocsList('page'),
-      createDocsList('article'),
-      ...customTypesWithOrderPage,
-      // This returns an array of all the document types
-      // defined in schema.js. We filter out those that we have
-      // defined the structure above
-      ...S.documentTypeListItems().filter(hiddenDocTypes),
-      S.divider(),
-      createSingleton('companyInfo', { withPreviews: false, icon: MdBusiness }),
-      S.listItem()
-        .title('Settings')
-        .icon(MdSettings)
-        .child(
-          S.list()
-            .title('Settings')
-            .items([
-              createSingleton('siteSettings', {
-                withPreviews: false,
-                icon: MdSettings
-              })
-            ])
-        )
-    ])
