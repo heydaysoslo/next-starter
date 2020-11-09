@@ -1,10 +1,11 @@
-import MdFormatQuote from 'react-icons/lib/md/format-quote'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'quote',
   title: 'Quote',
   type: 'object',
-  icon: MdFormatQuote,
+  icon: () => <EmojiIcon>❝</EmojiIcon>,
   fields: [
     {
       name: 'content',

@@ -1,9 +1,11 @@
-import MdControlPoint from 'react-icons/lib/md/control-point'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
 export default {
   name: 'tabs',
   title: 'Tabs',
   type: 'object',
-  icon: MdControlPoint,
+  icon: () => <EmojiIcon small>🗂</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
       name: 'items',
@@ -11,7 +13,30 @@ export default {
       type: 'array',
       of: [
         {
-          type: 'tabsItem'
+          name: 'tabsItem',
+          title: 'Tab item',
+          type: 'object',
+          fields: [
+            {
+              name: 'defaultOpen',
+              title: 'Default open',
+              description:
+                'Toggle this if you want this particular item to be open by default. If not the first one be open by default',
+              type: 'boolean'
+            },
+            {
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: Rule => Rule.required()
+            },
+            {
+              name: 'content',
+              title: 'Content',
+              type: 'editor',
+              validation: Rule => Rule.required()
+            }
+          ]
         }
       ]
     }
@@ -25,7 +50,7 @@ export default {
         items.map(item => item.title && item.title).join(', ') || 'Tab'
       return {
         title,
-        media: MdControlPoint
+        media: () => <EmojiIcon>🗂</EmojiIcon> // Pagebuilder list icon
       }
     }
   }

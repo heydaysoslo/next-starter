@@ -1,11 +1,15 @@
 import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
 import d from '../defaults'
+
+const icon = '📰'
 
 export default {
   name: 'textImageSplit',
   title: 'Text Image Split',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fieldsets: [
     { name: 'image', title: 'Image' },
     { name: 'content', title: 'Content' }
@@ -48,10 +52,9 @@ export default {
       media: 'media'
     },
     prepare({ media, title }) {
-      console.log('prepare -> media', media)
       return {
         title,
-        media: () => <CloudinaryPreview media={media} fallback="🐋" />,
+        media: () => <CloudinaryPreview media={media} fallback={icon} />, // Pagebuilder list preview
         subtitle: 'Text Image Split'
       }
     }

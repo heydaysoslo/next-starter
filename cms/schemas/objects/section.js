@@ -1,10 +1,13 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
+const icon = '📰'
+
 export default {
   name: 'section',
   title: 'Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
       name: 'label',
@@ -35,7 +38,7 @@ export default {
       return {
         title,
         subtitle: 'Section',
-        media: () => <EmojiIcon>📰</EmojiIcon>
+        media: () => <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
     }
   }

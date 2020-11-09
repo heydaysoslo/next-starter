@@ -1,10 +1,11 @@
-import MdPermMedia from 'react-icons/lib/md/perm-media'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'oembed',
   title: 'Embed (oembed)',
   type: 'object',
-  icon: MdPermMedia,
+  icon: () => <EmojiIcon>⏯</EmojiIcon>,
   fields: [
     {
       name: 'url',

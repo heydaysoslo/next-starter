@@ -1,32 +1,47 @@
-import MdControlPoint from "react-icons/lib/md/control-point";
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import d from '../defaults'
+
 export default {
-  name: "accordion",
-  title: "Accordion",
-  type: "object",
-  icon: MdControlPoint,
+  name: 'accordion',
+  title: 'Accordion',
+  type: 'object',
+  icon: () => <EmojiIcon>📜</EmojiIcon>, // Needed for editor
   fields: [
     {
-      name: "items",
-      title: "Items",
-      type: "array",
+      name: 'items',
+      title: 'Items',
+      type: 'array',
       of: [
         {
-          type: "accordionItem"
+          name: 'accordionItem',
+          title: 'Accordion item',
+          type: 'object',
+          fields: [
+            {
+              ...d.title,
+              validation: Rule => Rule.required()
+            },
+            {
+              ...d.editor,
+              validation: Rule => Rule.required()
+            }
+          ]
         }
       ]
     }
   ],
   preview: {
     select: {
-      items: "items"
+      items: 'items'
     },
     prepare({ items }) {
       const title =
-        items.map(item => item.title && item.title).join(", ") || "Accordion";
+        items.map(item => item.title && item.title).join(', ') || 'Accordion'
       return {
         title,
-        media: MdControlPoint
-      };
+        media: () => <EmojiIcon>↕️</EmojiIcon>
+      }
     }
   }
-};
+}

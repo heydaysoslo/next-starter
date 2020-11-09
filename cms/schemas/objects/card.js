@@ -1,5 +1,6 @@
 import React from 'react'
 import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
+import d from '../defaults'
 
 export default {
   name: 'card',
@@ -16,7 +17,28 @@ export default {
     {
       name: 'cardOverride',
       title: 'Card Override',
-      type: 'cardOverride'
+      type: 'object',
+      description: `We will get the information we need
+      from the refrence above. But if you wan't to override
+      the information in the card use the fields below.`,
+      options: {
+        collapsible: true,
+        collapsed: true
+      },
+      fields: [
+        d.title,
+        {
+          name: 'image',
+          title: 'Image',
+          type: 'mainImage'
+        },
+        d.editorMinimal,
+        {
+          name: 'link',
+          title: 'Link',
+          type: 'url'
+        }
+      ]
     }
   ],
   preview: {

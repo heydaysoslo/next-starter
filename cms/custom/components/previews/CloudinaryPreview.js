@@ -14,7 +14,7 @@ const CloudinaryPreview = ({
     width,
     height
   })
-  return <img src={src} />
+  return <img style={{ maxWidth: '100%' }} src={src} />
 }
 
 export default CloudinaryPreview

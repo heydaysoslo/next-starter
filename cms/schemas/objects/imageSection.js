@@ -1,7 +1,14 @@
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
+
+const icon = '🖼'
+
 export default {
   name: 'imageSection',
   title: 'Full Image Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
       name: 'image',
@@ -16,12 +23,12 @@ export default {
   ],
   preview: {
     select: {
-      media: 'image'
+      media: 'image.cldImage'
     },
     prepare({ media }) {
       return {
         title: 'Image',
-        media,
+        media: () => <CloudinaryPreview media={media} fallback={icon} />, // Pagebuilder list icon
         subtitle: 'Image section'
       }
     }

@@ -1,32 +1,19 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
+const icon = '🃏'
+
 export default {
   name: 'cardSection',
   title: 'Card Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
-    // {
-    //   name: 'label',
-    //   title: 'Label',
-    //   type: 'string'
-    // },
     {
       name: 'title',
       title: 'Title',
       type: 'string'
     },
-    // {
-    //   name: 'intro',
-    //   title: 'Intro',
-    //   type: 'editorMinimal'
-    // },
-    // {
-    //   name: 'columnAmount',
-    //   title: 'Column amount',
-    //   description: 'Desired amount of columns.',
-    //   type: 'number'
-    // },
     {
       name: 'cardsList',
       title: 'Cards',
@@ -53,7 +40,7 @@ export default {
       return {
         title,
         subtitle: 'Card section',
-        media: <EmojiIcon>🃏</EmojiIcon>
+        media: <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
     }
   }

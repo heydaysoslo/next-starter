@@ -2,10 +2,13 @@ import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 import Vimeo from '../../custom/components/Vimeo'
 
+const icon = '🎬'
+
 export default {
   name: 'videoSection',
   title: 'Video Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
       name: 'video',
@@ -22,7 +25,7 @@ export default {
       const data = video && JSON.parse(video)
       return {
         title: data && data.label ? data.label : 'Video',
-        media: () => <EmojiIcon>🎬</EmojiIcon>,
+        media: () => <EmojiIcon>{icon}</EmojiIcon>, // Pagebuilder list icon
         subtitle: 'Video section'
       }
     }
