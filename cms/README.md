@@ -17,12 +17,6 @@ afterwards.
 
 Deploys sanity to the sanity cloud.
 
-## Dashboard
-
-### Netlify widget
-
-Check `/cms/daskboardConfig.js` under netlify and add correct values
-
 ## `heydays-config.js`
 
 This is the config file for our sanity setup.

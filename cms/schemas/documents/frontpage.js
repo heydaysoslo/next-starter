@@ -1,4 +1,5 @@
-import FaHome from 'react-icons/lib/fa/home'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 import d from '../defaults'
 // import PageIcon from '../../custom/components/icons/PageIcon'
 
@@ -6,7 +7,7 @@ export default {
   name: 'frontpage',
   title: 'Front page',
   type: 'document',
-  icon: FaHome,
+  icon: () => <EmojiIcon>🏠</EmojiIcon>,
   initialValue: {
     template: 'frontpage'
   },

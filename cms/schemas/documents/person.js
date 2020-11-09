@@ -1,10 +1,11 @@
-import MdPerson from 'react-icons/lib/md/person'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'person',
   title: 'Person',
   type: 'document',
-  icon: MdPerson,
+  icon: () => <EmojiIcon>🙋🏻‍♀️</EmojiIcon>,
   liveEdit: false,
   fields: [
     {
