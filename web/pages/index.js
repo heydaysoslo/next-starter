@@ -9,18 +9,18 @@ export default function Home({ data, preview }) {
   })
 
   return (
-    <Layout page={post.frontpage} preview={preview}>
-      <TemplateResolver page={post.frontpage} />
+    <Layout page={post?.frontpage} preview={preview}>
+      <TemplateResolver page={post?.frontpage} />
     </Layout>
   )
 }
 
 export const getStaticProps = async ({ preview = false }) => {
-  const post = await getClient(preview).fetch(frontpageQuery)
+  const { frontpage } = await getClient(preview).fetch(frontpageQuery)
   return {
     props: {
       preview,
-      data: { post }
+      data: { frontpage }
     }
   }
 }
