@@ -46,7 +46,7 @@ export const ExternalLink = ({ link, className, children, ...props }) => {
 
   if (!href) {
     console.warn(`No href provided. Can't resolve link.`)
-    return children // make sure we render potentially nested content
+    return children || null // make sure we render potentially nested content
   }
 
   return (
