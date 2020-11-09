@@ -15,6 +15,7 @@ import article from './documents/article'
 import siteSettings from './documents/siteSettings'
 import frontpage from './documents/frontpage'
 import globalContent from './documents/globalContent'
+import reusableSection from './documents/reusableSection'
 
 // Object types
 import link from './objects/link'
@@ -48,6 +49,7 @@ import tabs from './objects/tabs'
 import tabsItem from './objects/tabsItem'
 import videoSection from './objects/videoSection'
 import spacer from './objects/spacer'
+import reusableSectionReference from './objects/reusableSectionReference'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -93,6 +95,7 @@ export default createSchema({
     tabsItem,
     videoSection,
     spacer,
+    reusableSectionReference,
 
     // The following are document types which will appear
     // in the studio.
@@ -105,6 +108,7 @@ export default createSchema({
     article,
     // articleOrder,
     frontpage,
-    globalContent
+    globalContent,
+    reusableSection
   ])
 })
