@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import styled, { css } from 'styled-components'
 
@@ -12,7 +12,7 @@ const sectionTypes = {
   textImageSplit: dynamic(() => import('./TextImageSplit')),
   carousel: dynamic(() => import('./CarouselSection')),
   tabs: dynamic(() => import('../elements/Tabs')),
-  videoSection: dynamic(() => import('./VideoSection'))
+  videoSection: dynamic(() => import('./VideoSection')),
 }
 
 const StyledPageBuilder = styled.div(
@@ -23,7 +23,16 @@ const StyledPageBuilder = styled.div(
   `
 )
 
-const PageBuilder = ({ sections }) => {
+type section = {
+  _type: keyof typeof sectionTypes
+  _key: string
+}
+
+type Props = {
+  sections: section[]
+}
+
+const PageBuilder: React.FC<Props> = ({ sections }) => {
   return (
     <StyledPageBuilder>
       <Stagger>
