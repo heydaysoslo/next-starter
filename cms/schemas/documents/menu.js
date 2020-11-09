@@ -1,10 +1,11 @@
-import FaList from 'react-icons/lib/fa/list-ul'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'menu',
   title: 'Navigation',
   type: 'document',
-  icon: FaList,
+  icon: () => <EmojiIcon>🧭</EmojiIcon>,
   fields: [
     {
       title: 'Title',
