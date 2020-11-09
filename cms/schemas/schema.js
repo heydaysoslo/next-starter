@@ -14,6 +14,7 @@ import article from './documents/article'
 // import articleOrder from './documents/articleOrder'
 import siteSettings from './documents/siteSettings'
 import frontpage from './documents/frontpage'
+import globalContent from './documents/globalContent'
 
 // Object types
 import link from './objects/link'
@@ -103,6 +104,7 @@ export default createSchema({
     // personOrder,
     article,
     // articleOrder,
-    frontpage
+    frontpage,
+    globalContent
   ])
 })

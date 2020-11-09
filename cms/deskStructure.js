@@ -19,7 +19,7 @@ export default () =>
       createDocsList('menu'),
       createDocsList('frontpage'),
       createDocsList('page'),
-      // createDocsList('article'),
+      createDocsList('article'),
       ...customTypesWithOrderPage,
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
@@ -29,10 +29,23 @@ export default () =>
       // createDocsList('designTokens', {
       //   withPreviews: true
       // }),
-      createSingleton('companyInfo', {
-        withPreviews: false,
-        icon: () => <EmojiIcon>🏢</EmojiIcon>
-      }),
+      S.listItem()
+        .title('Global')
+        .icon(() => <EmojiIcon>🌍</EmojiIcon>)
+        .child(
+          S.list()
+            .title('Global')
+            .items([
+              createSingleton('companyInfo', {
+                withPreviews: false,
+                icon: () => <EmojiIcon>🏢</EmojiIcon>
+              }),
+              createSingleton('globalContent', {
+                withPreviews: false,
+                icon: () => <EmojiIcon>🌍</EmojiIcon>
+              })
+            ])
+        ),
       S.listItem()
         .title('Settings')
         .icon(() => <EmojiIcon>⚙️</EmojiIcon>)
@@ -74,6 +87,8 @@ const hiddenDocTypes = listItem =>
     'article',
     'frontpage',
     'menu',
+    'companyInfo',
+    'globalContent',
     ...config.pageTypes,
     ...hiddenCustomTypes
   ].includes(listItem.getId())
