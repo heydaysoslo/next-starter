@@ -3,6 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import heydaysConfig from '../../../../heydays-config'
+import resolveProductionUrl from '../../../../resolveProductionUrl'
 
 class Preview extends React.PureComponent {
   static propTypes = {
@@ -24,9 +25,7 @@ class Preview extends React.PureComponent {
   render() {
     const { displayed } = this.props.document
 
-    const url = `${heydaysConfig.previewUrl[process.env.NODE_ENV]}${
-      displayed._id
-    }?access_token=${heydaysConfig.access_token}`
+    const url = resolveProductionUrl(displayed)
 
     if (!displayed._id) return null
 
