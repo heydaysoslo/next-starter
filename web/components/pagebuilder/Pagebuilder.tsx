@@ -1,25 +1,18 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import styled, { css } from 'styled-components'
 
-import CardSection from './CardSection'
-import TextSection from './TextSection'
-import FullImageSection from './FullImageSection'
-import Section from './Section'
-import TextImageSplit from './TextImageSplit'
-import VideoSection from './VideoSection'
-import Tabs from '../elements/Tabs'
 import Stagger from '@heydays/animation/Stagger'
 
 const sectionTypes = {
-  section: Section,
-  cardSection: CardSection,
-  textSection: TextSection,
-  imageSection: FullImageSection,
-  textImageSplit: TextImageSplit,
+  section: dynamic(() => import('./Section')),
+  cardSection: dynamic(() => import('./CardSection')),
+  textSection: dynamic(() => import('./TextSection')),
+  imageSection: dynamic(() => import('./FullImageSection')),
+  textImageSplit: dynamic(() => import('./TextImageSplit')),
   carousel: dynamic(() => import('./CarouselSection')),
-  tabs: Tabs,
-  videoSection: VideoSection
+  tabs: dynamic(() => import('../elements/Tabs')),
+  videoSection: dynamic(() => import('./VideoSection')),
 }
 
 const StyledPageBuilder = styled.div(
@@ -30,7 +23,16 @@ const StyledPageBuilder = styled.div(
   `
 )
 
-const PageBuilder = ({ sections }) => {
+type section = {
+  _type: keyof typeof sectionTypes
+  _key: string
+}
+
+type Props = {
+  sections: section[]
+}
+
+const PageBuilder: React.FC<Props> = ({ sections }) => {
   return (
     <StyledPageBuilder>
       <Stagger>

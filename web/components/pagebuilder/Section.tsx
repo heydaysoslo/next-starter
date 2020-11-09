@@ -1,10 +1,24 @@
 import React from 'react'
-import Editor from '../editor/'
+import Editor from '../editor'
 import { P, H3 } from '@heydays/Typography'
 import styled, { css } from 'styled-components'
 import LinkResolver from '@heydays/LinkResolver'
 
-const Section = ({ label, title, content, link, className }) => {
+type Props = {
+  label: string
+  title: string
+  content: any
+  link: any
+  className?: string
+}
+
+const Section: React.FC<Props> = ({
+  label,
+  title,
+  content,
+  link,
+  className,
+}) => {
   return (
     <div className={className}>
       {label && (
@@ -15,7 +29,9 @@ const Section = ({ label, title, content, link, className }) => {
       {title && <H3 className="title">{title}</H3>}
       {content && <Editor className="content" blocks={content} />}
       {link && (
-        <LinkResolver link={link}>{link.title || link.url}</LinkResolver>
+        <LinkResolver className="" link={link}>
+          {link.title || link.url}
+        </LinkResolver>
       )}
     </div>
   )
