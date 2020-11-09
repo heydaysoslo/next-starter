@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
 const templates = {
-  article: 'Article',
   frontpage: 'FrontPage',
   contact: 'ContactPage',
   news: 'NewsPage',
-  default: 'Page'
+  default: 'Page',
+  article: 'Article'
 }
 
 export default function TemplateResolver({ page }) {
@@ -14,10 +14,10 @@ export default function TemplateResolver({ page }) {
   useEffect(() => {
     let temp
     // Check if we have a template
-    if (page.template && templates[page.template]) {
+    if (page?.template && templates[page.template]) {
       temp = templates[page.template]
     } // If no template name is set, resolve to type
-    else if (page._type && templates[page._type]) {
+    else if (page?._type && templates[page._type]) {
       temp = templates[page._type]
     } // If we still don't have a component, resolve to default
     else {

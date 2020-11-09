@@ -23,8 +23,8 @@
     "next-sanity": "^0.1.7",
     "next-svgr": "^0.0.2",
     "oembed-parser": "^1.4.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "react": "^16.9",
+    "react-dom": "^16.9",
     "react-intersection-observer": "^8.26.2",
     "styled-components": "^5.1.1"
   },
