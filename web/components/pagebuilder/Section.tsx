@@ -3,6 +3,7 @@ import Editor from '../editor'
 import { P, H3 } from '@heydays/Typography'
 import styled, { css } from 'styled-components'
 import LinkResolver from '@heydays/LinkResolver'
+import Animate from '@heydays/animation/Animate'
 
 type Props = {
   label: string
@@ -20,7 +21,7 @@ const Section: React.FC<Props> = ({
   className,
 }) => {
   return (
-    <div className={className}>
+    <Animate className={className}>
       {label && (
         <P modifiers="small" className="label">
           {label}
@@ -33,7 +34,7 @@ const Section: React.FC<Props> = ({
           {link.title || link.url}
         </LinkResolver>
       )}
-    </div>
+    </Animate>
   )
 }
 

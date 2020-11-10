@@ -2,8 +2,6 @@ import React, { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 import styled, { css } from 'styled-components'
 
-import Stagger from '@heydays/animation/Stagger'
-
 const sectionTypes = {
   section: dynamic(() => import('./Section')),
   cardSection: dynamic(() => import('./CardSection')),
@@ -35,24 +33,22 @@ type Props = {
 const PageBuilder: React.FC<Props> = ({ sections }) => {
   return (
     <StyledPageBuilder>
-      <Stagger>
-        {sections?.map((section, index) => {
-          const Component = sectionTypes[section._type] || null
-          return Component ? (
-            <div key={section._key} className="PageBuilder__item">
-              <Component
-                {...section}
-                prevComp={sections[index - 1] ? sections[index - 1] : null}
-                nextComp={sections[index + 1] ? sections[index + 1] : null}
-              />
-            </div>
-          ) : (
-            <p key={section._key} style={{ background: 'yellow' }}>
-              Component {section._type} not found
-            </p>
-          )
-        })}
-      </Stagger>
+      {sections?.map((section, index) => {
+        const Component = sectionTypes[section._type] || null
+        return Component ? (
+          <div key={section._key} className="PageBuilder__item">
+            <Component
+              {...section}
+              prevComp={sections[index - 1] ? sections[index - 1] : null}
+              nextComp={sections[index + 1] ? sections[index + 1] : null}
+            />
+          </div>
+        ) : (
+          <p key={section._key} style={{ background: 'yellow' }}>
+            Component {section._type} not found
+          </p>
+        )
+      })}
     </StyledPageBuilder>
   )
 }
