@@ -7,12 +7,12 @@ import Layout from '../components/Layout'
 export default function Post({ data, preview }) {
   const router = useRouter()
 
-  if (!router.isFallback && !data.post?.slug) {
+  if (!router.isFallback && !data?.slug) {
     return <ErrorPage statusCode={404} />
   }
 
   const { data: post } = usePreviewSubscription(pageQuery, {
-    params: { slug: data?.post?.slug?.current },
+    params: { slug: data?.slug?.current },
     initialData: data,
     enabled: preview
   })
@@ -31,7 +31,7 @@ export const getStaticProps = async ({ params, preview = false }) => {
   return {
     props: {
       preview,
-      data: { post }
+      data: post
     }
   }
 }

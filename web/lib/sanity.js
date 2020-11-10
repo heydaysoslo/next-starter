@@ -69,13 +69,15 @@ const BASE_ARTICLE = groq`
 
 export const PAGEBUILDER = groq`
 pagebuilder {
-  sections[]{
+  sections[] {
     seeAllLink {
       reference->{slug, title,_type},
       ...
     },
-    cardsList[]{
-      content->{...},
+    cardsList[] {
+      content->{
+        ...
+      },
       ...
     },
     ...
@@ -86,8 +88,8 @@ pagebuilder {
 
 export const pageQuery = groq`
 *[_type == 'page' && slug.current == $slug][0] {
-  ...,
-  ${PAGEBUILDER}
+  ${PAGEBUILDER},
+  ...
 }
 `
 
@@ -137,9 +139,7 @@ export const getPage = (params, preview = false) => {
 }
 
 export const getPages = () => {
-  const query = groq`
-  *[_type == 'page']`
-
+  const query = groq`*[_type == 'page']`
   return getClient(false).fetch(query)
 }
 
