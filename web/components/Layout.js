@@ -4,22 +4,25 @@ import Header from '../components/Header'
 import SEO from '../components/SEO'
 import Footer from '@heydays/Footer'
 import styled from 'styled-components'
+import { SanityProvider } from 'components/context/sanityContext'
 
 const AdminBar = dynamic(() => import('../components/cms/AdminBar'), {
   ssr: false
 })
 
-const Layout = ({ page, preview = false, children }) => {
+const Layout = ({ page, global, preview = false, children }) => {
   return (
-    <Wrapper>
-      <SEO page={page} />
-      <Content>
-        {preview && <AdminBar />}
-        <Header />
-        {children}
-      </Content>
-      <StyledFooter />
-    </Wrapper>
+    <SanityProvider data={{ global }}>
+      <Wrapper>
+        <SEO page={page} />
+        <Content>
+          {preview && <AdminBar />}
+          <Header />
+          {children}
+        </Content>
+        <StyledFooter />
+      </Wrapper>
+    </SanityProvider>
   )
 }
 

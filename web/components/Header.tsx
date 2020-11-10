@@ -5,6 +5,7 @@ import Switch from '@heydays/Switch'
 import Container from './elements/Container'
 import useWindowSize from '@heydays/useWindowSize'
 import AppContext from './context/appContext'
+import MainMenu from './elements/MainMenu'
 
 type Props = {
   className?: string
@@ -34,12 +35,16 @@ const Header: React.FC<Props> = ({ className }) => {
             <a>NEXT STARTER</a>
           </Link>
         </h1>
-        <Switch
-          size={60}
-          state={state.darkTheme}
-          onClick={() => actions.toggleDarkTheme()}
-        />
+        <div className="Header__tools">
+          <MainMenu />
+          <Switch
+            size={60}
+            state={state.darkTheme}
+            onClick={() => actions.toggleDarkTheme()}
+          />
+        </div>
       </header>
+      
     </Container>
   )
 }
@@ -50,5 +55,9 @@ export default styled(Header)(
     justify-content: space-between;
     align-items: center;
     ${t.spacing.md('mt')};
+    .Header__tools {
+      display: flex;
+      align-items: center;
+    }
   `
 )

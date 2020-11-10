@@ -13,16 +13,13 @@ import theme from 'styles/themes/defaultTheme'
 import darkTheme from 'styles/themes/darkTheme'
 
 import Favicon from 'components/Favicon'
-import { SanityProvider } from 'components/context/sanityContext'
 import AppContext, { AppProvider } from 'components/context/appContext'
 
 const App = props => {
   return (
-    <SanityProvider>
-      <AppProvider>
-        <Inner {...props} />
-      </AppProvider>
-    </SanityProvider>
+    <AppProvider>
+      <Inner {...props} />
+    </AppProvider>
   )
 }
 

@@ -1,10 +1,16 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import TemplateResolver from '@heydays/TemplateResolver'
-import { getClient, usePreviewSubscription, pageQuery, pagesQuery } from '@cms'
+import {
+  getClient,
+  usePreviewSubscription,
+  pageQuery,
+  pagesQuery,
+  getGlobalSettings
+} from '@cms'
 import Layout from '../components/Layout'
 
-export default function Post({ data, preview }) {
+export default function Post({ data, global, preview }) {
   const router = useRouter()
 
   if (!router.isFallback && !data?.slug) {
@@ -18,7 +24,7 @@ export default function Post({ data, preview }) {
   })
 
   return (
-    <Layout preview={preview}>
+    <Layout preview={preview} global={global}>
       <TemplateResolver page={post} />
     </Layout>
   )
@@ -28,10 +34,12 @@ export const getStaticProps = async ({ params, preview = false }) => {
   const post = await getClient(preview).fetch(pageQuery, {
     slug: params.slug
   })
+  const global = await getGlobalSettings()
   return {
     props: {
       preview,
-      data: post
+      data: post,
+      global
     }
   }
 }

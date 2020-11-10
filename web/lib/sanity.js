@@ -197,7 +197,16 @@ export const getCompanyInfo = () => {
 }
 
 export const getGlobalSettings = () => {
-  const query = groq`*[_type == 'global']`
+  const query = groq`*[_id == 'siteSettings'][0]{
+    primaryMenu->{
+      item[] {
+        reference->,
+        ...
+      },
+      ...
+    },
+    ...
+  }`
   return getClient(false).fetch(query)
 }
 
