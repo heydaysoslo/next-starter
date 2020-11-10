@@ -15,7 +15,7 @@ type Props = {
 const Header: React.FC<Props> = ({ className }) => {
   const headerRef = useRef<HTMLElement | null>(null)
   const windowSize = useWindowSize({ debounce: 200 })
-  const {state, actions} = useContext(AppContext)
+  const { state, actions } = useContext(AppContext)
 
   useEffect(() => {
     if (headerRef?.current) {
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ className }) => {
           </Link>
         </h1>
         <div className="Header__tools">
-          <MainMenu />
+          <MainMenu className="" />
           <Switch
             size={60}
             state={state.darkTheme}
@@ -44,7 +44,6 @@ const Header: React.FC<Props> = ({ className }) => {
           />
         </div>
       </header>
-      
     </Container>
   )
 }
