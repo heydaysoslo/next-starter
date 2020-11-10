@@ -3,14 +3,11 @@ import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 
-import 'lazysizes/plugins/respimg/ls.respimg.js'
-import 'lazysizes/plugins/attrchange/ls.attrchange.js'
 import 'lazysizes'
-
 import 'styles/reset.css'
 
 import theme from 'styles/themes/defaultTheme'
-import darkTheme from 'styles/themes/darkTheme'
+import darkTheme from 'styles/themes/darkTheme' // gå over til dynamic importering
 
 import Favicon from 'components/Favicon'
 import AppContext, { AppProvider } from 'components/context/appContext'
