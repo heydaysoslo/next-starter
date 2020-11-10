@@ -6,6 +6,7 @@ import {
   createPreviewSubscriptionHook,
   createCurrentUserHook
 } from 'next-sanity'
+import { useEffect, useState } from 'react'
 
 const config = {
   /**
@@ -32,7 +33,32 @@ const config = {
 export const urlFor = source => createImageUrlBuilder(config).image(source)
 
 // Set up the live preview subsscription hook
-export const usePreviewSubscription = createPreviewSubscriptionHook(config)
+// export const usePreviewSubscription = createPreviewSubscriptionHook(config)
+export const usePreviewSubscriptionClient = createPreviewSubscriptionHook(
+  config
+)
+
+// Fix to resolve references in preview subscription
+export const usePreviewSubscription = (
+  query,
+  { params, initialData, enabled }
+) => {
+  const [newData, setNewData] = useState(initialData)
+  const { data } = usePreviewSubscriptionClient(query, {
+    params,
+    initialData,
+    enabled
+  })
+  const getResolvedPreview = () => {
+    if (enabled) {
+      getPreview(query, params).then(res => {
+        setNewData(res)
+      })
+    }
+  }
+  useEffect(getResolvedPreview, [data])
+  return { data: newData }
+}
 
 // Set up Portable Text serialization
 export const PortableText = createPortableTextComponent({
