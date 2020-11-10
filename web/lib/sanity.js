@@ -38,25 +38,30 @@ export const usePreviewSubscriptionClient = createPreviewSubscriptionHook(
   config
 )
 
-// Fix to resolve references in preview subscription
+// [WIP] Fix to resolve references in preview subscription
 export const usePreviewSubscription = (
   query,
   { params, initialData, enabled }
 ) => {
-  const [newData, setNewData] = useState(initialData)
-  const { data } = usePreviewSubscriptionClient(query, {
+  const { data: newData } = usePreviewSubscriptionClient(query, {
     params,
     initialData,
     enabled
   })
-  const getResolvedPreview = () => {
-    if (enabled) {
-      getPreview(query, params).then(res => {
-        setNewData(res)
-      })
-    }
-  }
-  useEffect(getResolvedPreview, [data])
+  //
+  // Current problem: sanityClient token renders undefined and drafts are not returned
+  //
+  // const [newData, setNewData] = useState(initialData)
+  // const getResolvedPreview = () => {
+  //   if (enabled) {
+  //     // console.log('GET PREVIEW', getClient(true))
+  //     getPreview(query, params).then(res => {
+  //       console.log('GET PREVIEW', res)
+  //       setNewData(res)
+  //     })
+  //   }
+  // }
+  // useEffect(getResolvedPreview, [data])
   return { data: newData }
 }
 
