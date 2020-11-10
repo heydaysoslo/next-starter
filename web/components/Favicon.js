@@ -146,9 +146,9 @@ const Favicon = () => {
       <meta name="msapplication-TileColor" content="#fff" />
       <meta
         name="msapplication-TileImage"
-        content="${PATH}mstile-144x144.png"
+        content={`${PATH}mstile-144x144.png`}
       />
-      <meta name="msapplication-config" content="${PATH}browserconfig.xml" />
+      <meta name="msapplication-config" content={`${PATH}browserconfig.xml`} />
       <meta name="theme-color" content="#fff" />
     </Head>
   )
