@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import Switch from '@heydays/Switch'
 import Container from './elements/Container'
 import useWindowSize from '@heydays/useWindowSize'
-import AppContext from './context/appContext'
 import MainMenu from './elements/MainMenu'
+import useAppContext from '@heydays/useAppContext'
 
 type Props = {
   className?: string
@@ -15,7 +15,7 @@ type Props = {
 const Header: React.FC<Props> = ({ className }) => {
   const headerRef = useRef<HTMLElement | null>(null)
   const windowSize = useWindowSize({ debounce: 200 })
-  const { state, actions } = useContext(AppContext)
+  const { state, actions } = useAppContext()
 
   useEffect(() => {
     if (headerRef?.current) {
