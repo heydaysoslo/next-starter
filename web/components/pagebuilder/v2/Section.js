@@ -4,10 +4,12 @@ import { P, H3 } from '@heydays/Typography'
 
 import Editor from '../../editor'
 import Container from '@heydays/Container'
+import Spacer from '@heydays/Spacer'
 
 const Section = ({ label, title, content, className }) => {
   return (
     <div className={className}>
+      <Spacer />
       <Container>
         {label && (
           <P modifiers="small" className="label">
@@ -24,8 +26,6 @@ const Section = ({ label, title, content, className }) => {
 export default styled(Section)(
   ({ theme }) => css`
     text-align: center;
-    padding-top: 40px;
-    background: green;
     .title {
       margin-top: 10px;
     }

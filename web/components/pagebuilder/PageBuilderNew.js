@@ -2,14 +2,18 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 // import dynamic from 'next/dynamic'
 import Section from './v2/Section'
+import CardSection from './v2/CardSection'
+import TextSection from './v2/TextSection'
 
-const NotFound = props => {
-  return <p style={{ background: 'yellow' }}>Component not found</p>
+const NotFound = ({ _type }) => {
+  return <p style={{ background: 'yellow' }}>Component "{_type}" not found</p>
 }
 
 const sectionTypes = {
   error: NotFound,
-  section: Section
+  section: Section,
+  cardSection: CardSection,
+  textSection: TextSection
   // section: dynamic(() => import('./Section')),
   // cardSection: dynamic(() => import('./CardSection')),
   // textSection: dynamic(() => import('./TextSection')),
@@ -22,7 +26,9 @@ const sectionTypes = {
 
 const StyledPageBuilder = styled.div(
   ({ theme }) => css`
-    background: red;
+    .Pagebuilder__item {
+      border-top: 1px solid red;
+    }
   `
 )
 
@@ -31,7 +37,13 @@ const PageBuilder = ({ sections, className }) => {
     <StyledPageBuilder className={className}>
       {sections.map((section, index) => {
         const Component = sectionTypes[section._type] || sectionTypes.error
-        return <Component key={section._key} {...section} />
+        return (
+          <Component
+            className="Pagebuilder__item"
+            key={section._key}
+            {...section}
+          />
+        )
       })}
     </StyledPageBuilder>
   )
