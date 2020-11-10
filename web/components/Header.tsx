@@ -4,16 +4,18 @@ import Link from 'next/link'
 import Switch from '@heydays/Switch'
 import Container from './elements/Container'
 import useWindowSize from '@heydays/useWindowSize'
+import MainMenu from './elements/MainMenu'
+import useAppContext from '@heydays/useAppContext'
 
 type Props = {
   className?: string
   isDark: boolean
-  setIsDark: (cb: (prevState: boolean) => void) => void
 }
 
-const Header: React.FC<Props> = ({ className, isDark, setIsDark }) => {
+const Header: React.FC<Props> = ({ className }) => {
   const headerRef = useRef<HTMLElement | null>(null)
   const windowSize = useWindowSize({ debounce: 200 })
+  const { state, actions } = useAppContext()
 
   useEffect(() => {
     if (headerRef?.current) {
@@ -33,11 +35,14 @@ const Header: React.FC<Props> = ({ className, isDark, setIsDark }) => {
             <a>NEXT STARTER</a>
           </Link>
         </h1>
-        <Switch
-          size={60}
-          state={isDark}
-          onClick={() => setIsDark(prevState => !prevState)}
-        />
+        <div className="Header__tools">
+          <MainMenu className="" />
+          <Switch
+            size={60}
+            state={state.darkTheme}
+            onClick={() => actions.toggleDarkTheme()}
+          />
+        </div>
       </header>
     </Container>
   )
@@ -49,5 +54,9 @@ export default styled(Header)(
     justify-content: space-between;
     align-items: center;
     ${t.spacing.md('mt')};
+    .Header__tools {
+      display: flex;
+      align-items: center;
+    }
   `
 )

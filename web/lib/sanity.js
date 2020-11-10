@@ -6,6 +6,7 @@ import {
   createPreviewSubscriptionHook,
   createCurrentUserHook
 } from 'next-sanity'
+import { useEffect, useState } from 'react'
 
 const config = {
   /**
@@ -32,7 +33,37 @@ const config = {
 export const urlFor = source => createImageUrlBuilder(config).image(source)
 
 // Set up the live preview subsscription hook
-export const usePreviewSubscription = createPreviewSubscriptionHook(config)
+// export const usePreviewSubscription = createPreviewSubscriptionHook(config)
+export const usePreviewSubscriptionClient = createPreviewSubscriptionHook(
+  config
+)
+
+// [WIP] Fix to resolve references in preview subscription
+export const usePreviewSubscription = (
+  query,
+  { params, initialData, enabled }
+) => {
+  const { data: newData } = usePreviewSubscriptionClient(query, {
+    params,
+    initialData,
+    enabled
+  })
+  //
+  // Current problem: sanityClient token renders undefined and drafts are not returned
+  //
+  // const [newData, setNewData] = useState(initialData)
+  // const getResolvedPreview = () => {
+  //   if (enabled) {
+  //     // console.log('GET PREVIEW', getClient(true))
+  //     getPreview(query, params).then(res => {
+  //       console.log('GET PREVIEW', res)
+  //       setNewData(res)
+  //     })
+  //   }
+  // }
+  // useEffect(getResolvedPreview, [data])
+  return { data: newData }
+}
 
 // Set up Portable Text serialization
 export const PortableText = createPortableTextComponent({
@@ -69,13 +100,15 @@ const BASE_ARTICLE = groq`
 
 export const PAGEBUILDER = groq`
 pagebuilder {
-  sections[]{
+  sections[] {
     seeAllLink {
       reference->{slug, title,_type},
       ...
     },
-    cardsList[]{
-      content->{...},
+    cardsList[] {
+      content->{
+        ...
+      },
       ...
     },
     ...
@@ -86,8 +119,8 @@ pagebuilder {
 
 export const pageQuery = groq`
 *[_type == 'page' && slug.current == $slug][0] {
-  ...,
-  ${PAGEBUILDER}
+  ${PAGEBUILDER},
+  ...
 }
 `
 
@@ -137,9 +170,7 @@ export const getPage = (params, preview = false) => {
 }
 
 export const getPages = () => {
-  const query = groq`
-  *[_type == 'page']`
-
+  const query = groq`*[_type == 'page']`
   return getClient(false).fetch(query)
 }
 
@@ -166,7 +197,16 @@ export const getCompanyInfo = () => {
 }
 
 export const getGlobalSettings = () => {
-  const query = groq`*[_type == 'global']`
+  const query = groq`*[_id == 'siteSettings'][0]{
+    primaryMenu->{
+      item[] {
+        reference->,
+        ...
+      },
+      ...
+    },
+    ...
+  }`
   return getClient(false).fetch(query)
 }
 

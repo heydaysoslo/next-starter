@@ -25,9 +25,9 @@ export default {
       type: 'editorMinimal'
     },
     {
-      name: 'link',
-      title: 'Link',
-      type: 'link'
+      title: 'Settings',
+      name: 'settings',
+      type: 'sectionSettings'
     }
   ],
   preview: {

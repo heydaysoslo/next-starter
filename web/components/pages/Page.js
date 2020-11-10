@@ -1,37 +1,26 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
-import Pagebuilder from '../pagebuilder/Pagebuilder'
-import { H1, P } from '@heydays/Typography'
+// import Pagebuilder from '../pagebuilder/Pagebuilder'
+import PageBuilderNew from '../pagebuilder/PageBuilderNew'
+import { H1 } from '@heydays/Typography'
 import Container from '@heydays/Container'
 
 const Page = ({ className, title, content, pagebuilder, ...props }) => {
   return (
     <div className={className}>
-      <Container className="Page__container">
-        <header className="Page__header">
-          <P>Page</P>
-          {title && <H1>{title}</H1>}
-        </header>
-        {pagebuilder && (
-          <div className="Page__content">
-            {pagebuilder?.sections && (
-              <Pagebuilder sections={pagebuilder.sections} />
-            )}
-          </div>
-        )}
-      </Container>
+      <header>
+        <Container>{title && <H1>{title}</H1>}</Container>
+      </header>
+      {pagebuilder && (
+        <div className="Page__content">
+          {pagebuilder?.sections && (
+            <PageBuilderNew sections={pagebuilder.sections} />
+          )}
+        </div>
+      )}
     </div>
   )
 }
 
-export default styled(Page)(
-  ({ theme }) => css`
-    .Page__header {
-      ${theme.spacing.sm('mt')}
-    }
-    .Page__content {
-      ${theme.spacing.sm('mt')}
-    }
-  `
-)
+export default styled(Page)(({ theme }) => css``)

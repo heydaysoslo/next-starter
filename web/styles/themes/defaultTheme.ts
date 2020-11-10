@@ -62,9 +62,9 @@ export const responsiveSpacing = {
     lg: 'gutter'
   },
   container: {
-    xs: '10px',
-    md: 'lg',
-    lg: '5vw'
+    xs: '20px',
+    sm: '40px',
+    md: '5vw',
   },
   pixel: {
     xs: '1px'

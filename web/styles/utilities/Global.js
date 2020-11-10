@@ -13,6 +13,11 @@ export const GlobalStyle = createGlobalStyle(
       --header-height: 0px;
     }
 
+    // Needed for sticky footer
+    html, body, #__next {
+      height: 100%;
+    }
+
     html {
       font-size: 62.5%;
     }

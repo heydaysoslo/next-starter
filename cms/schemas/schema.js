@@ -44,7 +44,9 @@ import address from './objects/address'
 import tabs from './objects/tabs'
 import videoSection from './objects/videoSection'
 import spacer from './objects/spacer'
+import sectionSettings from './objects/sectionSettings'
 import reusableSectionReference from './objects/reusableSectionReference'
+import theme from './objects/theme'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -85,7 +87,9 @@ export default createSchema({
     tabs,
     videoSection,
     spacer,
+    sectionSettings,
     reusableSectionReference,
+    theme,
 
     // The following are document types which will appear
     // in the studio.
