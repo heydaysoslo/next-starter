@@ -1,11 +1,15 @@
 import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
 import d from '../defaults'
-import { getCloudinaryImageSource } from 'part:sanity-plugin-asset-source-cloudinary/helpers'
+
+const icon = '📰'
 
 export default {
   name: 'textImageSplit',
   title: 'Text Image Split',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fieldsets: [
     { name: 'image', title: 'Image' },
     { name: 'content', title: 'Content' }
@@ -45,64 +49,14 @@ export default {
   preview: {
     select: {
       title: 'title',
-      media: 'image'
+      media: 'media'
     },
     prepare({ media, title }) {
-      const newMedia = getCloudinaryImageSource(media?.cldImage, { width: 50 })
       return {
         title,
-        media: newMedia ? <img src={newMedia} alt="" /> : null,
+        media: () => <CloudinaryPreview media={media} fallback={icon} />, // Pagebuilder list preview
         subtitle: 'Text Image Split'
       }
     }
   }
 }
-
-// export default {
-//   name: 'textImageSplit',
-//   title: 'Text Image Split',
-//   type: 'object',
-//   fieldsets: [{ name: 'image', title: 'Image' }],
-//   fields: [
-//     // {
-//     //   name: 'textOnTheRight',
-//     //   title: 'Text On The Right',
-//     //   type: 'boolean'
-//     // },
-//     {
-//       name: 'title',
-//       title: 'title',
-//       type: 'string'
-//     }
-//     // {
-//     //   name: 'text',
-//     //   title: 'Text',
-//     //   type: 'editorMinimal'
-//     // },
-//     // {
-//     //   name: 'image',
-//     //   title: 'Image',
-//     //   type: 'mainImage',
-//     //   fieldset: 'image'
-//     // },
-//     // {
-//     //   name: 'aspect',
-//     //   title: 'Aspect Ratio',
-//     //   type: 'aspect',
-//     //   fieldset: 'image'
-//     // }
-//   ],
-//   preview: {
-//     select: {
-//       title: 'title',
-//       media: 'image'
-//     },
-//     prepare({ media, title }) {
-//       return {
-//         title,
-//         media: media || '',
-//         subtitle: 'Text Image Split'
-//       }
-//     }
-//   }
-// }

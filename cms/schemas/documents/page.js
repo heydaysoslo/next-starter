@@ -28,11 +28,6 @@ export default {
         maxLength: 96
       }
     },
-    // {
-    //   name: 'content',
-    //   title: 'Content',
-    //   type: 'content'
-    // },
     {
       name: 'mainImage',
       title: 'Main image',

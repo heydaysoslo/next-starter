@@ -1,9 +1,13 @@
-import FaFileText from 'react-icons/lib/fa/file-text-o'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
+const icon = '✍️'
 
 export default {
   name: 'textSection',
   title: 'Text Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
       name: 'body',
@@ -22,10 +26,7 @@ export default {
       return {
         title: text,
         subtitle: 'Text section',
-        media:
-          content.filter(block => block._type === 'mainImage').length > 0
-            ? content.filter(block => block._type === 'mainImage')[0].asset
-            : FaFileText
+        media: <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
     }
   }

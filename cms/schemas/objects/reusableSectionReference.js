@@ -1,43 +1,29 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
-const icon = '📰'
+const icon = '♻️'
 
 export default {
-  name: 'section',
-  title: 'Section',
+  name: 'reusableSectionReference',
+  title: 'Reusable Section',
   type: 'object',
   icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
     {
-      name: 'label',
-      title: 'Label',
-      type: 'string'
-    },
-    {
-      name: 'title',
-      title: 'Title',
-      type: 'string'
-    },
-    {
-      name: 'content',
-      title: 'Content',
-      type: 'editorMinimal'
-    },
-    {
-      name: 'link',
-      title: 'Link',
-      type: 'link'
+      name: 'reusableSection',
+      title: 'Module',
+      type: 'reference',
+      to: [{ type: 'reusableSection' }]
     }
   ],
   preview: {
     select: {
-      title: 'title'
+      title: 'reusableSection.title'
     },
     prepare({ title }) {
       return {
         title,
-        subtitle: 'Section',
+        subtitle: 'Reusable Section',
         media: () => <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
     }

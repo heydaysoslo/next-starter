@@ -161,7 +161,7 @@ const AccordionItem = ({
         id={`${item._key}-${i}`}
         aria-labelledby={`${i}-${item._key}`}
       >
-        <Editor blocks={item.content} />
+        <Editor blocks={item.editor} />
       </div>
     </div>
   )
