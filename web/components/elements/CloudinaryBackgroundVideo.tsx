@@ -54,7 +54,7 @@ const CloudinaryBackgroundVideo: React.FC<Props> = ({
         ref={player}
         width={node.width}
         height={node.height}
-        autoPlay
+        autoPlay={inView}
         loop
         muted
         playsInline
