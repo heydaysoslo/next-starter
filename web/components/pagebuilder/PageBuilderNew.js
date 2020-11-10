@@ -4,6 +4,7 @@ import styled, { css } from 'styled-components'
 import Section from './v2/Section'
 import CardSection from './v2/CardSection'
 import TextSection from './v2/TextSection'
+import CarouselSection from './v2/CarouselSection'
 
 const NotFound = ({ _type }) => {
   return <p style={{ background: 'yellow' }}>Component "{_type}" not found</p>
@@ -13,7 +14,8 @@ const sectionTypes = {
   error: NotFound,
   section: Section,
   cardSection: CardSection,
-  textSection: TextSection
+  textSection: TextSection,
+  carousel: CarouselSection
   // section: dynamic(() => import('./Section')),
   // cardSection: dynamic(() => import('./CardSection')),
   // textSection: dynamic(() => import('./TextSection')),
