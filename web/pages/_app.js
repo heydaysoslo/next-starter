@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
@@ -10,7 +10,8 @@ import theme from 'styles/themes/defaultTheme'
 import darkTheme from 'styles/themes/darkTheme' // gå over til dynamic importering
 
 import Favicon from 'components/Favicon'
-import AppContext, { AppProvider } from 'components/context/appContext'
+import { AppProvider } from 'components/context/appContext'
+import useAppContext from '@heydays/useAppContext'
 
 const App = props => {
   return (
@@ -20,8 +21,8 @@ const App = props => {
   )
 }
 
-const Inner = ({ Component, pageProps, ...props }) => {
-  const { state } = useContext(AppContext)
+const Inner = ({ Component, pageProps }) => {
+  const { state } = useAppContext()
   return (
     <ThemeProvider theme={state.darkTheme ? darkTheme : theme}>
       <Favicon />
