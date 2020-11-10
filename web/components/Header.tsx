@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Switch from '@heydays/Switch'
 import Container from './elements/Container'
 import useWindowSize from '@heydays/useWindowSize'
-import MainMenu from './elements/MainMenu'
+import Navigation from './elements/Navigation'
 import useAppContext from '@heydays/useAppContext'
 
 type Props = {
@@ -36,7 +36,7 @@ const Header: React.FC<Props> = ({ className }) => {
           </Link>
         </h1>
         <div className="Header__tools">
-          <MainMenu className="" />
+          <Navigation />
           <Switch
             size={60}
             state={state.darkTheme}
