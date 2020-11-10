@@ -14,7 +14,7 @@ const nextConfig = {
     config.plugins.push(
       new FaviconsWebpackPlugin({
         logo: path.resolve(__dirname, 'public/favicon/favicon.png'),
-        inject: true
+        outputPath: '/static/assets'
       })
     )
 
