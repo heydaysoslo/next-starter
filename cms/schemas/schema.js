@@ -14,6 +14,8 @@ import article from './documents/article'
 // import articleOrder from './documents/articleOrder'
 import siteSettings from './documents/siteSettings'
 import frontpage from './documents/frontpage'
+import globalContent from './documents/globalContent'
+import reusableSection from './documents/reusableSection'
 
 // Object types
 import link from './objects/link'
@@ -23,11 +25,8 @@ import mainImage from './objects/mainImage'
 import editor, { editorMinimal } from './objects/editor'
 import social from './objects/social'
 import office from './objects/office'
-import content from './objects/content'
-import contentConditional from './objects/contentConditional'
 import pagebuilder from './objects/pagebuilder'
 import card from './objects/card'
-import cardOverride from './objects/cardOverride'
 import cardSection from './objects/cardSection'
 import textSection from './objects/textSection'
 import figure from './objects/figure'
@@ -41,13 +40,12 @@ import personReference from './objects/personReference'
 import carousel from './objects/carousel'
 import oembed from './objects/oembed'
 import accordion from './objects/accordion'
-import accordionItem from './objects/accordionItem'
 import address from './objects/address'
 import tabs from './objects/tabs'
-import tabsItem from './objects/tabsItem'
 import videoSection from './objects/videoSection'
 import spacer from './objects/spacer'
 import sectionSettings from './objects/sectionSettings'
+import reusableSectionReference from './objects/reusableSectionReference'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -69,11 +67,8 @@ export default createSchema({
     editorMinimal,
     social,
     office,
-    content,
-    contentConditional,
     pagebuilder,
     card,
-    cardOverride,
     cardSection,
     textSection,
     figure,
@@ -87,13 +82,12 @@ export default createSchema({
     carousel,
     oembed,
     accordion,
-    accordionItem,
     address,
     tabs,
-    tabsItem,
     videoSection,
     spacer,
     sectionSettings,
+    reusableSectionReference,
 
     // The following are document types which will appear
     // in the studio.
@@ -105,6 +99,8 @@ export default createSchema({
     // personOrder,
     article,
     // articleOrder,
-    frontpage
+    frontpage,
+    globalContent,
+    reusableSection
   ])
 })

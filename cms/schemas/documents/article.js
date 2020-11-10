@@ -1,11 +1,11 @@
-import FaNewspaper from 'react-icons/lib/fa/newspaper-o'
-// import NewspaperIcon from '../../custom/components/icons/NewspaperIcon'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
   name: 'article',
   title: 'Article',
   type: 'document',
-  icon: FaNewspaper,
+  icon: () => <EmojiIcon>🗞</EmojiIcon>,
   initialValue: () => ({
     publishDate: new Date().toISOString()
   }),

@@ -1,6 +1,3 @@
-import React from 'react'
-import { getCloudinaryImageSource } from 'part:sanity-plugin-asset-source-cloudinary/helpers'
-
 export default {
   title: {
     name: 'title',
@@ -28,21 +25,6 @@ export default {
     options: {
       selectionType: 'single'
     }
-    // preview: {
-    //   select: {
-    //     media: 'media'
-    //   },
-    //   prepare({ media }) {
-    //     console.log('prepare -> media', media)
-    //     return {
-    //       title: media.resource_type,
-    //       media: getCloudinaryImageSource(media, {
-    //         width: 200,
-    //         height: 200
-    //       })
-    //     }
-    //   }
-    // }
   },
   editor: {
     name: 'editor',
@@ -72,35 +54,5 @@ export default {
     options: {
       isHighlighted: true
     }
-  },
-  imagePreview: {
-    preview: {
-      select: {
-        media: 'cldImage'
-      },
-      prepare({ media }) {
-        const newMedia = getCloudinaryImageSource(media, {
-          width: 50
-        })
-        return {
-          title: media.title,
-          media: newMedia ? <img src={newMedia} alt="" /> : null,
-          subtitle: 'Image'
-        }
-      }
-    }
-  },
-  mainImagePreview: (select, width) => ({
-    preview: {
-      select
-    },
-    prepare(select) {
-      const newMedia = getCloudinaryImageSource(media, { width })
-      return {
-        title,
-        media: newMedia ? <img src={newMedia} alt="" /> : null,
-        subtitle
-      }
-    }
-  })
+  }
 }

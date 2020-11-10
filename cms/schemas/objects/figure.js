@@ -1,14 +1,13 @@
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import CloudinaryPreview from '../../custom/components/previews/CloudinaryPreview'
 import d from '../defaults'
-import MdImage from 'react-icons/lib/md/image'
 
 export default {
   name: 'figure',
   title: 'Image',
   type: 'object',
-  // options: {
-  //   hotspot: true
-  // },
-  icon: MdImage,
+  icon: () => <EmojiIcon>🖼</EmojiIcon>, // dropdown preview in editor
   fields: [
     d.image,
     {
@@ -31,5 +30,24 @@ export default {
       }
     }
   ],
-  ...d.imagePreview
+  preview: {
+    select: {
+      media: 'cldImage'
+    },
+    prepare({ media }) {
+      return {
+        media
+      }
+    },
+    // Inline preview in editor
+    component: props => {
+      return (
+        <CloudinaryPreview
+          width={828}
+          height={800}
+          media={props?.value?.media}
+        />
+      )
+    }
+  }
 }

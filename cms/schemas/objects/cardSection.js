@@ -1,29 +1,20 @@
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+import d from '../defaults'
+
+const icon = '🃏'
+
 export default {
   name: 'cardSection',
   title: 'Card Section',
   type: 'object',
+  icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [
-    // {
-    //   name: 'label',
-    //   title: 'Label',
-    //   type: 'string'
-    // },
     {
       name: 'title',
       title: 'Title',
       type: 'string'
     },
-    // {
-    //   name: 'intro',
-    //   title: 'Intro',
-    //   type: 'editorMinimal'
-    // },
-    // {
-    //   name: 'columnAmount',
-    //   title: 'Column amount',
-    //   description: 'Desired amount of columns.',
-    //   type: 'number'
-    // },
     {
       name: 'cardsList',
       title: 'Cards',
@@ -33,6 +24,27 @@ export default {
           name: 'card',
           title: 'Card',
           type: 'card'
+        },
+        {
+          name: 'staticCard',
+          title: 'Static Card',
+          description:
+            'Use if you are not linking or fetching assets internally on the website.',
+          type: 'object',
+          fields: [
+            d.title,
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'mainImage'
+            },
+            d.editorMinimal,
+            {
+              name: 'link',
+              title: 'Link',
+              type: 'link'
+            }
+          ]
         }
       ]
     },
@@ -44,14 +56,13 @@ export default {
   ],
   preview: {
     select: {
-      title: 'cardsList.0.content.title',
-      media: 'cardsList.0.content.mainImage'
+      title: 'cardsList.0.content.title'
     },
-    prepare({ title = 'No title', media }) {
+    prepare({ title = 'No title' }) {
       return {
         title,
         subtitle: 'Card section',
-        media
+        media: <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
     }
   }
