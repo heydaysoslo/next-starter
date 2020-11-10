@@ -12,16 +12,6 @@ const SmallTextRenderer = props => (
   <span style={{ fontSize: '.85em', lineHeight: 1.1 }}>{props.children}</span>
 )
 
-/**
- * This is the schema definition for the rich text fields used for
- * for this blog studio. When you import it in schemas.js it can be
- * reused in other parts of the studio with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'editor'
- *  }
- */
 const editor = {
   title: 'Editor',
   name: 'editor',
