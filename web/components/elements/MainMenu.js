@@ -1,34 +1,33 @@
 import LinkResolver from '@heydays/LinkResolver'
-import React, { useContext } from 'react'
+import useSanity from '@heydays/useSanity'
+import React from 'react'
 import styled from 'styled-components'
-import SanityContext from '../context/sanityContext'
 
 const MainMenu = ({ className }) => {
-  const cms = useContext(SanityContext)
+  const cms = useSanity()
   const mainMenuItems = cms?.data?.global?.primaryMenu?.item
+  if (!mainMenuItems) {
+    return null
+  }
   return (
     <nav className={className}>
-      {mainMenuItems && (
-        <ul className="MainMenu__list">
-          {mainMenuItems.map(item => {
-            return (
-              <li className="MainMenu__item" key={item._key}>
-                <LinkResolver link={item.reference}>
-                  {item.linkText}
-                </LinkResolver>
-              </li>
-            )
-          })}
-        </ul>
-      )}
+      {mainMenuItems.map(item => {
+        return (
+          <LinkResolver
+            key={item._key}
+            className="MainMenu__item"
+            link={item.reference}
+          >
+            {item.linkText}
+          </LinkResolver>
+        )
+      })}
     </nav>
   )
 }
 
 export default styled(MainMenu)`
-  .MainMenu__list {
-    display: flex;
-  }
+  display: flex;
   .MainMenu__item {
     margin-right: 1rem;
   }
