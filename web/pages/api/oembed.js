@@ -3,21 +3,25 @@ const { extract } = require('oembed-parser')
 
 export default (req, res) => {
   const { url } = JSON.parse(req.body)
-  extract(url)
-    .then(data => {
-      res.statusCode = 200
-      res.json({
-        statusCode: 200,
-        result: data,
-        status: 'success'
+  return new Promise(resolve => {
+    extract(url)
+      .then(data => {
+        res.statusCode = 200
+        res.json({
+          statusCode: 200,
+          result: data,
+          status: 'success'
+        })
+        resolve()
       })
-    })
-    .catch(err => {
-      res.statusCode = 500
-      res.json({
-        statusCode: 500,
-        error: err,
-        status: 'error'
+      .catch(err => {
+        res.statusCode = 500
+        res.json({
+          statusCode: 500,
+          error: err,
+          status: 'error'
+        })
+        resolve()
       })
-    })
+  })
 }
