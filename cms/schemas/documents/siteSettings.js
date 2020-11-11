@@ -1,12 +1,13 @@
-import MdSettings from 'react-icons/lib/md/settings'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
+const icon = '⏺'
 
 export default {
   name: 'siteSettings',
   title: 'Site Settings',
   type: 'document',
-  // liveEdit: false,
-  __experimental_actions: ['update', 'publish' /*'create', 'delete'*/],
-  icon: MdSettings,
+  icon: () => <EmojiIcon>{icon}</EmojiIcon>,
   fieldsets: [
     { name: 'important', title: 'Important pages' },
     { name: 'seo', title: 'SEO' },

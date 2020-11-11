@@ -34,6 +34,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.9",
     "react-dom": "^16.9",
+    "react-icons": "^3.11.0",
     "react-select": "^3.0.8",
     "sanity-plugin-asset-source-cloudinary-test": "^0.0.19",
     "sanity-plugin-tabs": "^2.0.1",

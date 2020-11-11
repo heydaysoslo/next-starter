@@ -1,11 +1,14 @@
-import MdBusiness from 'react-icons/lib/md/business'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
+const icon = '🏢'
 
 export default {
   name: 'companyInfo',
   title: 'Company Info',
   type: 'document',
   liveEdit: false,
-  icon: MdBusiness,
+  icon: () => <EmojiIcon>{icon}</EmojiIcon>,
   fieldsets: [
     { name: 'offices', title: 'Offices' },
     { name: 'contact', title: 'Contact' },

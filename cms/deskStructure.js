@@ -1,6 +1,5 @@
 import React from 'react'
 import S from '@sanity/desk-tool/structure-builder'
-import config, { createCustomTypeDeskStructure } from './heydays-config'
 
 import EmojiIcon from './custom/components/icons/EmojiIcon'
 // import EyeIcon from 'part:@sanity/base/eye-icon'
@@ -20,10 +19,9 @@ export default () =>
       createDocsList('frontpage'),
       createDocsList('page'),
       createDocsList('article'),
-      ...customTypesWithOrderPage,
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
-      // defined the structure above
+      // defined the structure
       ...S.documentTypeListItems().filter(hiddenDocTypes),
       S.divider(),
       // createDocsList('designTokens', {
@@ -65,16 +63,6 @@ export default () =>
  * Helper functions
  */
 
-const customTypesWithOrderPage = createCustomTypeDeskStructure(
-  config.customTypes
-)
-
-const hiddenCustomTypes = config.customTypes.reduce((res, item) => {
-  const typesToHide = [item.typeId, item.orderTypeId]
-  res.push(...typesToHide)
-  return res
-}, [])
-
 const camel2title = camelCase =>
   camelCase
     .replace(/([A-Z])/g, match => ` ${match}`)
@@ -89,8 +77,7 @@ const hiddenDocTypes = listItem =>
     'menu',
     'companyInfo',
     'globalContent',
-    ...config.pageTypes,
-    ...hiddenCustomTypes
+    'page'
   ].includes(listItem.getId())
 
 const createSingleton = (id, options = {}) => {

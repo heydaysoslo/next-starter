@@ -1,9 +1,13 @@
-import MdPerson from 'react-icons/lib/md/person'
+import React from 'react'
+import EmojiIcon from '../../custom/components/icons/EmojiIcon'
+
+const icon = '⏺'
+
 export default {
   name: 'personReference',
   title: 'Person Reference',
   type: 'object',
-  icon: MdPerson,
+  icon: () => <EmojiIcon>{icon}</EmojiIcon>,
   fields: [
     {
       name: 'person',
@@ -17,7 +21,7 @@ export default {
       title: 'person.name',
       media: 'person.image'
     },
-    prepare({ title = 'No title', media = mdPerson }) {
+    prepare({ title = 'No title', media = <EmojiIcon>{icon}</EmojiIcon> }) {
       return {
         title,
         media

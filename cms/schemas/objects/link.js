@@ -3,14 +3,14 @@
 // https://www.sanity.io/guides/portable-text-internal-and-external-links
 import { defaultLinkFields } from '../defaults/linkDefaults'
 import ExternalLinkRenderer from '../../custom/components/ExternalLinkRenderer'
-import ExternalLinkIcon from 'react-icons/lib/md/open-in-new'
+import { FaExternalLinkAlt } from 'react-icons'
 
 export default {
   name: 'link',
   type: 'object',
   title: 'External link',
   blockEditor: {
-    icon: ExternalLinkIcon,
+    icon: FaExternalLinkAlt,
     render: ExternalLinkRenderer
   },
   fields: [
