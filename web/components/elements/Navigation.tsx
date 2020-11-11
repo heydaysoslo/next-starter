@@ -1,10 +1,11 @@
-import LinkResolver from '@heydays/LinkResolver'
+// import LinkResolver from '@heydays/LinkResolver'
+import NavItemResolver from '@heydays/NavItemResolver'
 import useSanity from '@heydays/useSanity'
 import { AnimateSharedLayout, motion } from 'framer-motion'
-import { useRouter } from 'next/router'
+
 import React from 'react'
-import { resolveRoute } from 'routes'
 import styled, { css } from 'styled-components'
+
 
 type Props = {
   className?: string
@@ -14,24 +15,12 @@ const Navigation: React.FC<Props> = ({ className }) => {
   const cms = useSanity()
   const mainMenuItems = cms?.data?.global?.primaryMenu?.item
   if (!mainMenuItems) return null
-  const router = useRouter()
   return (
     <nav className={className}>
       <AnimateSharedLayout type="crossfade">
         {mainMenuItems.map((item: any) => {
-          const isActive = router.asPath === resolveRoute(item?.reference)
           return (
-            <MenuItem
-              key={item._key}
-              as={LinkResolver}
-              // isActive={isActive}
-              link={item.reference}
-            >
-              {item.linkText}
-              {isActive && (
-                <motion.div animate className="line" layoutId="line" />
-              )}
-            </MenuItem>
+          <NavItemResolver className="Navigation__item" key={item._key} item={item} />
           )
         })}
       </AnimateSharedLayout>
@@ -39,21 +28,26 @@ const Navigation: React.FC<Props> = ({ className }) => {
   )
 }
 
-const MenuItem = styled.div<{ isActive: boolean }>(
-  ({ isActive }) => css`
-    margin-right: 1rem;
-    /* ${isActive &&
-      css`
-        background: red;
-      `} */
-  `
-)
+// const MenuItem = styled.div<{ isActive: boolean }>(
+//   ({ isActive }) => css`
+//     margin-right: 1rem;
+//     /* ${isActive &&
+//       css`
+//         background: red;
+//       `} */
+//   `
+// )
 
 export default styled(Navigation)`
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   .line {
     height: 1px;
     width: 100%;
     background: black;
+  }
+  .Navigation__item {
+    margin-left: 10px;
   }
 `

@@ -196,16 +196,35 @@ export const getCompanyInfo = () => {
   return getClient(false).fetch(query)
 }
 
+const LINK_REFERENCE = groq`
+  reference->{
+    _id,
+    _type,
+    slug
+  },
+`
+
 export const getGlobalSettings = () => {
   const query = groq`*[_id == 'siteSettings'][0]{
     primaryMenu->{
       item[] {
-        reference->,
+        reference->{
+          _id,
+          _type,
+          slug
+        },
+        event[]{
+          reference->{
+            _id,
+            _type,
+            slug
+          },
+					...
+        },
         ...
       },
       ...
-    },
-    ...
+    }
   }`
   return getClient(false).fetch(query)
 }

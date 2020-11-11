@@ -16,7 +16,7 @@ export default {
       name: 'item',
       title: 'Items',
       type: 'array',
-      of: [{ type: 'link' }, { type: 'internalLink' }]
+      of: [{ type: 'link' }, { type: 'internalLink' }, { type: 'button' }]
     }
   ],
   preview: {
