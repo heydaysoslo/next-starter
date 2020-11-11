@@ -11,6 +11,9 @@ const sectionTypes = {
   carousel: dynamic(() => import('./CarouselSection')),
   tabs: dynamic(() => import('../elements/Tabs')),
   videoSection: dynamic(() => import('./VideoSection')),
+  reusableSectionReference: ({ reusableSection }) => (
+    <PageBuilder sections={reusableSection?.pagebuilder?.sections} />
+  )
 }
 
 const StyledPageBuilder = styled.div(
@@ -31,6 +34,7 @@ type Props = {
 }
 
 const PageBuilder: React.FC<Props> = ({ sections }) => {
+  console.log('sections', sections)
   return (
     <StyledPageBuilder>
       {sections?.map((section, index) => {
