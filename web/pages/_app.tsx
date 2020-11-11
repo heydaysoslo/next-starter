@@ -29,7 +29,9 @@ const Inner = ({ Component, pageProps, router }: AppProps) => {
       <Favicon />
       <GlobalStyle />
       <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} router={router} key={router.route} />
+        <Component {...pageProps} />
+        {/* key={router.route} fucks up route changes */}
+        {/* <Component {...pageProps} router={router} key={router.route} /> */}
       </AnimatePresence>
     </ThemeProvider>
   )
