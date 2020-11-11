@@ -54,5 +54,10 @@ export default {
     options: {
       isHighlighted: true
     }
+  },
+  color: {
+    name: 'color',
+    title: 'Color',
+    type: 'color'
   }
 }

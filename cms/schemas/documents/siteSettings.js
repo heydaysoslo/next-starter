@@ -1,7 +1,7 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
-const icon = '⏺'
+const icon = '⚙️'
 
 export default {
   name: 'siteSettings',
@@ -73,6 +73,13 @@ export default {
       type: 'reference',
       to: [{ type: 'page' }],
       validation: Rule => Rule.required(),
+      fieldset: 'important'
+    },
+    {
+      name: 'designTokens',
+      title: 'Design tokens',
+      type: 'reference',
+      to: [{ type: 'designTokens' }],
       fieldset: 'important'
     },
     {

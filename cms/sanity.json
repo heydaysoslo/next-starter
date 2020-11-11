@@ -23,7 +23,8 @@
     "@sanity/vision",
     "@sanity/production-preview",
     "tabs",
-    "asset-source-cloudinary-test"
+    "asset-source-cloudinary-test",
+    "@sanity/color-input"
   ],
   "parts": [
     {

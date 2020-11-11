@@ -24,9 +24,9 @@ export default () =>
       // defined the structure
       ...S.documentTypeListItems().filter(hiddenDocTypes),
       S.divider(),
-      // createDocsList('designTokens', {
-      //   withPreviews: true
-      // }),
+      createDocsList('designTokens', {
+        withPreviews: true
+      }),
       S.listItem()
         .title('Global')
         .icon(() => <EmojiIcon>🌍</EmojiIcon>)
@@ -77,7 +77,8 @@ const hiddenDocTypes = listItem =>
     'menu',
     'companyInfo',
     'globalContent',
-    'page'
+    'page',
+    'designTokens'
   ].includes(listItem.getId())
 
 const createSingleton = (id, options = {}) => {

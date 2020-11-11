@@ -13,6 +13,7 @@ import darkTheme from 'styles/themes/darkTheme' // gå over til dynamic importer
 import Favicon from 'components/Favicon'
 import { AppProvider } from 'components/context/appContext'
 import useAppContext from '@heydays/useAppContext'
+import DesignTokens from 'components/DesignTokens'
 
 const App = (props: AppProps) => {
   return (
@@ -28,9 +29,12 @@ const Inner = ({ Component, pageProps, router }: AppProps) => {
     <ThemeProvider theme={state.darkTheme ? darkTheme : theme}>
       <Favicon />
       <GlobalStyle />
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} router={router} key={router.route} />
-      </AnimatePresence>
+      <DesignTokens>
+        {/* Do not put anything inside Animate Presence or page transitions will fail */}
+        <AnimatePresence exitBeforeEnter>
+          <Component {...pageProps} router={router} key={router.route} />
+        </AnimatePresence>
+      </DesignTokens>
     </ThemeProvider>
   )
 }

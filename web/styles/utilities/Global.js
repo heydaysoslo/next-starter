@@ -29,6 +29,7 @@ export const GlobalStyle = createGlobalStyle(
       -moz-osx-font-smoothing: grayscale;
       color: ${theme.colors.text};
       ${theme.fonts.body()}
+      background-color: ${theme.colors.background};
     }
 
     ::selection {
