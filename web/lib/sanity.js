@@ -216,7 +216,7 @@ export const getGlobalSettings = () => {
           _type,
           slug
         },
-        event[]{
+        event[0] {
           reference->{
             _id,
             _type,

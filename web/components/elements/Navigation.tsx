@@ -1,11 +1,9 @@
-// import LinkResolver from '@heydays/LinkResolver'
-import NavItemResolver from '@heydays/NavItemResolver'
-import useSanity from '@heydays/useSanity'
-import { AnimateSharedLayout, motion } from 'framer-motion'
-
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import NavItemResolver from '@heydays/NavItemResolver'
+import useSanity from '@heydays/useSanity'
+import { AnimateSharedLayout } from 'framer-motion'
 
 type Props = {
   className?: string
@@ -27,16 +25,6 @@ const Navigation: React.FC<Props> = ({ className }) => {
     </nav>
   )
 }
-
-// const MenuItem = styled.div<{ isActive: boolean }>(
-//   ({ isActive }) => css`
-//     margin-right: 1rem;
-//     /* ${isActive &&
-//       css`
-//         background: red;
-//       `} */
-//   `
-// )
 
 export default styled(Navigation)`
   display: flex;
