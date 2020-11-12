@@ -34,7 +34,6 @@ type Props = {
 }
 
 const PageBuilder: React.FC<Props> = ({ sections }) => {
-  console.log('sections', sections)
   return (
     <StyledPageBuilder>
       {sections?.map((section, index) => {
