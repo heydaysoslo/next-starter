@@ -2,7 +2,6 @@ import React from 'react'
 import Editor from '../editor'
 import { P, H3 } from '@heydays/Typography'
 import styled, { css } from 'styled-components'
-import LinkResolver from '@heydays/LinkResolver'
 import Animate from '@heydays/animation/Animate'
 
 type Props = {
@@ -29,11 +28,6 @@ const Section: React.FC<Props> = ({
       )}
       {title && <H3 className="title">{title}</H3>}
       {content && <Editor className="content" blocks={content} />}
-      {link && (
-        <LinkResolver className="" link={link}>
-          {link.title || link.url}
-        </LinkResolver>
-      )}
     </Animate>
   )
 }

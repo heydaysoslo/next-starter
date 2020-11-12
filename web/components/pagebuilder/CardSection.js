@@ -1,36 +1,28 @@
 import React from 'react'
 import Grid, { GridItem } from '../elements/Grid'
 import Animate from '@heydays/animation/Animate'
-
 import Card from '../elements/Card'
-import LinkResolver from '@heydays/LinkResolver'
 
-const CardSection = ({ title, seeAllLink, cardsList = [], ...props }) => {
+const CardSection = ({ className, title, cardsList = [], ...props }) => {
   return (
-    <div className="CardSection">
+    <div className={className}>
       {title && <h2>{title}</h2>}
       <Grid gap>
         {cardsList.map(card => {
-          const { content, cardOverride } = card
           return (
             <GridItem span={{ md: 4 }} key={card?._key}>
               <Animate>
                 <Card
-                  title={cardOverride?.title || content?.title}
-                  image={cardOverride?.image || content?.mainImage}
-                  excerpt={cardOverride?.content || content?.excerpt}
-                  link={cardOverride?.link || content}
+                  title={card?.content?.title || card?.title}
+                  image={card?.content?.mainImage || card?.image}
+                  excerpt={card?.content?.excerpt || card?.editorMinimal}
+                  link={card?.content}
                 />
               </Animate>
             </GridItem>
           )
         })}
       </Grid>
-      {seeAllLink && (
-        <LinkResolver link={seeAllLink}>
-          {seeAllLink?.title || seeAllLink?.reference?.title}
-        </LinkResolver>
-      )}
     </div>
   )
 }

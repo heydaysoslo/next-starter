@@ -2,7 +2,7 @@ import React from 'react'
 // import External from 'react-icons/lib/fa/external-link'
 // Follow sanity recommendations for internal/external links
 // https://www.sanity.io/guides/portable-text-internal-and-external-links
-import ExternalLinkRenderer from '../../custom/components/ExternalLinkRenderer'
+// import ExternalLinkRenderer from '../../custom/components/ExternalLinkRenderer'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
 export default {
@@ -11,8 +11,8 @@ export default {
   title: 'External link',
   icon: () => <EmojiIcon small>🌍</EmojiIcon>,
   blockEditor: {
-    icon: () => <EmojiIcon small>🌍</EmojiIcon>,
-    render: ExternalLinkRenderer
+    icon: () => <EmojiIcon small>🌍</EmojiIcon>
+    // render: ExternalLinkRenderer
   },
   fields: [
     {

@@ -5,13 +5,7 @@ import Card from '../../elements/Card'
 import Container from '@heydays/Container'
 import Spacer from '@heydays/Spacer'
 
-const CardSection = ({
-  className,
-  title,
-  seeAllLink,
-  cardsList = [],
-  ...props
-}) => {
+const CardSection = ({ className, title, seeAllLink, cardsList = [] }) => {
   return (
     <div className={className}>
       <Spacer />

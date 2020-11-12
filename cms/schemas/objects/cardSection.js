@@ -38,12 +38,7 @@ export default {
               title: 'Image',
               type: 'mainImage'
             },
-            d.editorMinimal,
-            {
-              name: 'link',
-              title: 'Link',
-              type: 'link'
-            }
+            d.editorMinimal
           ]
         }
       ]
@@ -56,11 +51,12 @@ export default {
   ],
   preview: {
     select: {
-      title: 'cardsList.0.content.title'
+      title: 'title',
+      firstCardTitle: 'cardsList.0.title'
     },
-    prepare({ title = 'No title' }) {
+    prepare({ title, firstCardTitle }) {
       return {
-        title,
+        title: title || firstCardTitle || 'No title',
         subtitle: 'Card section',
         media: <EmojiIcon>{icon}</EmojiIcon> // Pagebuilder list icon
       }
