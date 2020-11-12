@@ -8,7 +8,7 @@ const StyledButton = styled.button(
     display: inline-flex;
     border-radius: 0;
     appearance: none;
-    font-family: inherit;
+    font-family: sans-serif;
     cursor: pointer;
     &:hover {
       background-color: black;
@@ -18,7 +18,12 @@ const StyledButton = styled.button(
     ${size &&
       size === 'lg' &&
       css`
-        padding: 10px 15px;
+        padding: 20px 25px;
+      `}
+    ${size &&
+      size === 'sm' &&
+      css`
+        padding: 2px 5px;
       `}
     ${type &&
       type === 'primary' &&

@@ -18,13 +18,19 @@ const Navigation: React.FC<Props> = ({ className }) => {
       <AnimateSharedLayout type="crossfade">
         {mainMenuItems.map((item: any) => {
           return (
-          <NavItemResolver className="Navigation__item" key={item._key} item={item} />
+            <NavItem className="Navigation__item" key={item._key} item={item} />
           )
         })}
       </AnimateSharedLayout>
     </nav>
   )
 }
+
+const NavItem = styled(NavItemResolver)`
+  &[aria-current] {
+    opacity: 0.5;
+  }
+`
 
 export default styled(Navigation)`
   display: flex;
