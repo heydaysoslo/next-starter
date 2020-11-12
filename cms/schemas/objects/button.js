@@ -5,7 +5,7 @@ export default {
   name: 'button',
   title: 'Button',
   type: 'object',
-  icon: () => <EmojiIcon small>🟣</EmojiIcon>,
+  icon: () => <EmojiIcon small>⏺</EmojiIcon>,
   fieldsets: [
     {
       name: 'appearance',

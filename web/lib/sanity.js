@@ -6,7 +6,6 @@ import {
   createPreviewSubscriptionHook,
   createCurrentUserHook
 } from 'next-sanity'
-import { useEffect, useState } from 'react'
 
 const config = {
   /**
@@ -110,6 +109,10 @@ pagebuilder {
         ...
       },
       ...
+    },
+    reusableSection->{...},
+    reusableSectionReference{
+      reusableSection->{...}
     },
     ...
   },

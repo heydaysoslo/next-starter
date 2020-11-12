@@ -1,10 +1,10 @@
 import React from 'react'
-import ExternalLinkIcon from 'react-icons/lib/md/open-in-new'
+import { FaExternalLinkAlt } from 'react-icons'
 
 const ExternalLinkRenderer = props => (
   <span>
     {console.log(props.attributes)}
-    {props.linkText || props.children} <ExternalLinkIcon />
+    {props.linkText || props.children} <FaExternalLinkAlt />
   </span>
 )
 

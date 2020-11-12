@@ -16,6 +16,7 @@ import siteSettings from './documents/siteSettings'
 import frontpage from './documents/frontpage'
 import globalContent from './documents/globalContent'
 import reusableSection from './documents/reusableSection'
+import designTokens from './documents/designTokens'
 
 // Object types
 import link from './objects/link'
@@ -103,6 +104,7 @@ export default createSchema({
     // articleOrder,
     frontpage,
     globalContent,
-    reusableSection
+    reusableSection,
+    designTokens
   ])
 })
