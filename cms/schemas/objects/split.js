@@ -90,13 +90,22 @@ export default {
   ],
   preview: {
     select: {
-      title: 'items.content.title',
-      media: 'items.media.media'
+      items: 'items'
     },
-    prepare({ media, title }) {
+    prepare({ items }) {
+      let allMedia = items.filter(item => item?._type === 'media')
+      let media = allMedia?.[0]?.media || null
+
+      let content = items.filter(item => item?._type === 'content')
+      let title = content?.[0]?.title || 'No title'
+
       return {
-        title,
-        media: () => <CloudinaryPreview media={media} fallback={icon} />, // Pagebuilder list preview
+        title: title,
+        media: media ? (
+          () => <CloudinaryPreview media={media} />
+        ) : (
+          <EmojiIcon>{icon}</EmojiIcon>
+        ), // Pagebuilder list preview
         subtitle: 'Split'
       }
     }
