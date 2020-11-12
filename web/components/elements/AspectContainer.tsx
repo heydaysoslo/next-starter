@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState, useMemo } from 'react'
+import React, { useRef, useEffect, useState, useMemo } from 'react'
 import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../hooks/useMediaQuery'
 import useWindowSize from '../hooks/useWindowSize'
@@ -116,14 +116,14 @@ const AspectContainer: React.FC<Props> = ({
   Recalculating when child is added is not 100% reliable
   might be because it's fired before the child is fully rendered
   */
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (children && preventOverflow) {
       setWrapperMinHeight()
     }
   }, [innerHeight, innerWidth, preventOverflow, children, currentRatio])
 
   // Get ratio based on breakpoint
-  useLayoutEffect(calculateNewRatio, [media])
+  useEffect(calculateNewRatio, [media])
 
   return (
     <StyledAspectContainer
