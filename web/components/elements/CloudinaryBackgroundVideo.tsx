@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import { cldGetVideoUrl } from '../../utils/cloudinary'
@@ -36,7 +36,7 @@ const CloudinaryBackgroundVideo: React.FC<Props> = ({
   const [inViewRef, inView] = useInView()
 
   // Toggle play/pause on enter/leave view
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (player?.current) {
       if (inView) {
         player.current.play()
