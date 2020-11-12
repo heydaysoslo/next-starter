@@ -1,7 +1,7 @@
 import React from 'react'
 import EmojiIcon from '../../custom/components/icons/EmojiIcon'
 
-const icon = '✍️'
+const icon = '📝'
 
 export default {
   name: 'textSection',

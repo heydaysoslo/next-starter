@@ -42,7 +42,7 @@ export const getAspect = ratio => {
 export const getImageSrc = ({ public_id, format }, aspectRatio) => {
   let transformations = 'f_auto,q_auto'
   if (aspectRatio) {
-    transformations += `,ar_${getAspect(aspectRatio)},c_fill`
+    transformations += `,ar_${getAspect(aspectRatio)},g_auto,c_fill`
   }
 
   // Applying transformations to animated gifs is extremely unstable

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic'
 import styled, { css } from 'styled-components'
 
@@ -13,7 +13,8 @@ const sectionTypes = {
   videoSection: dynamic(() => import('./VideoSection')),
   reusableSectionReference: ({ reusableSection }) => (
     <PageBuilder sections={reusableSection?.pagebuilder?.sections} />
-  )
+  ),
+  split: dynamic(() => import('./Split'))
 }
 
 const StyledPageBuilder = styled.div(
