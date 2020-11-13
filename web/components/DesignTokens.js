@@ -6,13 +6,11 @@ import fontFactory from 'styles/utilities/fontFactory'
 import spacingFactory from 'styles/utilities/spacingFactory'
 
 const fromSanityToThemeSchema = theme => {
-  console.log('theme', theme)
   if (!theme) return defaultTheme
   const colors = Object.entries(theme.colors).reduce((res, [key, value]) => {
     res[key] = value.hex
     return res
   }, {})
-  console.log('colors', colors)
   const fonts =
     theme?.responsiveFonts &&
     fontFactory({ responsiveFonts: theme.responsiveFonts, bp: defaultTheme.bp })
@@ -23,8 +21,12 @@ const fromSanityToThemeSchema = theme => {
       bp: defaultTheme.bp
     })
   const newTheme = {
-    fontFamily: theme?.fontFamily ? theme.fontFamily : defaultTheme.fontFamily,
-    colors: colors ? colors : defaultTheme.colors,
+    fontFamily: theme?.fontFamily
+      ? { ...defaultTheme.fontFamily, ...theme.fontFamily }
+      : defaultTheme.fontFamily,
+    colors: colors
+      ? { ...defaultTheme.colors, ...colors }
+      : defaultTheme.colors,
     fonts: fonts ? { ...defaultTheme.fonts, ...fonts } : defaultTheme.fonts,
     spacing: spacing
       ? { ...defaultTheme.spacing, ...spacing }
