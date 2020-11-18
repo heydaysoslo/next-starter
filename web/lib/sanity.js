@@ -106,14 +106,28 @@ const BASE_LINK = groq`
 export const PAGEBUILDER = groq`
 pagebuilder {
   sections[] {
+    ...,
+    body[] {
+      ...,
+      markDefs[] {
+        ...,
+        _type == "internalLink" => {
+          "reference": {
+            "slug": @.reference->slug,
+            "_type": @.reference->_type,
+            "_id": @.reference->_id
+          }
+        }
+      }
+    },
     seeAllLink {
       reference->{
         title,
         ${BASE_LINK}
       },
-      ...
     },
     content[] {
+      ...,
       event[0] {
         reference->{
           ${BASE_LINK}
@@ -121,12 +135,13 @@ pagebuilder {
         ...
       },
       markDefs[] {
-        reference->{
-          ${BASE_LINK}
-        },
-        ...
-      },
-      ...
+        ...,
+        _type == "internalLink" => {
+          "slug": @.reference->slug,
+          "_type": @.reference->_type,
+          "_id": @.reference->_id
+        }
+      }
     },
     cardsList[] {
       content->{

@@ -81,7 +81,7 @@ type Props = {
 
 const Editor: React.FC<Props> = ({ blocks, className }) => {
   return (
-    <div className={`Editor ${className ? className : ''}`}>
+    <div className={className}>
       <BaseBlockContent
         className="Editor__blocks"
         blocks={blocks}

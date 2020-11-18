@@ -9,6 +9,7 @@ const InternalLink = ({ className, children, reference, linkText }) => {
   }
   const router = useRouter()
   const href = resolveRoute(reference)
+  console.log('HELLLELELE', children)
   const isActive = router.asPath === href
   // aria-current
   return (
