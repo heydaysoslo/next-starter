@@ -1,3 +1,5 @@
+import seoConfig from 'lib/seoConfig'
+
 // Routes for all generated pages
 export const routes = {
   page: ({ slug }) => {
@@ -25,6 +27,10 @@ export const resolveRoute = doc => {
 
   console.warn(`Could not resolve route`, doc)
   return '/'
+}
+
+export const getCanonical = doc => {
+  return `${seoConfig.siteUrl}${resolveRoute(doc)}`
 }
 
 export const docTypes = {

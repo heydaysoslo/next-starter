@@ -33,6 +33,13 @@ export default {
       title: 'Main image',
       type: 'mainImage'
     },
+    {
+      name: 'excerpt',
+      title: 'Excerpt',
+      description:
+        'An excerpt is a summary for the page. It is good to spend a little time on this to give users, google and social media a overview of what this page is about. Example usage is in cards and SEO.',
+      type: 'editorMinimal'
+    },
     // {
     //   name: 'menuTheme',
     //   title: 'Menu Theme',

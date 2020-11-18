@@ -3,6 +3,8 @@ import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 import { AppProps } from 'next/app'
+import { DefaultSeo } from 'next-seo';
+
 
 import 'lazysizes'
 import 'styles/reset.css'
@@ -14,6 +16,7 @@ import Favicon from 'components/Favicon'
 import { AppProvider } from 'components/context/appContext'
 import useAppContext from '@heydays/useAppContext'
 import DesignTokens from 'components/DesignTokens'
+import { defaultSeo } from 'lib/seoConfig'
 
 const App = (props: AppProps) => {
   return (
@@ -27,6 +30,7 @@ const Inner = ({ Component, pageProps, router }: AppProps) => {
   const { state } = useAppContext()
   return (
     <ThemeProvider theme={state.darkTheme ? darkTheme : theme}>
+      <DefaultSeo {...defaultSeo} />
       <Favicon />
       <GlobalStyle />
       <DesignTokens>

@@ -43,7 +43,7 @@ export default {
       name: 'excerpt',
       title: 'Excerpt',
       description:
-        'An excerpt is a summary for the article. It is good to spend a little time on this to give users, google and social media a overview of what this post is about. Example usage is in cards and seo.',
+        'An excerpt is a summary for the page. It is good to spend a little time on this to give users, google and social media a overview of what this page is about. Example usage is in cards and SEO',
       type: 'editorMinimal'
     },
     {

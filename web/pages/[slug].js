@@ -24,7 +24,7 @@ export default function Post({ data, global, preview }) {
   })
 
   return (
-    <Layout preview={preview} global={global}>
+    <Layout preview={preview} page={post} global={global}>
       <TemplateResolver page={post} />
     </Layout>
   )
