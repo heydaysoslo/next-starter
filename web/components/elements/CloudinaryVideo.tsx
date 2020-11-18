@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { CloudinaryNode } from 'types'
 
@@ -37,7 +37,7 @@ const CloudinaryVideo: React.FC<Props> = ({
   const player = useRef<HTMLVideoElement>(null)
   const [shouldPlay, setShouldPlay] = useState(false)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (player?.current && shouldPlay) {
       player.current.play()
     }

@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react'
+import { useState, useEffect } from 'react'
 import useWindowSize from './useWindowSize'
 
 /**
@@ -34,7 +34,7 @@ const useCanvas = ({ canvas, container }) => {
   const windowSize = useWindowSize()
 
   // HandleResizing
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (canvas?.current) {
       const ctx = canvas.current.getContext('2d')
       setC(ctx)

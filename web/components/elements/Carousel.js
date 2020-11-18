@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { remSize } from '../../styles/utilities'
 
@@ -24,7 +24,7 @@ const Carousel = ({
   const container = useRef(null)
 
   // Init
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!flkty) {
       import('flickity').then(res => {
         const flickity = res.default
@@ -42,7 +42,7 @@ const Carousel = ({
   }, [options, children, flkty])
 
   // Prevent vertical scrolling when swiping
-  useLayoutEffect(() => {
+  useEffect(() => {
     function touchStart(e) {
       this.firstClientX = e.touches[0].clientX
       this.firstClientY = e.touches[0].clientY
@@ -115,7 +115,7 @@ const CustomButtons = ({ flkty, children }) => {
   }, [flkty])
 
   // Navigation
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handlePrev = () => flkty.select(index - 1)
     const handleNext = () => flkty.select(index + 1)
 
