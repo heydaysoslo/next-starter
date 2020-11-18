@@ -115,6 +115,18 @@ export const GlobalStyle = createGlobalStyle(
       list-style: none;
     }
 
+    pre {
+      font-size: 13px;
+      text-align: left;
+      font-family: monospace;
+      overflow-x: scroll;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border: 1px solid #CCC;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+
     /* Typography */
     ${globalTypeStyle}
 

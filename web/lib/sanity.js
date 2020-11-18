@@ -97,11 +97,35 @@ const BASE_ARTICLE = groq`
   mainImage
 `
 
+const BASE_LINK = groq`
+  _id,
+  slug,
+  _type
+`
+
 export const PAGEBUILDER = groq`
 pagebuilder {
   sections[] {
     seeAllLink {
-      reference->{slug, title,_type},
+      reference->{
+        title,
+        ${BASE_LINK}
+      },
+      ...
+    },
+    content[] {
+      event[0] {
+        reference->{
+          ${BASE_LINK}
+        },
+        ...
+      },
+      markDefs[] {
+        reference->{
+          ${BASE_LINK}
+        },
+        ...
+      },
       ...
     },
     cardsList[] {
@@ -203,12 +227,19 @@ export const getGlobalSettings = () => {
   const query = groq`*[_id == 'siteSettings'][0]{
     primaryMenu->{
       item[] {
-        reference->,
+        reference->{
+          ${BASE_LINK}
+        },
+        event[0] {
+          reference->{
+            ${BASE_LINK}
+          },
+					...
+        },
         ...
       },
       ...
-    },
-    ...
+    }
   }`
   return getClient(false).fetch(query)
 }

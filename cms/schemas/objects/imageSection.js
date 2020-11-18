@@ -6,7 +6,7 @@ const icon = '🖼'
 
 export default {
   name: 'imageSection',
-  title: 'Full Image Section',
+  title: 'Image Section',
   type: 'object',
   icon: () => <EmojiIcon small>{icon}</EmojiIcon>, // Pagebuilder dropdown icon
   fields: [

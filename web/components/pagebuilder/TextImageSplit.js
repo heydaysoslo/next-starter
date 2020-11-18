@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Editor from '../editor/'
-import LinkResolver from '@heydays/LinkResolver'
 import { H3 } from '@heydays/Typography'
 import Grid, { GridItem } from '@heydays/Grid'
 import styled, { css } from 'styled-components'
@@ -10,7 +9,6 @@ import CloudinaryMediaResolver from '../resolvers/CloudinaryMediaResolver'
 const TextImageSplit = ({
   textOnTheRight = false,
   aspect,
-  link,
   title,
   content,
   className,
@@ -29,9 +27,6 @@ const TextImageSplit = ({
             {title && <H3>{title}</H3>}
             {content && (
               <Editor className="TextImageSplit__content" blocks={content} />
-            )}
-            {link && (
-              <LinkResolver className="TextImageSplit__button" link={link} />
             )}
           </div>
         </GridItem>

@@ -55,7 +55,8 @@ const ThemeWrapper = styled.div(
     background: ${theme?.colors?.background};
     color: ${theme?.colors?.text};
     font-family: ${theme.fontFamily.sans};
-
+    height: 100%;
+    min-height: 100%;
     a {
       font-family: ${theme.fontFamily.serif};
     }

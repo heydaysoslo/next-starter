@@ -1,13 +1,17 @@
 import React from 'react'
 import BaseBlockContent from '@sanity/block-content-to-react'
 
-import LinkResolver from '@heydays/LinkResolver'
 import Quote from './Quote'
 import Figure from './Figure'
 import Oembed from '../Oembed'
 import { H3, H2, P } from '@heydays/Typography'
-import Button from '@heydays/Button'
 import Accordion from '@heydays/Accordion'
+import InternalLink from '@heydays/InternalLink'
+import ExternalLink from '@heydays/ExternalLink'
+import StyledLink from 'components/styled/StyledLink'
+import SanityButton from '@heydays/SanityButton'
+import Container from '@heydays/Container'
+import styled, { css } from 'styled-components'
 
 export const serializers = {
   types: {
@@ -31,40 +35,16 @@ export const serializers = {
             </P>
           )
 
-        case 'button':
-          if (!props.node.link) return null
-          return (
-            <p>
-              <Button
-                as={LinkResolver}
-                data={props.node.link.link}
-                modifiers="primary"
-              >
-                {props.node.link.title}
-              </Button>
-            </p>
-          )
-
         case 'span':
           return <P as="span">{props.children}</P>
 
         default:
-          return <P>{props.children}</P>
+          return <P className="Editor__paragraph">{props.children}</P>
       }
     },
-    button(props) {
-      if (!props.node.link) return null
-      return (
-        <p>
-          <Button
-            as={LinkResolver}
-            link={props.node.link?.href}
-            modifiers={props.node.linkStyle && props.node.linkStyle}
-          >
-            {props.node.link.linkText}
-          </Button>
-        </p>
-      )
+    button: (props) => {
+      // @ts-ignore
+      return <Container><SanityButton className="Editor__button" {...props?.node} /></Container>
     },
     quote(props) {
       if (!props.node.content) return null
@@ -83,20 +63,13 @@ export const serializers = {
     }
   },
   marks: {
-    link(props) {
-      const link = props?.mark?.externalLink?.url || props?.mark?.reference
-      if (!link) return props.children
-      return (
-        <LinkResolver
-          className=""
-          openInNewTab={props?.mark?.externalLink?.blank}
-          link={link}
-        >
-          {props.children ||
-            props?.mark?.title ||
-            props?.mark?.reference?.title}
-        </LinkResolver>
-      )
+    internalLink: ({mark, children}) => {
+      // @ts-ignore
+      return <StyledLink as={InternalLink} {...mark}>{children}</StyledLink>
+    },
+    link: ({mark, children}) => {
+      // @ts-ignore
+      return <StyledLink as={ExternalLink} {...mark}>{children}</StyledLink>
     }
   }
 }
@@ -118,4 +91,14 @@ const Editor: React.FC<Props> = ({ blocks, className }) => {
   )
 }
 
-export default Editor
+export default styled(Editor)(({theme}) => css`
+  .Editor__button {
+    margin-top: 2rem;
+  }
+  .Editor__paragraph {
+    max-width: 60ch;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+  }
+`)
