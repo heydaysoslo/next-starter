@@ -9,6 +9,7 @@ type Props = {
 }
 
 const CloudinaryMediaResolver: React.FC<Props> = ({ node, aspectRatio }) => {
+  console.log('aspectRatio', aspectRatio)
   if (
     node?.cldImage?.resource_type === 'image' ||
     node?.resource_type === 'image'

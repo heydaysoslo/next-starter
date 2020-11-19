@@ -36,7 +36,7 @@ import quote from './objects/quote'
 import imageSection from './objects/imageSection'
 import aspect from './objects/aspect'
 import section from './objects/section'
-import textImageSplit from './objects/textImageSplit'
+import split from './objects/split'
 import personReference from './objects/personReference'
 import carousel from './objects/carousel'
 import oembed from './objects/oembed'
@@ -79,7 +79,7 @@ export default createSchema({
     imageSection,
     aspect,
     section,
-    textImageSplit,
+    split,
     personReference,
     carousel,
     oembed,

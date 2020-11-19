@@ -24,6 +24,7 @@ const CloudinaryImage: React.FC<Props> = ({ node, aspectRatio = null }) => {
     node?.aspect_ratio ||
     null
   const passedRatio = aspectRatio && getAspect(aspectRatio)
+  console.log('passedRatio', passedRatio)
   // Get the passed ratio first, then fallback to image original ratio
   const ratioValue = passedRatio || originalRatio
   const src = getImageSrc(node?.cldImage ? node.cldImage : node, ratioValue)
