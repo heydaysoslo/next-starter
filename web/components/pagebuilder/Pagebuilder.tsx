@@ -1,6 +1,5 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import styled, { css } from 'styled-components'
 
 const sectionTypes = {
   section: dynamic(() => import('./Section')),
@@ -17,43 +16,35 @@ const sectionTypes = {
   split: dynamic(() => import('./Split'))
 }
 
-const StyledPageBuilder = styled.div(
-  ({ theme }) => css`
-    .PageBuilder__item {
-      ${theme.spacing.section('mt')};
-    }
-  `
-)
-
 type section = {
   _type: keyof typeof sectionTypes
   _key: string
 }
 
 type Props = {
-  sections: section[]
+  sections: section[],
+  className?: string
 }
 
-const PageBuilder: React.FC<Props> = ({ sections }) => {
+const PageBuilder: React.FC<Props> = ({ className, sections }) => {
   return (
-    <StyledPageBuilder>
+    <div className={className}>
       {sections?.map((section, index) => {
         const Component = sectionTypes[section._type] || null
         return Component ? (
-          <div key={section._key} className="PageBuilder__item">
             <Component
+              key={section._key}
               {...section}
               prevComp={sections[index - 1] ? sections[index - 1] : null}
               nextComp={sections[index + 1] ? sections[index + 1] : null}
             />
-          </div>
         ) : (
           <p key={section._key} style={{ background: 'yellow' }}>
             Component {section._type} not found
           </p>
         )
       })}
-    </StyledPageBuilder>
+    </div>
   )
 }
 
