@@ -1,9 +1,9 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 
 import AspectContainer from './AspectContainer'
 import LinkResolver from '@heydays/LinkResolver'
 import Editor from '../editor'
-import styled, { css } from 'styled-components'
 import { P } from './Typography'
 import CloudinaryImage from './CloudinaryImage'
 import { CloudinaryNode } from 'types'
@@ -49,10 +49,11 @@ export default styled(Card)(
     .media {
       background: #f1f1f1;
     }
-
-    .title,
-    .excerpt {
+    .title {
       ${t.spacing.sm('mt')}
+    }
+    .excerpt  {
+      ${t.spacing.xs('mt')}
     }
   `
 )
