@@ -61,7 +61,7 @@ const Header: React.FC<Props> = ({ className }) => {
               onClick={() => actions.toggleDarkTheme()}
             />
           </DesktopNav>
-          <MobileMenuButton active={open} onClick={() => setOpen(!open)}>
+          <MobileMenuButton onClick={() => setOpen(!open)}>
             <Burger active={open} />
           </MobileMenuButton>
         </div>
@@ -78,7 +78,7 @@ const Header: React.FC<Props> = ({ className }) => {
 }
 
 const MobileMenuButton = styled.button(
-  ({ theme: t, active }) => css`
+  ({ theme: t }) => css`
     ${t.bp.md} {
       display: none;
     }
@@ -111,6 +111,12 @@ const MobileNav = styled.div(
 export default styled(Header)(
   ({ theme: t }) => css`
     ${t.spacing.md('py')};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.5);
     .content {
       position: relative;
       width: 100%;
