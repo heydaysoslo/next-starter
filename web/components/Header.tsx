@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
 import Link from 'next/link'
 import Switch from '@heydays/Switch'
 import Container from './elements/Container'
-import useWindowSize from '@heydays/useWindowSize'
 import Navigation from './elements/Navigation'
 import useAppContext from '@heydays/useAppContext'
+import useDimension from '@heydays/useDimension'
+import Burger from '@heydays/Burger'
+import { useOnClickOutside } from '@heydays/useOnClickOutside'
 
 type Props = {
   className?: string
@@ -14,46 +16,108 @@ type Props = {
 
 const Header: React.FC<Props> = ({ className }) => {
   const headerRef = useRef<HTMLElement | null>(null)
-  const windowSize = useWindowSize({ debounce: 200 })
   const { state, actions } = useAppContext()
+  const [open, setOpen] = useState(false)
+  const { outerHeight: headerHeight } = useDimension(headerRef)
 
+  /*
+  Save the header height as a css variable.
+  Helpful to:
+  - create correct padding on Hero elements to prevent absolute or fixed menu overlap.
+  - positioning mobile menu or modals
+  Usage:
+  .hero {
+    padding-top: var(--header-height);
+  }
+  .mobileMenu {
+    position: absolute;
+    top: var(--header-height);
+  }
+  */
   useEffect(() => {
-    if (headerRef?.current) {
-      const height = headerRef?.current?.getBoundingClientRect()?.height
-      document.documentElement.style.setProperty(
-        '--header-height',
-        height + 'px'
-      )
-    }
-  }, [headerRef, windowSize])
+    document.documentElement.style.setProperty(
+      '--header-height',
+      headerHeight + 'px'
+    )
+  }, [headerHeight])
+
+  // Close menu if click outside of header element
+  useOnClickOutside(headerRef, () => {
+    setOpen(false)
+  })
 
   return (
-    <Container>
-      <header className={className} ref={headerRef}>
-        <h1>
+    <header className={className} ref={headerRef}>
+      <Container>
+        <div className="content">
           <Link href="/">
-            <a>NEXT STARTER</a>
+            <a className="branding">HEYDAYS STARTER</a>
           </Link>
-        </h1>
-        <div className="Header__tools">
-          <Navigation />
-          <Switch
-            size={60}
-            state={state.darkTheme}
-            onClick={() => actions.toggleDarkTheme()}
-          />
+          <DesktopNav>
+            <Navigation />
+            <Switch
+              size={60}
+              state={state.darkTheme}
+              onClick={() => actions.toggleDarkTheme()}
+            />
+          </DesktopNav>
+          <MobileMenuButton active={open} onClick={() => setOpen(!open)}>
+            <Burger active={open} />
+          </MobileMenuButton>
         </div>
-      </header>
-    </Container>
+      </Container>
+      {open && (
+        <MobileNav>
+          <Container>
+            <Navigation />
+          </Container>
+        </MobileNav>
+      )}
+    </header>
   )
 }
 
+const MobileMenuButton = styled.button(
+  ({ theme: t, active }) => css`
+    ${t.bp.md} {
+      display: none;
+    }
+  `
+)
+
+const DesktopNav = styled.div(
+  ({ theme: t }) => css`
+    display: none;
+    ${t.bp.md} {
+      display: flex;
+      align-items: center;
+    }
+  `
+)
+
+const MobileNav = styled.div(
+  ({ theme: t }) => css`
+    align-items: center;
+    position: absolute;
+    top: var(--header-height);
+    width: 100%;
+    border-bottom: 1px solid black;
+    ${t.bp.md} {
+      display: none;
+    }
+  `
+)
+
 export default styled(Header)(
   ({ theme: t }) => css`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    ${t.spacing.md('mt')};
+    ${t.spacing.md('py')};
+    .content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .Header__tools {
       display: flex;
       align-items: center;

@@ -17,9 +17,7 @@ const Navigation: React.FC<Props> = ({ className }) => {
     <nav className={className}>
       <AnimateSharedLayout type="crossfade">
         {mainMenuItems.map((item: any) => {
-          return (
-            <NavItem className="Navigation__item" key={item._key} item={item} />
-          )
+          return <NavItem key={item._key} item={item} />
         })}
       </AnimateSharedLayout>
     </nav>
@@ -27,21 +25,34 @@ const Navigation: React.FC<Props> = ({ className }) => {
 }
 
 const NavItem = styled(NavItemResolver)`
-  &[aria-current] {
+  /* &[aria-current] {
     opacity: 0.5;
-  }
+  } */
 `
 
-export default styled(Navigation)`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  .line {
-    height: 1px;
-    width: 100%;
-    background: black;
-  }
-  .Navigation__item {
-    margin-left: 10px;
-  }
-`
+export default styled(Navigation)(
+  ({ theme }) => css`
+    // Shared styling
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    // Mobile styling
+    ${theme.bp.below.md} {
+      flex-flow: column;
+      padding-bottom: 20px;
+      background: white;
+      ${NavItem} {
+        margin-top: 20px;
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+
+    // Desktop styling
+    ${theme.bp.md} {
+      flex-flow: row;
+    }
+  `
+)
