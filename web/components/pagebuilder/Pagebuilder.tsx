@@ -13,7 +13,8 @@ const sectionTypes = {
   reusableSectionReference: ({ reusableSection }) => (
     <PageBuilder sections={reusableSection?.pagebuilder?.sections} />
   ),
-  split: dynamic(() => import('./Split'))
+  split: dynamic(() => import('./Split')),
+  heroSection: dynamic(() => import('./HeroSection'))
 }
 
 type section = {
@@ -22,7 +23,7 @@ type section = {
 }
 
 type Props = {
-  sections: section[],
+  sections: section[]
   className?: string
 }
 
@@ -32,12 +33,12 @@ const PageBuilder: React.FC<Props> = ({ className, sections }) => {
       {sections?.map((section, index) => {
         const Component = sectionTypes[section._type] || null
         return Component ? (
-            <Component
-              key={section._key}
-              {...section}
-              prevComp={sections[index - 1] ? sections[index - 1] : null}
-              nextComp={sections[index + 1] ? sections[index + 1] : null}
-            />
+          <Component
+            key={section._key}
+            {...section}
+            prevComp={sections[index - 1] ? sections[index - 1] : null}
+            nextComp={sections[index + 1] ? sections[index + 1] : null}
+          />
         ) : (
           <p key={section._key} style={{ background: 'yellow' }}>
             Component {section._type} not found

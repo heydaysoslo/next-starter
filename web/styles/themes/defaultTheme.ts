@@ -1,4 +1,4 @@
-import { css, DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components'
 
 import { remSize } from '../utilities/Converters'
 import breakpointsFactory, {
@@ -68,6 +68,9 @@ export const responsiveSpacing = {
   },
   pixel: {
     xs: '1px'
+  },
+  header: {
+    xs: 'var(--header-height)'
   }
 }
 
@@ -97,12 +100,14 @@ export const responsiveFonts = {
   },
   h1: {
     xs: {
-      size: '40px/50px',
-      css: css`
-        text-transform: uppercase;
-      `
+      size: '30px/1.2'
     },
-    lg: '60px/1.2'
+    md: {
+      size: '45px/1.2'
+    },
+    lg: {
+      size: '70px/1.2'
+    }
   },
   h2: {
     xs: '24px/1.2',
