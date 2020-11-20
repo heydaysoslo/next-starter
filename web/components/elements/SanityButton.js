@@ -2,7 +2,7 @@ import React from 'react'
 
 import ExternalLink from '@heydays/ExternalLink'
 import InternalLink from '@heydays/InternalLink'
-import StyledButton from 'components/styled/StyledButton'
+import StyledButton from 'components/styled/Button.styled'
 
 const SanityButton = ({ className, event, title, size, type }) => {
   let Component = 'button'

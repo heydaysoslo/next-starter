@@ -8,7 +8,7 @@ import { H3, H2, P } from '@heydays/Typography'
 import Accordion from '@heydays/Accordion'
 import InternalLink from '@heydays/InternalLink'
 import ExternalLink from '@heydays/ExternalLink'
-import StyledLink from 'components/styled/StyledLink'
+import StyledLink from 'components/styled/Link.styled'
 import SanityButton from '@heydays/SanityButton'
 import Container from '@heydays/Container'
 import styled, { css } from 'styled-components'
@@ -42,9 +42,13 @@ export const serializers = {
           return <P className="Editor__paragraph">{props.children}</P>
       }
     },
-    button: (props) => {
+    button: props => {
       // @ts-ignore
-      return <Container><SanityButton className="Editor__button" {...props?.node} /></Container>
+      return (
+        <Container>
+          <SanityButton className="Editor__button" {...props?.node} />
+        </Container>
+      )
     },
     quote(props) {
       if (!props.node.content) return null
@@ -63,13 +67,21 @@ export const serializers = {
     }
   },
   marks: {
-    internalLink: ({mark, children}) => {
+    internalLink: ({ mark, children }) => {
       // @ts-ignore
-      return <StyledLink as={InternalLink} {...mark}>{children}</StyledLink>
+      return (
+        <StyledLink as={InternalLink} {...mark}>
+          {children}
+        </StyledLink>
+      )
     },
-    link: ({mark, children}) => {
+    link: ({ mark, children }) => {
       // @ts-ignore
-      return <StyledLink as={ExternalLink} {...mark}>{children}</StyledLink>
+      return (
+        <StyledLink as={ExternalLink} {...mark}>
+          {children}
+        </StyledLink>
+      )
     }
   }
 }
@@ -91,14 +103,16 @@ const Editor: React.FC<Props> = ({ blocks, className }) => {
   )
 }
 
-export default styled(Editor)(({theme}) => css`
-  .Editor__button {
-    margin-top: 2rem;
-  }
-  .Editor__paragraph {
-    max-width: 60ch;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 2rem;
-  }
-`)
+export default styled(Editor)(
+  ({ theme }) => css`
+    .Editor__button {
+      margin-top: 2rem;
+    }
+    .Editor__paragraph {
+      max-width: 60ch;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2rem;
+    }
+  `
+)
