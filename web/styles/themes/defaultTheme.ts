@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { css, DefaultTheme } from 'styled-components'
 
 import { remSize } from '../utilities/Converters'
 import breakpointsFactory, {
@@ -99,15 +99,9 @@ export const responsiveFonts = {
     lg: '24px/1.2'
   },
   h1: {
-    xs: {
-      size: '30px/1.2'
-    },
-    md: {
-      size: '45px/1.2'
-    },
-    lg: {
-      size: '70px/1.2'
-    }
+    xs: '30px/1.2',
+    md: '45px/1.2',
+    lg: '70px/1.2'
   },
   h2: {
     xs: '24px/1.2',

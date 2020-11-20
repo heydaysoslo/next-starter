@@ -24,11 +24,7 @@ const Navigation: React.FC<Props> = ({ className }) => {
   )
 }
 
-const NavItem = styled(NavItemResolver)`
-  /* &[aria-current] {
-    opacity: 0.5;
-  } */
-`
+const NavItem = styled(NavItemResolver)``
 
 export default styled(Navigation)(
   ({ theme }) => css`

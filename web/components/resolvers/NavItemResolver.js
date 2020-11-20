@@ -9,7 +9,7 @@ const types = {
   link: ExternalLink
 }
 
-const NavItemResolver = ({ className, item }) => {
+const NavItemResolver = ({ className = '', item }) => {
   const Component = types[item._type] || null
   if (!Component) {
     console.warn(`Could not resolve nav item of type ${item._type}`)

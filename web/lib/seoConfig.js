@@ -25,10 +25,10 @@ export const defaultSeo = {
       }
     ]
   },
-  twitter: config.twitter,
-  facebook: {
-    appId: null
-  }
+  twitter: config.twitter
+  // facebook: {
+  //   appId: null
+  // }
 }
 
 export default config
