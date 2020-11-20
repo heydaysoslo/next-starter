@@ -24,28 +24,28 @@ export const breakpointsFactory: breakpointsFactory = breakpoints => ({
   xxl: `@media (min-width: ${emSize(breakpoints.xxl)})`,
 
   below: {
-    sm: `@media (max-width: ${emSize(breakpoints.xs)})`,
-    md: `@media (max-width: ${emSize(breakpoints.sm)})`,
-    lg: `@media (max-width: ${emSize(breakpoints.md)})`,
-    xl: `@media (max-width: ${emSize(breakpoints.lg)})`,
-    xxl: `@media (max-width: ${emSize(breakpoints.xl)})`
+    sm: `@media (max-width: ${emSize(breakpoints.sm - 1)})`,
+    md: `@media (max-width: ${emSize(breakpoints.md - 1)})`,
+    lg: `@media (max-width: ${emSize(breakpoints.lg - 1)})`,
+    xl: `@media (max-width: ${emSize(breakpoints.xl - 1)})`,
+    xxl: `@media (max-width: ${emSize(breakpoints.xxl - 1)})`
   },
 
   only: {
-    xs: `@media (max-width: ${emSize(breakpoints.sm)})`,
-    sm: `@media (min-width: ${emSize(breakpoints.xs)} and max-width: ${emSize(
-      breakpoints.md
+    xs: `@media (max-width: ${emSize(breakpoints.sm - 1)})`,
+    sm: `@media (min-width: ${emSize(breakpoints.sm)}) and (max-width: ${emSize(
+      breakpoints.md - 1
     )})`,
-    md: `@media (min-width: ${emSize(breakpoints.sm)} and max-width: ${emSize(
-      breakpoints.lg
+    md: `@media (min-width: ${emSize(breakpoints.md)}) and (max-width: ${emSize(
+      breakpoints.lg - 1
     )})`,
-    lg: `@media (min-width: ${emSize(breakpoints.md)} and max-width: ${emSize(
-      breakpoints.xl
+    lg: `@media (min-width: ${emSize(breakpoints.lg)}) and (max-width: ${emSize(
+      breakpoints.xl - 1
     )})`,
-    xl: `@media (min-width: ${emSize(breakpoints.lg)} and max-width: ${emSize(
-      breakpoints.xxl
+    xl: `@media (min-width: ${emSize(breakpoints.xl)}) and (max-width: ${emSize(
+      breakpoints.xxl - 1
     )})`,
-    xxl: `@media (min-width: ${emSize(breakpoints.xl)})`
+    xxl: `@media (min-width: ${emSize(breakpoints.xxl)})`
   }
 })
 
