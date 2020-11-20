@@ -6,6 +6,10 @@ const height = 24
 const easeIn = 'cubic-bezier(.55,.055,.675,.19)'
 const easeOut = 'cubic-bezier(0.215, 0.61, 0.355, 1)'
 
+/*
+Styling and transition logic based on "Squeeze" from https://jonsuh.com/hamburgers/
+*/
+
 export const StyledBurger = styled.span(
   ({ theme, active }) => css`
     // Make sure click-rect is big enough for usability
@@ -14,13 +18,11 @@ export const StyledBurger = styled.span(
     justify-content: center;
     width: 48px;
     height: 48px;
-    overflow: visible;
 
+    // Lines container
     .box {
       position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       width: ${width}px;
       height: ${height}px;
     }
