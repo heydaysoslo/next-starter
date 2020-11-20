@@ -3,8 +3,7 @@ import { GlobalStyle } from '../styles/utilities/Global'
 import { ThemeProvider } from 'styled-components'
 import { AnimatePresence } from 'framer-motion'
 import { AppProps } from 'next/app'
-import { DefaultSeo } from 'next-seo';
-
+import { DefaultSeo } from 'next-seo'
 
 import 'lazysizes'
 import 'styles/reset.css'
