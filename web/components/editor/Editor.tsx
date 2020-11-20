@@ -114,5 +114,9 @@ export default styled(Editor)(
       margin-right: auto;
       margin-top: 2rem;
     }
+    // Remove margin top from any first element
+    > *:first-child {
+      margin-top: 0 !important;
+    }
   `
 )
