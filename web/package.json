@@ -28,6 +28,7 @@
     "react": "^16.9",
     "react-dom": "^16.9",
     "react-intersection-observer": "^8.26.2",
+    "resize-observer-polyfill": "^1.5.1",
     "styled-components": "^5.1.1"
   },
   "devDependencies": {
