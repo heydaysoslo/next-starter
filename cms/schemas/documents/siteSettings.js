@@ -113,6 +113,23 @@ export default {
       to: [{ type: 'menu' }],
       description: 'The menu that should appear in the footer',
       fieldset: 'menus'
+    },
+    {
+      name: 'footerMenus',
+      title: 'Footer menus',
+      description: 'The menus that should appear in the footer',
+      fieldset: 'menus',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [
+            {
+              type: 'menu'
+            }
+          ]
+        }
+      ]
     }
   ]
 }
