@@ -19,7 +19,7 @@ const Footer = ({ className }) => {
           {menus &&
             menus.map(menu => {
               return (
-                <GridItem span={{ xs: 12, md: 6, lg: 3 }}>
+                <GridItem key={menu._id} span={{ xs: 12, md: 6, lg: 3 }}>
                   {menu?.title && <H3>{menu.title}</H3>}
                   <NavList
                     className="nav-menu"
