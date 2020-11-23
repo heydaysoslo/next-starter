@@ -4,7 +4,7 @@ import ExternalLink from '@heydays/ExternalLink'
 import InternalLink from '@heydays/InternalLink'
 import StyledButton from 'components/styled/Button.styled'
 
-const SanityButton = ({ className, event, title, size, type }) => {
+const SanityButton = ({ className, event, title, size, type, children }) => {
   let Component = 'button'
   let buttonProps = {}
 
@@ -32,7 +32,7 @@ const SanityButton = ({ className, event, title, size, type }) => {
       size={size}
       type={type}
     >
-      {title}
+      {title || children}
     </StyledButton>
   )
 }

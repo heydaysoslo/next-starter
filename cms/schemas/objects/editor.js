@@ -71,7 +71,17 @@ const editor = {
             name: 'internalLink',
             type: 'internalLink',
             title: 'Internal Link' // Find render comps in internalLink.js
+          },
+          {
+            name: 'button',
+            title: 'Button',
+            type: 'button'
           }
+          // {
+          //   name: 'button',
+          //   type: 'button',
+          //   title: 'Button'
+          // }
         ]
       }
     },

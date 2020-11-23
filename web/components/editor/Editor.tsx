@@ -82,6 +82,10 @@ export const serializers = {
           {children}
         </StyledLink>
       )
+    },
+    button: ({ mark, children }) => {
+      // @ts-ignore
+      return <SanityButton {...mark}>{children}</SanityButton>
     }
   }
 }

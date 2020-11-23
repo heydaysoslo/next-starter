@@ -63,6 +63,7 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     link,
     internalLink,
+    button,
     seo,
     mainImage,
     editor,
@@ -74,7 +75,6 @@ export default createSchema({
     cardSection,
     textSection,
     figure,
-    button,
     quote,
     imageSection,
     aspect,
