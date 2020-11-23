@@ -1,4 +1,8 @@
-import styled, { css, DefaultTheme, FlattenSimpleInterpolation } from 'styled-components'
+import styled, {
+  css,
+  DefaultTheme,
+  FlattenSimpleInterpolation
+} from 'styled-components'
 
 import { applyModifier } from '../../styles/utilities'
 
@@ -40,7 +44,6 @@ export const H1 = styled.h1(
 export const H2 = styled.h2(
   ({ theme }) => css`
     ${theme.fonts.h2()}
-    text-transform: uppercase;
   `
 )
 
