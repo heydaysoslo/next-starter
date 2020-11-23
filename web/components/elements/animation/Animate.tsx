@@ -20,7 +20,7 @@ const Animate: React.FC<Props> = ({
     <motion.div
       className={className}
       {...transitions[type]}
-      exit={transitions[type].initial}
+      exit={transitions[type].exit || transitions[type].initial}
     >
       {children}
     </motion.div>
