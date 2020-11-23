@@ -42,9 +42,12 @@ export const serializers = {
           return <P className="Editor__paragraph">{props.children}</P>
       }
     },
-    button: props => {
+    button: ({ node }) => {
       // @ts-ignore
-      return <SanityButton className="Editor__button" {...props?.node} />
+      const { event, ...props } = node
+      return (
+        <SanityButton event={event[0]} className="Editor__button" {...props} />
+      )
     },
     quote(props) {
       if (!props.node.content) return null
