@@ -14,7 +14,7 @@ type Props = {
 }
 
 const CloudinaryImage: React.FC<Props> = ({ node, aspectRatio = null }) => {
-  if (!node) {
+  if (!node?.cldImage) {
     return null
   }
   // Set aspect ratio as style prop to prevent generating a class for every ratio

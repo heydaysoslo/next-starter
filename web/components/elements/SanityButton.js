@@ -8,6 +8,10 @@ const SanityButton = ({ className, event, title, size, type, children }) => {
   let Component = 'button'
   let buttonProps = {}
 
+  if (!event?._type) {
+    console.warn('Button action event type not defined')
+  }
+
   if (event?._type === 'alert') {
     buttonProps = {
       onMouseDown: e => e.preventDefault(),

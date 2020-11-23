@@ -104,51 +104,54 @@ const BASE_LINK = groq`
   title
 `
 
+const EDITOR = groq`
+  ...,
+  event[] {
+    ...,
+    reference->{
+      ${BASE_LINK}
+    }
+  },
+  markDefs[] {
+    ...,
+    event[] {
+      ...,
+      reference->{
+        ${BASE_LINK}
+      }
+    },
+    _type == "internalLink" => {
+      "reference": {
+        "slug": @.reference->slug,
+        "_type": @.reference->_type,
+        "_id": @.reference->_id,
+        "title": @.reference->title,
+      }
+    }
+  }
+`
+
 export const PAGEBUILDER = groq`
 pagebuilder {
   sections[] {
     ...,
     body[] {
-      ...,
-      markDefs[] {
-        ...,
-        _type == "internalLink" => {
-          "reference": {
-            "slug": @.reference->slug,
-            "_type": @.reference->_type,
-            "_id": @.reference->_id
-          }
-        }
-      }
+      ${EDITOR}
     },
     seeAllLink {
       reference->{
-        title,
         ${BASE_LINK}
       },
     },
     content[] {
-      ...,
-      event[0] {
-        reference->{
-          ${BASE_LINK}
-        },
-        ...
-      },
-      markDefs[] {
-        ...,
-        _type == "internalLink" => {
-          "reference": {
-            "slug": @.reference->slug,
-            "_type": @.reference->_type,
-            "_id": @.reference->_id,
-          }
-        }
-      }
+      ${EDITOR}
     },
     cardsList[] {
-      content->{
-        ...
+      content[] {
+        ${EDITOR}
+      },
+      editorMinimal[] {
+        ${EDITOR}
       },
       ...
     },
@@ -164,8 +167,11 @@ pagebuilder {
 
 export const pageQuery = groq`
 *[_type == 'page' && slug.current == $slug][0] {
+  ...,
+  excerpt[] {
+    ${EDITOR}
+  },
   ${PAGEBUILDER},
-  ...
 }
 `
 
@@ -176,6 +182,9 @@ export const pagesQuery = groq`
 export const articleQuery = groq`
 *[_type == 'article' && slug.current == $slug][0] {
   ...,
+  excerpt[] {
+    ${EDITOR}
+  },
   ${PAGEBUILDER}
 }
 `
@@ -188,6 +197,9 @@ export const frontpageQuery = groq`
 *[_id == 'siteSettings'][0] {
   frontpage->{
     ...,
+    excerpt[] {
+      ${EDITOR}
+    },
     ${PAGEBUILDER}
   }
 }
@@ -198,6 +210,9 @@ export const getFrontpage = () => {
   *[_id == 'siteSettings'] {
     frontpage->{
       ...,
+      excerpt[] {
+        ${EDITOR}
+      },
       ${PAGEBUILDER}
     }
   }`
@@ -208,6 +223,9 @@ export const getPage = (params, preview = false) => {
   const query = groq`
     *[_type == 'page' && slug.current == $slug][0] {
       ...,
+      excerpt[] {
+        ${EDITOR}
+      },
       ${PAGEBUILDER}
     }
   `
@@ -225,10 +243,11 @@ export const getSettings = () => {
     primaryMenu->,
     secondaryMenu->,
     frontpage->{
-      ...,
-      ${PAGEBUILDER}
+      ${BASE_LINK}
     },
-    privacypage->,
+    privacypage->{
+      ${BASE_LINK}
+    },
     designTokens->,
   }`
   return getClient(false)
@@ -246,7 +265,7 @@ const NAV_ITEM = groq`
   reference->{
     ${BASE_LINK}
   },
-  event[0] {
+  event[] {
     ...,
     reference->{
       ${BASE_LINK}
