@@ -102,6 +102,7 @@ const MobileNav = styled.div(
     top: var(--header-height);
     width: 100%;
     border-bottom: 1px solid black;
+    background: white;
     ${t.bp.md} {
       display: none;
     }
@@ -116,7 +117,6 @@ export default styled(Header)(
     left: 0;
     width: 100%;
     z-index: 10;
-    background: rgba(255, 255, 255, 0.5);
     .content {
       position: relative;
       width: 100%;

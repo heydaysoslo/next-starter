@@ -10,7 +10,7 @@ const CardSection = ({ className, title, cardsList = [], ...props }) => {
     <StyledCardSection className={className}>
       <Container>
         {title && <StyledCardSection.Title>{title}</StyledCardSection.Title>}
-        <Grid gap justify="center">
+        <Grid gap>
           {cardsList.map(card => {
             return (
               <GridItem span={{ md: 4 }} key={card?._key}>

@@ -1,8 +1,9 @@
 import React from 'react'
 import Editor from '../editor'
-import { P, H3 } from '@heydays/Typography'
+import { P, H2 } from '@heydays/Typography'
 import styled, { css } from 'styled-components'
 import Animate from '@heydays/animation/Animate'
+import Container from '@heydays/Container'
 
 type Props = {
   label: string
@@ -17,26 +18,25 @@ const Section: React.FC<Props> = ({
   title,
   content,
   link,
-  className,
+  className
 }) => {
   return (
     <Animate className={className}>
-      {label && (
-        <P modifiers="small" className="label">
-          {label}
-        </P>
-      )}
-      {title && <H3 className="title">{title}</H3>}
-      {content && <Editor className="content" blocks={content} />}
+      <Container>
+        {label && (
+          <P modifiers="small" className="label">
+            {label}
+          </P>
+        )}
+        {title && <H2 className="title">{title}</H2>}
+        {content && <Editor className="content" blocks={content} />}
+      </Container>
     </Animate>
   )
 }
 
 export default styled(Section)(
   ({ theme }) => css`
-    text-align: center;
-    .button {
-      ${theme.spacing.md('mt')}
-    }
+    ${theme.spacing.section('mt')}
   `
 )
