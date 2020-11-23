@@ -35,7 +35,7 @@ const Inner = ({ Component, pageProps, router }: AppProps) => {
       <DesignTokens>
         {/* Do not put anything inside Animate Presence or page transitions will fail */}
         <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} router={router} key={router.asPath} />
+          <Component {...pageProps} key={router.asPath} />
         </AnimatePresence>
       </DesignTokens>
     </ThemeProvider>
