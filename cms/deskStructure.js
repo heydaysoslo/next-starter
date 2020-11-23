@@ -15,7 +15,7 @@ export default () =>
   S.list()
     .title('Content')
     .items([
-      createDocsList('menu'),
+      createDocsList('menu', { title: 'Navigation' }),
       createDocsList('frontpage'),
       createDocsList('page'),
       createDocsList('article'),
@@ -109,8 +109,8 @@ const createSingleton = (id, options = {}) => {
 }
 
 const createDocsList = (id, options = {}) => {
-  const { withPreviews = true } = options
-  const title = camel2title(id)
+  const { withPreviews = true, title = camel2title(id) } = options
+  // const title = camel2title(id)
   return S.listItem()
     .title(title)
     .schemaType(id)
