@@ -8,18 +8,18 @@ const SanityButton = ({ className, event, title, size, type, children }) => {
   let Component = 'button'
   let buttonProps = {}
 
-  if (event._type === 'alert') {
+  if (event?._type === 'alert') {
     buttonProps = {
       onMouseDown: e => e.preventDefault(),
       onClick: () => alert(event.text)
     }
   }
 
-  if (event._type === 'link') {
+  if (event?._type === 'link') {
     Component = ExternalLink
   }
 
-  if (event._type === 'internalLink') {
+  if (event?._type === 'internalLink') {
     Component = InternalLink
   }
 
