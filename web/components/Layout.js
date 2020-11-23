@@ -15,8 +15,8 @@ const Layout = ({ page, global, preview = false, children }) => {
     <SanityProvider data={{ global }}>
       <Wrapper>
         <SEO page={page} />
+        {preview && <AdminBar />}
         <Content>
-          {preview && <AdminBar />}
           <Header />
           {children}
         </Content>
@@ -35,6 +35,7 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   flex: 1 0 auto;
+  position: relative;
 `
 const StyledFooter = styled(Footer)`
   flex-shrink: 0;
