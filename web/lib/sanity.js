@@ -137,9 +137,11 @@ pagebuilder {
       markDefs[] {
         ...,
         _type == "internalLink" => {
-          "slug": @.reference->slug,
-          "_type": @.reference->_type,
-          "_id": @.reference->_id
+          "reference": {
+            "slug": @.reference->slug,
+            "_type": @.reference->_type,
+            "_id": @.reference->_id,
+          }
         }
       }
     },
@@ -226,7 +228,7 @@ export const getSettings = () => {
       ${PAGEBUILDER}
     },
     privacypage->,
-    designTokens->
+    designTokens->,
   }`
   return getClient(false)
     .fetch(query)
@@ -238,22 +240,34 @@ export const getCompanyInfo = () => {
   return getClient(false).fetch(query)
 }
 
+const MENU_ITEM = groq`
+  ...,
+  reference->{
+    ${BASE_LINK}
+  },
+  event[0] {
+    ...,
+    reference->{
+      ${BASE_LINK}
+    }
+  }
+`
+
+const NAVIGATION = groq`
+  ...,
+  item[] {
+    ${MENU_ITEM}
+  }
+`
+
 export const getGlobalSettings = () => {
   const query = groq`*[_id == 'siteSettings'][0]{
+    ...,
+    footerMenus[]->{
+      ${NAVIGATION}
+    },
     primaryMenu->{
-      item[] {
-        reference->{
-          ${BASE_LINK}
-        },
-        event[0] {
-          reference->{
-            ${BASE_LINK}
-          },
-					...
-        },
-        ...
-      },
-      ...
+      ${NAVIGATION}
     }
   }`
   return getClient(false).fetch(query)
