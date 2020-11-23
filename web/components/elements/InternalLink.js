@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { resolveRoute } from 'routes'
 
-const InternalLink = ({ className, children, reference, linkText }) => {
+const InternalLink = ({ className, children, reference, linkText, title }) => {
   if (!reference?._type) {
     return children || null
   }
@@ -13,7 +13,7 @@ const InternalLink = ({ className, children, reference, linkText }) => {
   return (
     <Link href={href}>
       <a aria-current={isActive && 'page'} className={className}>
-        {linkText || children}
+        {linkText || children || reference?.title}
       </a>
     </Link>
   )
