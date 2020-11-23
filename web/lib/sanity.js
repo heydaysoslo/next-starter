@@ -100,7 +100,8 @@ const BASE_ARTICLE = groq`
 const BASE_LINK = groq`
   _id,
   slug,
-  _type
+  _type,
+  title
 `
 
 export const PAGEBUILDER = groq`
@@ -240,7 +241,7 @@ export const getCompanyInfo = () => {
   return getClient(false).fetch(query)
 }
 
-const MENU_ITEM = groq`
+const NAV_ITEM = groq`
   ...,
   reference->{
     ${BASE_LINK}
@@ -256,20 +257,27 @@ const MENU_ITEM = groq`
 const NAVIGATION = groq`
   ...,
   item[] {
-    ${MENU_ITEM}
+    ${NAV_ITEM}
   }
 `
 
 export const getGlobalSettings = () => {
-  const query = groq`*[_id == 'siteSettings'][0]{
-    ...,
-    footerMenus[]->{
-      ${NAVIGATION}
+  const query = groq`
+  {
+    "companyInfo": *[_id == 'companyInfo'][0]{
+      ...
     },
-    primaryMenu->{
-      ${NAVIGATION}
+    "siteSettings": *[_id == 'siteSettings'][0]{
+      ...,
+      footerMenus[]->{
+        ${NAVIGATION}
+      },
+      primaryMenu->{
+        ${NAVIGATION}
+      }
     }
-  }`
+  }
+  `
   return getClient(false).fetch(query)
 }
 
