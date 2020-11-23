@@ -85,7 +85,12 @@ export const serializers = {
     },
     button: ({ mark, children }) => {
       // @ts-ignore
-      return <SanityButton {...mark}>{children}</SanityButton>
+      const { event, ...props } = mark
+      return (
+        <SanityButton event={event[0]} {...props}>
+          {children}
+        </SanityButton>
+      )
     }
   }
 }
