@@ -11,7 +11,7 @@ type Props = {
 
 const Navigation: React.FC<Props> = ({ className }) => {
   const cms = useSanity()
-  const mainMenuItems = cms?.data?.global?.primaryMenu?.item
+  const mainMenuItems = cms?.data?.global?.siteSettings?.primaryMenu?.item
   if (!mainMenuItems) return null
   return (
     <nav className={className}>
@@ -49,6 +49,9 @@ export default styled(Navigation)(
     // Desktop styling
     ${theme.bp.md} {
       flex-flow: row;
+      ${NavItem} {
+        margin-left: 2rem;
+      }
     }
   `
 )
