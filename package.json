@@ -1,17 +1,21 @@
 {
-  "name": "next-starter-heydays",
-  "version": "0.0.4",
-  "private": true,
+  "name": "nextjs-starter",
+  "version": "1.0.0",
+  "description": "## Getting started",
+  "main": "index.js",
   "scripts": {
-    "start": "yarn workspace web dev",
-    "build": "yarn workspace web build",
-    "cms": "yarn workspace cms start",
-    "prod": "yarn workspace web start"
+    "start": "cd web && yarn start",
+    "cms": "cd cms && yarn start"
   },
-  "workspaces": [
-    "cms",
-    "web"
-  ],
-  "devDependencies": {},
-  "dependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heydaysoslo/next-starter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heydaysoslo/next-starter/issues"
+  },
+  "homepage": "https://github.com/heydaysoslo/next-starter#readme"
 }
