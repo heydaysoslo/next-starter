@@ -7,7 +7,7 @@
     "start": "cd web && yarn start",
     "build": "cd web && yarn build",
     "cms": "cd cms && yarn start",
-    "postinstall": "cd web && yarn && && cd ../cms && yarn"
+    "postinstall": "cd web && yarn && cd ../cms && yarn"
   },
   "repository": {
     "type": "git",
