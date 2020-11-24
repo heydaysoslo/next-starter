@@ -92,7 +92,7 @@ export const responsiveFonts = {
   small: fontDefs.xs,
   body: {
     xs: fontDefs.xs,
-    lg: '18px/1.2'
+    lg: '18px/1.43'
   },
   title: {
     xs: fontDefs.xs,
