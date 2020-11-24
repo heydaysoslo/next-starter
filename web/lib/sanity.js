@@ -90,11 +90,21 @@ export const useCurrentUser = createCurrentUserHook(config)
 
 const BASE_ARTICLE = groq`
   _id,
+  _type,
   title,
   slug {
     current
   },
-  mainImage
+  isFeatured,
+  mainImage,
+  excerpt,
+  publishDate,
+  categories[] {
+    reference->{...}
+  },
+  tags[] {
+    reference->{...}
+  }
 `
 
 const BASE_LINK = groq`
@@ -300,18 +310,20 @@ export const getGlobalSettings = () => {
   return getClient(false).fetch(query)
 }
 
-export const getArticles = () => {
+export const getArticles = preview => {
   const query = groq`*[_type == 'article'] {
     ${BASE_ARTICLE},
-    seo
   }
   `
-  return getClient(false).fetch(query)
+  return getClient(preview).fetch(query)
 }
 
 export const getArticle = params => {
   const query = groq`*[_type == 'article' && slug.current == $slug] {
-    ${BASE_ARTICLE}
+    ${BASE_ARTICLE},
+    body[] {
+      ${EDITOR}
+    }
   }
   `
   return getClient(false).fetch(query, params)
