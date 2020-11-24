@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { resolveRoute } from 'routes'
 
-const InternalLink = ({ className, children, reference, linkText, title }) => {
+const InternalLink = ({ className, children, reference, linkText }) => {
   if (!reference?._type) {
     return children || null
   }
