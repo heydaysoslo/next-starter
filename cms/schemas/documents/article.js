@@ -68,6 +68,28 @@ export default {
       ]
     },
     {
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'category' }]
+        }
+      ]
+    },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }]
+        }
+      ]
+    },
+    {
       name: 'pagebuilder',
       title: 'Page builder',
       type: 'pagebuilder'

@@ -48,6 +48,8 @@ import spacer from './objects/spacer'
 import sectionSettings from './objects/sectionSettings'
 import reusableSectionReference from './objects/reusableSectionReference'
 import theme from './objects/theme'
+import category from './documents/category'
+import tag from './documents/tag'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -99,6 +101,8 @@ export default createSchema({
     siteSettings,
     page,
     person,
+    category,
+    tag,
     // personOrder,
     article,
     // articleOrder,
