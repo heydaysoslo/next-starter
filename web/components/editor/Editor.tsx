@@ -4,13 +4,13 @@ import BaseBlockContent from '@sanity/block-content-to-react'
 import Quote from './Quote'
 import Figure from './Figure'
 import Oembed from '../Oembed'
-import { H3, H2, P } from '@heydays/Typography'
+import { H3, H2, P, UL, OL, ULItem, OLItem } from '@heydays/Typography'
 import Accordion from '@heydays/Accordion'
 import InternalLink from '@heydays/InternalLink'
 import ExternalLink from '@heydays/ExternalLink'
 import StyledLink from 'components/styled/Link.styled'
 import SanityButton from '@heydays/SanityButton'
-import Container from '@heydays/Container'
+// import Container from '@heydays/Container'
 import styled, { css } from 'styled-components'
 
 export const serializers = {
@@ -39,15 +39,14 @@ export const serializers = {
           return <P as="span">{props.children}</P>
 
         default:
-          return <P className="Editor__paragraph">{props.children}</P>
+          return <P>{props.children}</P>
       }
     },
-    button: props => {
+    button: ({ node }) => {
       // @ts-ignore
+      const { event, ...props } = node
       return (
-        <Container>
-          <SanityButton className="Editor__button" {...props?.node} />
-        </Container>
+        <SanityButton event={event[0]} className="Editor__button" {...props} />
       )
     },
     quote(props) {
@@ -82,6 +81,30 @@ export const serializers = {
           {children}
         </StyledLink>
       )
+    },
+    button: ({ mark, children }) => {
+      // @ts-ignore
+      const { event, ...props } = mark
+      return (
+        <SanityButton event={event[0]} {...props}>
+          {children}
+        </SanityButton>
+      )
+    }
+  },
+  list: ({ children, ...props }) => {
+    return props.type === 'number' ? <OL>{children}</OL> : <UL>{children}</UL>
+  },
+  listItem: ({ children, ...props }) => {
+    switch (props.node.listItem) {
+      case 'bullet':
+        return <ULItem>{children}</ULItem>
+
+      case 'number':
+        return <OLItem>{children}</OLItem>
+
+      default:
+        return <li>{children}</li>
     }
   }
 }
@@ -93,30 +116,44 @@ type Props = {
 
 const Editor: React.FC<Props> = ({ blocks, className }) => {
   return (
-    <div className={className}>
-      <BaseBlockContent
-        className="Editor__blocks"
-        blocks={blocks}
-        serializers={serializers}
-      />
-    </div>
+    <BaseBlockContent
+      className={className}
+      blocks={blocks}
+      serializers={serializers}
+      renderContainerOnSingleChild={true}
+    />
   )
 }
 
 export default styled(Editor)(
   ({ theme }) => css`
+    ${H2}, ${H3} {
+      margin-top: 4rem;
+      max-width: 72rem;
+    }
+
+    ${P}, ${UL}, ${OL} {
+      margin-top: 2rem;  
+    }
+
+    // Should contained items be wrapped in a <Container size="paragraph" /> ?
+    // What are the potential problems? Nesting?
+    // Could they be extended instead of wrapped?
+    // Or is the current solution sufficient?
+    ${H2}, ${H3}, ${P}, ${UL}, ${OL} {
+      max-width: 72rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .Editor__button {
       margin-top: 2rem;
     }
-    .Editor__paragraph {
-      max-width: 60ch;
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 2rem;
-    }
     // Remove margin top from any first element
+    
     > *:first-child {
       margin-top: 0 !important;
     }
+
   `
 )

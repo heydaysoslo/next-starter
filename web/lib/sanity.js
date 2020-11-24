@@ -90,17 +90,55 @@ export const useCurrentUser = createCurrentUserHook(config)
 
 const BASE_ARTICLE = groq`
   _id,
+  _type,
   title,
   slug {
     current
   },
-  mainImage
+  isFeatured,
+  mainImage,
+  excerpt,
+  publishDate,
+  categories[] {
+    reference->{...}
+  },
+  tags[] {
+    reference->{...}
+  }
 `
 
 const BASE_LINK = groq`
   _id,
   slug,
-  _type
+  _type,
+  title
+`
+
+const EDITOR = groq`
+  ...,
+  event[] {
+    ...,
+    reference->{
+      ${BASE_LINK}
+    }
+  },
+  markDefs[] {
+    ...,
+    event[] {
+      ...,
+      reference->{
+        ${BASE_LINK}
+      }
+    },
+    _type == "internalLink" => {
+      "reference": {
+        "slug": @.reference->slug,
+        "_type": @.reference->_type,
+        "_id": @.reference->_id,
+        "title": @.reference->title,
+      }
+    }
+  }
 `
 
 export const PAGEBUILDER = groq`
@@ -108,46 +146,22 @@ pagebuilder {
   sections[] {
     ...,
     body[] {
-      ...,
-      markDefs[] {
-        ...,
-        _type == "internalLink" => {
-          "reference": {
-            "slug": @.reference->slug,
-            "_type": @.reference->_type,
-            "_id": @.reference->_id
-          }
-        }
-      }
+      ${EDITOR}
     },
     seeAllLink {
       reference->{
-        title,
         ${BASE_LINK}
       },
     },
     content[] {
-      ...,
-      event[0] {
-        reference->{
-          ${BASE_LINK}
-        },
-        ...
-      },
-      markDefs[] {
-        ...,
-        _type == "internalLink" => {
-          "reference": {
-            "slug": @.reference->slug,
-            "_type": @.reference->_type,
-            "_id": @.reference->_id,
-          }
-        }
-      }
+      ${EDITOR}
     },
     cardsList[] {
-      content->{
-        ...
+      content[] {
+        ${EDITOR}
+      },
+      editorMinimal[] {
+        ${EDITOR}
       },
       ...
     },
@@ -163,8 +177,11 @@ pagebuilder {
 
 export const pageQuery = groq`
 *[_type == 'page' && slug.current == $slug][0] {
+  ...,
+  excerpt[] {
+    ${EDITOR}
+  },
   ${PAGEBUILDER},
-  ...
 }
 `
 
@@ -175,6 +192,9 @@ export const pagesQuery = groq`
 export const articleQuery = groq`
 *[_type == 'article' && slug.current == $slug][0] {
   ...,
+  excerpt[] {
+    ${EDITOR}
+  },
   ${PAGEBUILDER}
 }
 `
@@ -187,6 +207,9 @@ export const frontpageQuery = groq`
 *[_id == 'siteSettings'][0] {
   frontpage->{
     ...,
+    excerpt[] {
+      ${EDITOR}
+    },
     ${PAGEBUILDER}
   }
 }
@@ -197,6 +220,9 @@ export const getFrontpage = () => {
   *[_id == 'siteSettings'] {
     frontpage->{
       ...,
+      excerpt[] {
+        ${EDITOR}
+      },
       ${PAGEBUILDER}
     }
   }`
@@ -207,6 +233,9 @@ export const getPage = (params, preview = false) => {
   const query = groq`
     *[_type == 'page' && slug.current == $slug][0] {
       ...,
+      excerpt[] {
+        ${EDITOR}
+      },
       ${PAGEBUILDER}
     }
   `
@@ -224,10 +253,11 @@ export const getSettings = () => {
     primaryMenu->,
     secondaryMenu->,
     frontpage->{
-      ...,
-      ${PAGEBUILDER}
+      ${BASE_LINK}
     },
-    privacypage->,
+    privacypage->{
+      ${BASE_LINK}
+    },
     designTokens->,
   }`
   return getClient(false)
@@ -240,12 +270,12 @@ export const getCompanyInfo = () => {
   return getClient(false).fetch(query)
 }
 
-const MENU_ITEM = groq`
+const NAV_ITEM = groq`
   ...,
   reference->{
     ${BASE_LINK}
   },
-  event[0] {
+  event[] {
     ...,
     reference->{
       ${BASE_LINK}
@@ -256,35 +286,44 @@ const MENU_ITEM = groq`
 const NAVIGATION = groq`
   ...,
   item[] {
-    ${MENU_ITEM}
+    ${NAV_ITEM}
   }
 `
 
 export const getGlobalSettings = () => {
-  const query = groq`*[_id == 'siteSettings'][0]{
-    ...,
-    footerMenus[]->{
-      ${NAVIGATION}
+  const query = groq`
+  {
+    "companyInfo": *[_id == 'companyInfo'][0]{
+      ...
     },
-    primaryMenu->{
-      ${NAVIGATION}
+    "siteSettings": *[_id == 'siteSettings'][0]{
+      ...,
+      footerMenus[]->{
+        ${NAVIGATION}
+      },
+      primaryMenu->{
+        ${NAVIGATION}
+      }
     }
-  }`
-  return getClient(false).fetch(query)
-}
-
-export const getArticles = () => {
-  const query = groq`*[_type == 'article'] {
-    ${BASE_ARTICLE},
-    seo
   }
   `
   return getClient(false).fetch(query)
 }
 
+export const getArticles = preview => {
+  const query = groq`*[_type == 'article'] {
+    ${BASE_ARTICLE},
+  }
+  `
+  return getClient(preview).fetch(query)
+}
+
 export const getArticle = params => {
   const query = groq`*[_type == 'article' && slug.current == $slug] {
-    ${BASE_ARTICLE}
+    ${BASE_ARTICLE},
+    body[] {
+      ${EDITOR}
+    }
   }
   `
   return getClient(false).fetch(query, params)

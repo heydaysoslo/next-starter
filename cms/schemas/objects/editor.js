@@ -4,12 +4,16 @@ const strongRenderer = props => (
   <span style={{ fontWeight: 'bold' }}>{props.children}</span>
 )
 
+const emRenderer = props => (
+  <em style={{ fontStyle: 'italic' }}>{props.children}</em>
+)
+
 const LeadTextRenderer = props => (
-  <span style={{ fontSize: '2em', lineHeight: 1.1 }}>{props.children}</span>
+  <span style={{ fontSize: '1.25em', lineHeight: 1.2 }}>{props.children}</span>
 )
 
 const SmallTextRenderer = props => (
-  <span style={{ fontSize: '.85em', lineHeight: 1.1 }}>{props.children}</span>
+  <span style={{ fontSize: '.85em', lineHeight: 1.2 }}>{props.children}</span>
 )
 
 const editor = {
@@ -57,8 +61,12 @@ const editor = {
             title: 'Strong',
             value: 'strong',
             blockEditor: { render: strongRenderer }
+          },
+          {
+            title: 'Emphasis',
+            value: 'em',
+            blockEditor: { render: emRenderer }
           }
-          // { title: 'Emphasis', value: 'em' }
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -71,7 +79,17 @@ const editor = {
             name: 'internalLink',
             type: 'internalLink',
             title: 'Internal Link' // Find render comps in internalLink.js
+          },
+          {
+            name: 'button',
+            title: 'Button',
+            type: 'button'
           }
+          // {
+          //   name: 'button',
+          //   type: 'button',
+          //   title: 'Button'
+          // }
         ]
       }
     },

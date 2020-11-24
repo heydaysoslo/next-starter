@@ -48,6 +48,8 @@ import spacer from './objects/spacer'
 import sectionSettings from './objects/sectionSettings'
 import reusableSectionReference from './objects/reusableSectionReference'
 import theme from './objects/theme'
+import category from './documents/category'
+import tag from './documents/tag'
 
 // const personOrder = createOrderDoc('person')
 // const articleOrder = createOrderDoc('article')
@@ -63,6 +65,7 @@ export default createSchema({
     // { type: 'typename' } in other document schemas
     link,
     internalLink,
+    button,
     seo,
     mainImage,
     editor,
@@ -74,7 +77,6 @@ export default createSchema({
     cardSection,
     textSection,
     figure,
-    button,
     quote,
     imageSection,
     aspect,
@@ -99,6 +101,8 @@ export default createSchema({
     siteSettings,
     page,
     person,
+    category,
+    tag,
     // personOrder,
     article,
     // articleOrder,

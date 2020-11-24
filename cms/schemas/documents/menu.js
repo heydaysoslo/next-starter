@@ -26,7 +26,7 @@ export default {
     },
     prepare({ title }) {
       return {
-        title: title || 'Menu'
+        title: title || 'Navigation'
       }
     }
   }

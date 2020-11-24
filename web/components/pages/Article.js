@@ -7,6 +7,7 @@ import { getReadTime } from '../../utils/sanityHelpers'
 import Editor from '../editor'
 import PageBuilder from '../pagebuilder/Pagebuilder'
 import Author from '../elements/Author'
+import Animate from '@heydays/animation/Animate'
 
 const Article = page => {
   const { title, body, authors, publishDate, pagebuilder } = page
@@ -15,11 +16,13 @@ const Article = page => {
       <Spacer size="header" />
       <header>
         <Container>
-          {title && <H1>{title}</H1>}
-          <p>
-            {body && `Read time: ${getReadTime(body)}min`}
-            {publishDate && <span>Published: {publishDate}</span>}
-          </p>
+          <Animate>
+            {title && <H1>{title}</H1>}
+            <p>
+              {body && `Read time: ${getReadTime(body)}min`}
+              {publishDate && <span>Published: {publishDate}</span>}
+            </p>
+          </Animate>
         </Container>
       </header>
       {body && (

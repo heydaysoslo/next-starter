@@ -4,14 +4,26 @@ import Container from '@heydays/Container'
 import { H1 } from '@heydays/Typography'
 import styled, { css } from 'styled-components'
 import Editor from 'components/editor'
+import Grid, { GridItem } from '@heydays/Grid'
+import CloudinaryImage from '@heydays/CloudinaryImage'
+import Animate from '@heydays/animation/Animate'
 
-const HeroSection = ({ className, title, intro }) => {
+const HeroSection = ({ className, title, intro, image }) => {
   return (
     <header className={className}>
+      <Spacer size="header" />
       <Container>
-        <Spacer size="header" />
-        <H1>{title}</H1>
-        {intro && <Editor blocks={intro} />}
+        <Grid align="center" justify="space-between">
+          <GridItem span={{ xs: 12, md: 5 }} offset={{ xs: 0, md: 0 }}>
+            <Animate>
+              <H1>{title}</H1>
+            </Animate>
+            {intro && <Editor blocks={intro} />}
+          </GridItem>
+          <GridItem span={{ xs: 12, md: 6 }}>
+            {image && <CloudinaryImage node={image} />}
+          </GridItem>
+        </Grid>
       </Container>
     </header>
   )
@@ -19,6 +31,6 @@ const HeroSection = ({ className, title, intro }) => {
 
 export default styled(HeroSection)(
   ({ theme }) => css`
-    text-align: center;
+    text-align: left;
   `
 )

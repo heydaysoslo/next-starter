@@ -13,7 +13,7 @@ const InternalLink = ({ className, children, reference, linkText }) => {
   return (
     <Link href={href}>
       <a aria-current={isActive && 'page'} className={className}>
-        {linkText || children}
+        {linkText || children || reference?.title}
       </a>
     </Link>
   )

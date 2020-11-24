@@ -5,30 +5,45 @@ import Container from './Container'
 import Grid, { GridItem } from './Grid'
 import NavList from './NavList'
 import Spacer from './Spacer'
-import { H3 } from './Typography'
 
 const Footer = ({ className }) => {
   const cms = useSanity()
-  const menus = cms?.data?.global?.footerMenus
+  const menus = cms?.data?.global?.siteSettings?.footerMenus
+  const companyInfo = cms?.data?.global?.companyInfo
   return (
     <footer className={className}>
       <Spacer />
       <Container>
         <Grid gap>
-          <GridItem span={{ xs: 12, md: 6, lg: 3 }}>Next Starter</GridItem>
           {menus &&
-            menus.map(menu => {
+            menus.map((menu, i) => {
               return (
-                <GridItem key={menu._id} span={{ xs: 12, md: 6, lg: 3 }}>
-                  {menu?.title && <H3>{menu.title}</H3>}
-                  <NavList
-                    className="nav-menu"
-                    items={menu?.item}
-                    direction="vertical"
-                  />
+                <GridItem
+                  key={`menu-${menu._id}-${i}`}
+                  span={{ xs: 12, md: 6, lg: 3 }}
+                >
+                  <NavList items={menu?.item} direction="vertical" />
                 </GridItem>
               )
             })}
+          <GridItem span={{ xs: 12, md: 6, lg: 3 }}>
+            {companyInfo && (
+              <>
+                <p>
+                  {companyInfo.name}
+                  <br />
+                  {companyInfo?.address?.streetAddress}
+                  <br />
+                  {companyInfo?.address?.postCode} {companyInfo?.address?.city}
+                </p>
+                <p>
+                  Org.nr {companyInfo?.orgNumber}
+                  <br />
+                  {companyInfo?.email}
+                </p>
+              </>
+            )}
+          </GridItem>
         </Grid>
       </Container>
       <Spacer />
@@ -38,7 +53,4 @@ const Footer = ({ className }) => {
 
 export default styled(Footer)`
   border-top: 1px solid black;
-  .nav-menu {
-    margin-top: 20px;
-  }
 `

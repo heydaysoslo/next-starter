@@ -68,10 +68,34 @@ export default {
       ]
     },
     {
-      name: 'pagebuilder',
-      title: 'Page builder',
-      type: 'pagebuilder'
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'category' }]
+        }
+      ]
     },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag' }]
+        }
+      ]
+    },
+    // Martin: I'm not sure if pagebuilder should be a part of the article template.
+    // This could probably be a "one of" for special needs.
+    // {
+    //   name: 'pagebuilder',
+    //   title: 'Page builder',
+    //   type: 'pagebuilder'
+    // },
     {
       name: 'seo',
       title: 'SEO',

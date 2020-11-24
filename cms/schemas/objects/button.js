@@ -28,8 +28,8 @@ export default {
       type: 'array',
       description: 'Select what is going to happen when you click the button',
       of: [
-        { type: 'internalLink' },
-        { type: 'link' },
+        { type: 'internalLink', name: 'internalLink' },
+        { type: 'link', name: 'link' },
         {
           type: 'object',
           name: 'alert',

@@ -13,6 +13,7 @@ const Page = ({
   content,
   pagebuilder,
   excerpt,
+  mainImage,
   ...props
 }) => {
   return (
@@ -21,7 +22,7 @@ const Page = ({
        * Use a hero section with the page content if no custom hero is added to the pagebuilder
        */}
       {pagebuilder?.sections[0]?._type !== 'heroSection' && (
-        <HeroSection title={title} intro={excerpt} />
+        <HeroSection title={title} intro={excerpt} image={mainImage} />
       )}
       {pagebuilder?.sections && <Pagebuilder sections={pagebuilder.sections} />}
     </article>
