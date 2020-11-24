@@ -13,6 +13,7 @@
     "export": "rm -rf export && sanity dataset export production export/production.tar.gz",
     "lint": "eslint .",
     "test": "sanity check",
+    "sanity-init": "sanity init",
     "mutate": "sanity exec ./scripts/mutate.js",
     "postinstall": "sanity cors add http://localhost:3000 --no-credentials"
   },
