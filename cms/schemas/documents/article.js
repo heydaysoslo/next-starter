@@ -89,11 +89,13 @@ export default {
         }
       ]
     },
-    {
-      name: 'pagebuilder',
-      title: 'Page builder',
-      type: 'pagebuilder'
-    },
+    // Martin: I'm not sure if pagebuilder should be a part of the article template.
+    // This could probably be a "one of" for special needs.
+    // {
+    //   name: 'pagebuilder',
+    //   title: 'Page builder',
+    //   type: 'pagebuilder'
+    // },
     {
       name: 'seo',
       title: 'SEO',
