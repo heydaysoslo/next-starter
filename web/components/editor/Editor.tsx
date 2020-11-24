@@ -116,13 +116,12 @@ type Props = {
 
 const Editor: React.FC<Props> = ({ blocks, className }) => {
   return (
-    <div className={className}>
-      <BaseBlockContent
-        className="Editor__blocks"
-        blocks={blocks}
-        serializers={serializers}
-      />
-    </div>
+    <BaseBlockContent
+      className={className}
+      blocks={blocks}
+      serializers={serializers}
+      renderContainerOnSingleChild={true}
+    />
   )
 }
 
