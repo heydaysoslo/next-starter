@@ -14,8 +14,7 @@
     "lint": "eslint .",
     "test": "sanity check",
     "sanity-init": "sanity init",
-    "mutate": "sanity exec ./scripts/mutate.js",
-    "postinstall": "sanity cors add http://localhost:3000 --no-credentials"
+    "mutate": "sanity exec ./scripts/mutate.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.3.2",
