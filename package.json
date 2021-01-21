@@ -4,7 +4,7 @@
   "description": "## Getting started",
   "main": "index.js",
   "scripts": {
-    "start": "cd web && yarn start",
+    "start": "cd web && yarn dev",
     "build": "cd web && yarn build",
     "cms": "cd cms && yarn start",
     "postinstall": "cd web && yarn && cd ../cms && yarn"
