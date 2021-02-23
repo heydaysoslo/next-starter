@@ -3,26 +3,15 @@ import styled, { css } from 'styled-components'
 import { useRouter } from 'next/router'
 import sanityClient from '@sanity/client'
 
-import { getPreview, PAGEBUILDER } from 'lib/sanity'
-
 import TemplateResolver from '@heydays/TemplateResolver'
 import Head from 'next/head'
+import groq from 'groq'
+import useInterval from '@heydays/useInterval'
+import { PAGEBUILDER } from 'lib/sanity/queries/fragments.groq'
 
 const PREVIEWABLE_TYPES = ['page', 'frontpage', 'article']
 
-const Preview = ({ className }) => {
-  const [page, setPage] = useState(null)
-  const router = useRouter()
-  const fetchTimer = useRef(null)
-
-  useEffect(() => {
-    const previewClient = sanityClient({
-      projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-      useCdn: false,
-      token: router?.query?.access_token
-    })
-    const query = `
+const query = groq`
     {
       "siteSettings": *[_type == "siteSettings"] {
         primaryMenu->,
@@ -45,9 +34,21 @@ const Preview = ({ className }) => {
       } | order(_updatedAt desc),
     }
     `
+const Preview = ({ className, ...props }) => {
+  const [page, setPage] = useState(null)
+  const router = useRouter()
 
-    // declare sub variable to be able to unsub
-    let sub
+  useEffect(() => {
+    console.log('router has changed', router)
+  }, [router])
+
+  useEffect(() => {
+    const previewClient = sanityClient({
+      projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+      dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+      useCdn: false,
+      token: router?.query?.access_token,
+    })
 
     // Need id for query
     if (router?.query?.id) {
@@ -56,12 +57,7 @@ const Preview = ({ className }) => {
       const params = { draftId: `drafts.${pageId}`, id: pageId }
 
       const fetchPreview = async () => {
-        console.log('FETCHING PREVIEW')
-        const { data, siteSettings } = await getPreview(
-          previewClient,
-          query,
-          params
-        )
+        const { data, siteSettings } = await previewClient.fetch(query, params)
         const isPreviewable = PREVIEWABLE_TYPES.includes(data[0]._type)
         let page = data[0]
 
@@ -76,37 +72,17 @@ const Preview = ({ className }) => {
           ...page,
           siteSettings: {
             ...siteSettings[0],
-            designTokens: siteSettings[0]?.designTokens?.[0]
-          }
+            designTokens: siteSettings[0]?.designTokens?.[0],
+          },
         }
-        console.log(
-          'fetchPreview -> siteSettings[0]',
-          siteSettings[0]?.designTokens?.[0]?.theme?.responsiveSpacing?.lg
-        )
 
         setPage(newData)
       }
 
       // Fetch first preview
       fetchPreview()
-
-      // Start listening
-      sub = previewClient
-        .listen(query, params, { includeResult: false })
-        .subscribe(update => {
-          console.log('UPDATING…')
-          if (fetchTimer.current) {
-            clearTimeout(fetchTimer.current)
-          }
-          fetchTimer.current = setTimeout(fetchPreview, 2000)
-        })
     }
-    return () => {
-      if (sub) {
-        sub.unsubscribe()
-      }
-    }
-  }, [router])
+  }, [])
 
   return (
     <div className={className}>
@@ -122,6 +98,13 @@ const Preview = ({ className }) => {
       </div>
     </div>
   )
+}
+
+// This needs to be here
+export async function getServerSideProps(context) {
+  return {
+    props: {}, // will be passed to the page component as props
+  }
 }
 
 export default styled(Preview)(({ theme }) => css``)

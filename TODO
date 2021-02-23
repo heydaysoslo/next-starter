@@ -1,0 +1,7 @@
+
+Todo:
+  ✔ Remove usage of urlFor @done(21-02-22 13:19)
+  ✔ Remove next-sanity @done(21-02-22 23:51)
+  ☐ Solve SanityButton event stuff
+  ☐ Naming convention for article/blog and routes
+  ☐ Improve preview with no reload after update

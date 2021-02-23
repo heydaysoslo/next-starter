@@ -4,6 +4,9 @@ import { useRouter } from 'next/router'
 import { resolveRoute } from 'routes'
 
 const InternalLink = ({ className, children, reference, linkText }) => {
+  // console.log('📄 InternalLink.js:7 -> reference', reference)
+  // console.log('📄 InternalLink.js:7 -> linkText', linkText)
+  // console.log('Internallink fired')
   if (!reference?._type) {
     return children || null
   }

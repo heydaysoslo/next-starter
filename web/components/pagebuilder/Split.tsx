@@ -11,11 +11,10 @@ type Props = {
 }
 
 const Split: React.FC<Props> = ({ className, items, ...props }) => {
-  console.log('props', items)
   return (
     <div className={className}>
       <Grid gap={true} align="center">
-        {items.map(item => (
+        {items.map((item) => (
           <GridItem span={{ md: 6 }} key={item._key}>
             {item._type === 'content' && (
               <>

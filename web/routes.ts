@@ -10,10 +10,11 @@ export const routes = {
   },
   frontpage: () => {
     return `/`
-  }
+  },
 }
 
-export const resolveRoute = doc => {
+export const resolveRoute = (doc) => {
+  // console.log('📄 routes.ts:17 -> doc', doc)
   const type = doc?._type
   if (!type) {
     console.warn(`_type not defined`, doc)
@@ -29,29 +30,29 @@ export const resolveRoute = doc => {
   return '/'
 }
 
-export const getCanonical = doc => {
+export const getCanonical = (doc) => {
   return `${seoConfig.siteUrl}${resolveRoute(doc)}`
 }
 
 export const docTypes = {
   illustrator: {
-    ogType: 'website'
+    ogType: 'website',
   },
   page: {
-    ogType: 'website'
+    ogType: 'website',
   },
   post: {
-    ogType: 'article'
+    ogType: 'article',
   },
   article: {
-    ogType: 'article'
+    ogType: 'article',
   },
   blogCategory: {
-    ogType: 'website'
-  }
+    ogType: 'website',
+  },
 }
 
-export const getOgType = node => {
+export const getOgType = (node) => {
   if (node._type && docTypes[node._type]) {
     return docTypes[node._type].ogType ? docTypes[node._type].ogType : 'website'
   }

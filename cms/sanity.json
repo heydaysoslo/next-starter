@@ -7,13 +7,6 @@
     "projectId": "4tzgku1d",
     "dataset": "production"
   },
-  "env": {
-    "development": {
-      "api": {
-        "dataset": "production"
-      }
-    }
-  },
   "plugins": [
     "@sanity/base",
     "@sanity/components",
@@ -21,7 +14,6 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/vision",
-    "@sanity/production-preview",
     "tabs",
     "asset-source-cloudinary-test",
     "@sanity/color-input"
@@ -42,10 +34,6 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "./custom/styles/cms.css"
-    },
-    {
-      "implements": "part:@sanity/production-preview/resolve-production-url",
-      "path": "./resolveProductionUrl.js"
     }
   ]
 }

@@ -14,7 +14,7 @@ const sectionTypes = {
     <PageBuilder sections={reusableSection?.pagebuilder?.sections} />
   ),
   split: dynamic(() => import('./Split')),
-  heroSection: dynamic(() => import('./HeroSection'))
+  heroSection: dynamic(() => import('./HeroSection')),
 }
 
 type section = {

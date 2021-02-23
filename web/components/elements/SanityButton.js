@@ -14,8 +14,8 @@ const SanityButton = ({ className, event, title, size, type, children }) => {
 
   if (event?._type === 'alert') {
     buttonProps = {
-      onMouseDown: e => e.preventDefault(),
-      onClick: () => alert(event.text)
+      onMouseDown: (e) => e.preventDefault(),
+      onClick: () => alert(event.text),
     }
   }
 
