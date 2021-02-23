@@ -6,16 +6,11 @@ import Footer from '@heydays/Footer'
 import styled from 'styled-components'
 import { SanityProvider } from 'components/context/sanityContext'
 
-const AdminBar = dynamic(() => import('../components/cms/AdminBar'), {
-  ssr: false
-})
-
-const Layout = ({ page, global, preview = false, children }) => {
+const Layout = ({ page, global, children }) => {
   return (
     <SanityProvider data={{ global }}>
       <Wrapper>
         <SEO page={page} />
-        {preview && <AdminBar />}
         <Content>
           <Header />
           {children}

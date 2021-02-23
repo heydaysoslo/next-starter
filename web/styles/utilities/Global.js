@@ -3,7 +3,7 @@ import {
   css,
   DefaultTheme,
   Interpolation,
-  ThemedStyledProps
+  ThemedStyledProps,
 } from 'styled-components'
 import { globalTypeStyle } from './Typography'
 
@@ -14,7 +14,9 @@ export const GlobalStyle = createGlobalStyle(
     }
 
     // Needed for sticky footer
-    html, body, #__next {
+    html,
+    body,
+    #__next {
       height: 100%;
     }
 
@@ -35,10 +37,6 @@ export const GlobalStyle = createGlobalStyle(
     ::selection {
       background: ${theme.colors.primary};
       color: white;
-    }
-
-    #___gatsby {
-      transition: background-color 300ms ease;
     }
 
     figure {
@@ -122,7 +120,7 @@ export const GlobalStyle = createGlobalStyle(
       overflow-x: scroll;
       padding: 20px;
       background-color: #f1f1f1;
-      border: 1px solid #CCC;
+      border: 1px solid #ccc;
       border-radius: 4px;
       margin: 10px 0;
     }
@@ -135,21 +133,21 @@ export const GlobalStyle = createGlobalStyle(
 
     /* Add visible tag that shows breakpoint for dev environment */
     ${process.env.NODE_ENV === 'development' &&
-      css`
-    body:after {
-      content: "${theme.breakpoints[0]}";
-      background: rgba(255, 255, 255, 0.5);
-      position: fixed;
-      ${theme.spacing.xs(['py', 'px', 'bottom', 'left'])}
-      ${theme.fonts.body()}
-      ${Object.keys(theme.breakpoints).map(key => {
-        return css`
-          ${theme?.bp?.[key]} {
-            content: "${key}";
-          }
-        `
-      })}
-    }
-  `}
+    css`
+      body:after {
+        content: '${theme.breakpoints[0]}';
+        background: rgba(255, 255, 255, 0.5);
+        position: fixed;
+        ${theme.spacing.xs(['py', 'px', 'bottom', 'left'])}
+        ${theme.fonts.body()}
+      ${Object.keys(theme.breakpoints).map((key) => {
+          return css`
+            ${theme?.bp?.[key]} {
+              content: '${key}';
+            }
+          `
+        })}
+      }
+    `}
   `
 )

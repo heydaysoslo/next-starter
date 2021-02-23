@@ -1,9 +1,19 @@
 import React from 'react'
+import styled, { css } from 'styled-components'
 import Grid, { GridItem } from '../elements/Grid'
 import Animate from '@heydays/animation/Animate'
 import Card from '../elements/Card'
 import Container from '@heydays/Container'
-import StyledCardSection from 'components/styled/CardSection.styled'
+
+const StyledCardSection = styled.section(
+  ({ theme }) => css`
+    ${theme.spacing.md('mt')};
+  `
+)
+
+StyledCardSection.Title = styled.h2`
+  display: none;
+`
 
 const CardSection = ({ className, title, cardsList = [], ...props }) => {
   return (
@@ -11,7 +21,7 @@ const CardSection = ({ className, title, cardsList = [], ...props }) => {
       <Container>
         {title && <StyledCardSection.Title>{title}</StyledCardSection.Title>}
         <Grid gap>
-          {cardsList.map(card => {
+          {cardsList.map?.((card) => {
             return (
               <GridItem span={{ md: 4 }} key={card?._key}>
                 <Animate>

@@ -5,7 +5,7 @@ import defaultTheme, { bp } from 'styles/themes/defaultTheme'
 import fontFactory from 'styles/utilities/fontFactory'
 import spacingFactory from 'styles/utilities/spacingFactory'
 
-const fromSanityToThemeSchema = theme => {
+const fromSanityToThemeSchema = (theme) => {
   if (!theme) return defaultTheme
   const colors = Object.entries(theme.colors).reduce((res, [key, value]) => {
     res[key] = value.hex
@@ -18,7 +18,7 @@ const fromSanityToThemeSchema = theme => {
     theme?.responsiveSpacing &&
     spacingFactory({
       responsiveSpacing: theme.responsiveSpacing,
-      bp: defaultTheme.bp
+      bp: defaultTheme.bp,
     })
   const newTheme = {
     fontFamily: theme?.fontFamily
@@ -30,7 +30,7 @@ const fromSanityToThemeSchema = theme => {
     fonts: fonts ? { ...defaultTheme.fonts, ...fonts } : defaultTheme.fonts,
     spacing: spacing
       ? { ...defaultTheme.spacing, ...spacing }
-      : defaultTheme.spacing
+      : defaultTheme.spacing,
   }
   return newTheme
 }
@@ -38,7 +38,7 @@ const fromSanityToThemeSchema = theme => {
 const DesignTokens = ({ children }) => {
   const [theme, setTheme] = useState({})
   useEffect(() => {
-    getSettings().then(res => {
+    getSettings().then((res) => {
       setTheme(fromSanityToThemeSchema(res?.designTokens?.theme))
     })
   }, [])

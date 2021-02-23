@@ -6,7 +6,7 @@ import SanityButton from '@heydays/SanityButton'
 const types = {
   button: SanityButton,
   internalLink: InternalLink,
-  link: ExternalLink
+  link: ExternalLink,
 }
 
 const NavItemResolver = ({ className = '', item }) => {
