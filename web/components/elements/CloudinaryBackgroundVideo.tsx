@@ -31,7 +31,12 @@ const CloudinaryBackgroundVideo: React.FC<Props> = ({
   className,
   options
 }) => {
-  const videoUrl = node ? cldGetVideoUrl(node, options) : ''
+  const resolvedNode: CloudinaryNode | undefined = node.hasOwnProperty(
+    'public_id'
+  )
+    ? node
+    : node.cldImage
+  const videoUrl = resolvedNode ? cldGetVideoUrl(resolvedNode, options) : ''
   const player = useRef<HTMLVideoElement>(null)
   const [inViewRef, inView] = useInView()
 
@@ -46,7 +51,7 @@ const CloudinaryBackgroundVideo: React.FC<Props> = ({
     }
   }, [inView])
 
-  if (!node) return null
+  if (!resolvedNode) return null
 
   return (
     <div ref={inViewRef} className={className}>
