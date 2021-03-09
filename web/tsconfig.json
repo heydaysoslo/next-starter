@@ -11,8 +11,7 @@
         "components/resolvers/*",
         "components/hooks/*",
         "components/pagebuilder/*"
-      ],
-      "@cms": ["lib/sanity/*", "lib/sanity/queries/*"]
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,

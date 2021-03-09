@@ -1,4 +1,4 @@
-import { getFrontpage, getGlobalSettings } from '@cms'
+import { getFrontpage, getGlobalSettings } from 'lib/sanity'
 import TemplateResolver from '../components/resolvers/TemplateResolver'
 import Layout from 'components/Layout'
 
@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       data: { frontpage },
-      global,
-    },
+      global
+    }
   }
 }

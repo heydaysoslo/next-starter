@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { useCurrentUser } from '@cms'
+import { useCurrentUser } from 'lib/sanity'
 import styled from 'styled-components'
 import Container from '@heydays/Container'
 

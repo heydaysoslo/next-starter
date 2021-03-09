@@ -2,7 +2,7 @@ import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import TemplateResolver from '@heydays/TemplateResolver'
 import Layout from '../components/Layout'
-import { getGlobalSettings, getPage, getPages } from '@cms'
+import { getGlobalSettings, getPage, getPages } from 'lib/sanity'
 
 export default function Post({ data, global }) {
   const router = useRouter()
@@ -20,21 +20,21 @@ export default function Post({ data, global }) {
 
 export const getStaticProps = async ({ params }) => {
   const post = await getPage({
-    slug: params.slug,
+    slug: params.slug
   })
   const global = await getGlobalSettings()
   return {
     props: {
       data: post,
-      global,
-    },
+      global
+    }
   }
 }
 
 export async function getStaticPaths() {
   const paths = await getPages()
   return {
-    paths: paths.map((slug) => ({ params: { slug } })),
-    fallback: true,
+    paths: paths.map(slug => ({ params: { slug } })),
+    fallback: true
   }
 }

@@ -1,4 +1,4 @@
-// import { getPages } from '@cms'
+// import { getPages } from 'lib/sanity'
 // import React from 'react'
 
 // import { getPages } from '../../lib/sanity'
