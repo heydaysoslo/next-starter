@@ -27,26 +27,32 @@ import useWindowSize from './useWindowSize'
 *
 */
 
-const useCanvas = ({ canvas, container }) => {
-  const [c, setC] = useState(null)
-  const [width, setWidth] = useState(null)
-  const [height, setHeight] = useState(null)
+type Props = {
+  canvas: React.RefObject<HTMLCanvasElement>
+  container: React.RefObject<HTMLElement>
+}
+
+const useCanvas = ({ canvas, container }: Props) => {
+  const [c, setC] = useState<CanvasRenderingContext2D | null>(null)
+  const [width, setWidth] = useState<number | null>(null)
+  const [height, setHeight] = useState<number | null>(null)
   const windowSize = useWindowSize()
 
   // HandleResizing
   useEffect(() => {
-    if (canvas?.current) {
+    if (canvas?.current && container.current) {
       const ctx = canvas.current.getContext('2d')
       setC(ctx)
+      if (ctx) {
+        const ratio = window.devicePixelRatio || 1
+        ctx.scale(ratio, ratio)
 
-      const ratio = window.devicePixelRatio || 1
-      ctx.scale(ratio, ratio)
-
-      const { width, height } = container.current.getBoundingClientRect()
-      canvas.current.width = width
-      canvas.current.height = height
-      setWidth(width)
-      setHeight(height)
+        const { width, height } = container.current.getBoundingClientRect()
+        canvas.current.width = width
+        canvas.current.height = height
+        setWidth(width)
+        setHeight(height)
+      }
     }
   }, [windowSize, canvas, container])
 
