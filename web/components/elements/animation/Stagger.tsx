@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { transitions } from '../../../utils/animation'
 import { nanoid } from 'nanoid'
 
-import { transitions as transitionsType } from '../../../types'
+import type { transitions as transitionsType } from 'heydays'
 
 const ID = nanoid(10)
 

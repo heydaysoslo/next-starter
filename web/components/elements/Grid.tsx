@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components'
 import { BreakpointKeys } from 'styles/utilities/breakpointsFactory'
 import { SpacingSizes } from 'styles/utilities/spacingFactory'
-import { FlexBoxAlignItems, FlexBoxJustifyContent } from '../../types'
+import type { FlexBoxAlignItems, FlexBoxJustifyContent } from 'heydays'
 
 type gapItem = boolean | number | SpacingSizes
 

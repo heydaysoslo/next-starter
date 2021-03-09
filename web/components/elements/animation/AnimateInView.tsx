@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 
 import { transitions } from '../../../utils/animation'
-import { transitions as transitionType } from '../../../types'
+import type { transitions as transitionType } from 'heydays'
 
 /**
  * Usage:
