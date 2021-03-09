@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { transitions } from '../../../utils/animation'
-import { transitions as transitionsType } from 'types'
+import type { transitions as transitionsType } from 'heydays'
 
 type Props = {
   /**

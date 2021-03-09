@@ -1,7 +1,7 @@
 import React from 'react'
 import CloudinaryImage from '../elements/CloudinaryImage'
 import CloudinaryBackgroundVideo from '../elements/CloudinaryBackgroundVideo'
-import { aspect, CloudinaryNode } from 'types'
+import type { aspect, CloudinaryNode } from 'heydays'
 
 type Props = {
   node: CloudinaryNode

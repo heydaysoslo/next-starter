@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import { cldGetVideoUrl } from '../../utils/cloudinary'
-import { CloudinaryNode } from 'types'
+import type { CloudinaryNode } from 'heydays'
 
 /*
 

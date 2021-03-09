@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { CloudinaryNode } from 'types'
+import type { CloudinaryNode } from 'heydays'
 
 import { cldGetVideoUrl } from '../../utils/cloudinary'
 import Button from './Button'

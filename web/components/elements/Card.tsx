@@ -6,7 +6,7 @@ import LinkResolver from '@heydays/LinkResolver'
 import Editor from '../editor'
 import { P } from './Typography'
 import CloudinaryImage from './CloudinaryImage'
-import { CloudinaryNode } from 'types'
+import type { CloudinaryNode } from 'heydays'
 
 type Props = {
   className?: string

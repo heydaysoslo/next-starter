@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { aspect, CloudinaryNode } from 'types'
+import type { aspect, CloudinaryNode } from 'heydays'
 import { getImageSrc, getAspect } from '../../utils/cloudinary'
 
 /*

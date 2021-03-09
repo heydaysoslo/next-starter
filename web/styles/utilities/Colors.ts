@@ -1,5 +1,5 @@
 import Color from 'color'
-import { NormalizedNumber } from 'types'
+import type { NormalizedNumber } from 'heydays'
 
 const color = {
   darken: (color: string, percent: NormalizedNumber | number) =>

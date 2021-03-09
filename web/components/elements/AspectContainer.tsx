@@ -3,7 +3,7 @@ import styled, { useTheme } from 'styled-components'
 import useMediaQuery from '../hooks/useMediaQuery'
 import useWindowSize from '../hooks/useWindowSize'
 import { breakpoints } from '../../styles/themes/defaultTheme'
-import { aspect } from 'types'
+import type { aspect } from 'heydays'
 
 type Props = {
   /**
