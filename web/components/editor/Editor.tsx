@@ -59,7 +59,6 @@ export const serializers = {
       return <Oembed url={props.node.url} />
     },
     accordion(props: any) {
-      // @ts-ignore
       return <Accordion items={props.node.items} exclusive defaultActive={2} />
     }
   },
