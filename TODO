@@ -1,7 +1,14 @@
-
-Todo:
+Sanity:
+  ☐ Rewrite to TS
+Preview:
   ✔ Remove usage of urlFor @done(21-02-22 13:19)
   ✔ Remove next-sanity @done(21-02-22 23:51)
   ☐ Solve SanityButton event stuff
   ☐ Naming convention for article/blog and routes
   ☐ Improve preview with no reload after update
+Setup:
+  ☐ Fix lib/sanity errors
+Typescript:
+  ☐ Fix ts errors
+Cloudinary:
+  ✔ Fix background video url resolving @done(21-03-08 21:04)
