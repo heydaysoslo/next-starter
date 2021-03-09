@@ -7,8 +7,14 @@ Preview:
   ☐ Naming convention for article/blog and routes
   ☐ Improve preview with no reload after update
 Setup:
-  ☐ Fix lib/sanity errors
+  ✔ Fix @cms errors @done(21-03-09 20:30)
 Typescript:
-  ☐ Fix ts errors
+  ✔ Fix ts errors @done(21-03-09 20:34)
+  ☐ Remove all any types
+  ☐ Add types for sanity :(
 Cloudinary:
   ✔ Fix background video url resolving @done(21-03-08 21:04)
+Components:
+  Accordion:
+    ☐ Allow nested accordions
+    ☐ Consider external lib
