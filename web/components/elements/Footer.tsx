@@ -6,7 +6,11 @@ import Grid, { GridItem } from './Grid'
 import NavList from './NavList'
 import Spacer from './Spacer'
 
-const Footer = ({ className }) => {
+type Props = {
+  className?: string
+}
+
+const Footer: React.FC<Props> = ({ className }) => {
   const cms = useSanity()
   const menus = cms?.data?.global?.siteSettings?.footerMenus
   const companyInfo = cms?.data?.global?.companyInfo

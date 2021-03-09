@@ -43,31 +43,28 @@ export const serializers = {
       }
     },
     button: ({ node }) => {
-      // @ts-ignore
       const { event, ...props } = node
       return (
         <SanityButton event={event[0]} className="Editor__button" {...props} />
       )
     },
-    quote(props) {
+    quote(props: any) {
       if (!props.node.content) return null
       return <Quote quote={props.node} />
     },
-    figure(props) {
+    figure(props: any) {
       return <Figure node={props.node} />
     },
-    oembed(props) {
-      // @ts-ignore
+    oembed(props: any) {
       return <Oembed url={props.node.url} />
     },
-    accordion(props) {
+    accordion(props: any) {
       // @ts-ignore
       return <Accordion items={props.node.items} exclusive defaultActive={2} />
     }
   },
   marks: {
     internalLink: ({ mark, children }) => {
-      // @ts-ignore
       return (
         <StyledLink as={InternalLink} {...mark}>
           {children}
@@ -75,7 +72,6 @@ export const serializers = {
       )
     },
     link: ({ mark, children }) => {
-      // @ts-ignore
       return (
         <StyledLink as={ExternalLink} {...mark}>
           {children}
@@ -83,7 +79,6 @@ export const serializers = {
       )
     },
     button: ({ mark, children }) => {
-      // @ts-ignore
       const { event, ...props } = mark
       return (
         <SanityButton event={event[0]} {...props}>
@@ -126,14 +121,14 @@ const Editor: React.FC<Props> = ({ blocks, className }) => {
 }
 
 export default styled(Editor)(
-  ({ theme }) => css`
+  () => css`
     ${H2}, ${H3} {
       margin-top: 4rem;
       max-width: 72rem;
     }
 
     ${P}, ${UL}, ${OL} {
-      margin-top: 2rem;  
+      margin-top: 2rem;
     }
 
     // Should contained items be wrapped in a <Container size="paragraph" /> ?
@@ -150,7 +145,7 @@ export default styled(Editor)(
       margin-top: 2rem;
     }
     // Remove margin top from any first element
-    
+
     > *:first-child {
       margin-top: 0 !important;
     }

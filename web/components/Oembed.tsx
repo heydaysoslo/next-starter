@@ -5,12 +5,17 @@ import styled from 'styled-components'
 import useFetch from '@heydays/useFetch'
 import { useInView } from 'react-intersection-observer'
 
-const Oembed = ({ url, className }) => {
+type Props = {
+  url: string
+  className?: string
+}
+
+const Oembed: React.FC<Props> = ({ url, className }) => {
   const { response: embed, isLoading, error } = useFetch('/api/oembed', {
     method: 'POST',
     body: JSON.stringify({ url })
   })
-  const { inViewRef, inView } = useInView()
+  const { ref: inViewRef, inView } = useInView()
   if (isLoading || error) return null
   return (
     <div className={className} ref={inViewRef}>

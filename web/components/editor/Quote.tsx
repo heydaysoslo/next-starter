@@ -1,7 +1,14 @@
 import React from 'react'
 import Editor from './Editor'
 
-const Quote = ({ quote }) => {
+type Props = {
+  quote: {
+    content: any
+    source: any
+  }
+}
+
+const Quote: React.FC<Props> = ({ quote }) => {
   return (
     quote.content && (
       <div className="Quote">

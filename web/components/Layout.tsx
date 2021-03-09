@@ -1,18 +1,25 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
-import Header from '../components/Header'
-import SEO from '../components/SEO'
+import Header from './Header'
+import SEO from './SEO'
 import Footer from '@heydays/Footer'
 import styled from 'styled-components'
 import { SanityProvider } from 'components/context/sanityContext'
+import useAppContext from '@heydays/useAppContext'
 
-const Layout = ({ page, global, children }) => {
+type Props = {
+  page: any
+  global: any
+}
+
+const Layout: React.FC<Props> = ({ page, global, children }) => {
+  const { state } = useAppContext()
   return (
     <SanityProvider data={{ global }}>
       <Wrapper>
         <SEO page={page} />
         <Content>
-          <Header />
+          <Header isDark={state.isDark} />
           {children}
         </Content>
         <StyledFooter />

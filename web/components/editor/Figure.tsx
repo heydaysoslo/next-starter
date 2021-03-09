@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { aspect } from 'types'
+import type { aspect } from 'heydays'
 import CloudinaryMediaResolver from '../resolvers/CloudinaryMediaResolver'
 
 type Props = {
