@@ -1,5 +1,4 @@
 import React from 'react'
-import dynamic from 'next/dynamic'
 import Header from './Header'
 import SEO from './SEO'
 import Footer from '@heydays/Footer'
