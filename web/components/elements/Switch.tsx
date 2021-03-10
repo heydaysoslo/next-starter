@@ -19,9 +19,7 @@ const Switch: React.FC<Props> = ({ className, onClick, state, size = 150 }) => {
     >
       <motion.div
         className="inner"
-        animate={
-          state ? { background: 'darkslategray' } : { background: 'cornsilk' }
-        }
+        animate={state ? { background: '#2f4f4f' } : { background: '#fff8dc' }}
       >
         <motion.div
           className="switch"
