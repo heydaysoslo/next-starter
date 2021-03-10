@@ -1,16 +1,23 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useTheme } from 'styled-components'
+import { BreakpointKeys } from 'styles/utilities/breakpointsFactory'
 
-function useMedia(queries, values, defaultValue) {
+function useMedia(
+  queries: string[],
+  values: BreakpointKeys[],
+  defaultValue: BreakpointKeys
+) {
   // Array containing a media query list for each query
-  const mediaQueryLists = queries.map(
+  const mediaQueryLists: (false | MediaQueryList)[] = queries.map(
     q => typeof window !== 'undefined' && window.matchMedia(q)
   )
 
   // Function that gets value based on matching media query
   const getValue = useCallback(() => {
     // Get index of first media query that matches
-    const index = mediaQueryLists.findIndex(mql => mql.matches)
+    const index = mediaQueryLists.findIndex(
+      mql => typeof mql !== 'boolean' && mql.matches
+    )
     // Return related value or defaultValue if none
     return typeof values[index] !== 'undefined' ? values[index] : defaultValue
   }, [mediaQueryLists, values, defaultValue])
@@ -25,9 +32,17 @@ function useMedia(queries, values, defaultValue) {
       // ... current values of hook args (as this hook callback is created once on mount).
       const handler = () => setValue(getValue)
       // Set a listener for each media query with above handler as callback.
-      mediaQueryLists.forEach(mql => mql.addListener(handler))
+      mediaQueryLists.forEach(
+        mql =>
+          typeof mql !== 'boolean' && mql.addEventListener('change', handler)
+      )
       // Remove listeners on cleanup
-      return () => mediaQueryLists.forEach(mql => mql.removeListener(handler))
+      return () =>
+        mediaQueryLists.forEach(
+          mql =>
+            typeof mql !== 'boolean' &&
+            mql.removeEventListener('change', handler)
+        )
     },
     [getValue, mediaQueryLists] // Empty array ensures effect is only run on mount and unmount
   )
@@ -36,17 +51,19 @@ function useMedia(queries, values, defaultValue) {
 }
 
 /**
- * Custom MediaQuery hook that
- * returns the active breakpoint as a string
+ * Custom MediaQuery hook that returns the active breakpoint as a string
  *
- * Usage:
+ * @example ```tsx
  * const query = useQuery()
- * => 'sm' || 'md' || 'lg' || ...
+ * ```
+ * @returns 'xs' || 'sm' || 'md' || 'lg' || ...
  */
 
 export default function useMediaQuery() {
   const { breakpoints } = useTheme()
-  const keys = Object.keys(breakpoints)
+  const keys: BreakpointKeys[] = Object.keys(breakpoints) as Array<
+    BreakpointKeys
+  >
   const cssBreakpoints = keys.map(
     (key, index) =>
       `(min-width: ${breakpoints[key]}px) ${
