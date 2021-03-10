@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 
 const initialMouseState = {
-  x: null,
-  y: null,
-  screenX: null,
-  screenY: null,
-  pageX: null,
-  pageY: null,
-  clientX: null,
-  clientY: null,
-  movementX: null,
-  movementY: null,
-  offsetX: null,
-  offsetY: null
+  x: 0,
+  y: 0,
+  screenX: 0,
+  screenY: 0,
+  pageX: 0,
+  pageY: 0,
+  clientX: 0,
+  clientY: 0,
+  movementX: 0,
+  movementY: 0,
+  offsetX: 0,
+  offsetY: 0
 }
 
 function getMousePositionFromEvent(e) {
@@ -44,10 +44,17 @@ function getMousePositionFromEvent(e) {
   }
 }
 
+/**
+ * Get mouse position
+ *
+ * @example ```tsx
+ * const mouse = useMouse()
+ * ```
+ */
 const useMouse = () => {
   const [mousePosition, setMousePostition] = useState(initialMouseState)
 
-  function updateMousePosition(e) {
+  function updateMousePosition(e: MouseEvent) {
     setMousePostition(getMousePositionFromEvent(e))
   }
 
