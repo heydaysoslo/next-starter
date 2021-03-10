@@ -7,23 +7,25 @@ import StyledButton from 'components/styled/Button.styled'
 const SanityButton = ({ className, event, title, size, type, children }) => {
   let Component = 'button'
   let buttonProps = {}
+  // Event returns array in some cases. Need to check and resolve
+  const resolvedEvent = Array.isArray(event) ? event?.[0] : event
 
-  if (!event?._type) {
+  if (!resolvedEvent?._type) {
     console.warn('Button action event type not defined')
   }
 
-  if (event?._type === 'alert') {
+  if (resolvedEvent?._type === 'alert') {
     buttonProps = {
-      onMouseDown: (e) => e.preventDefault(),
-      onClick: () => alert(event.text),
+      onMouseDown: e => e.preventDefault(),
+      onClick: () => alert(resolvedEvent.text)
     }
   }
 
-  if (event?._type === 'link') {
+  if (resolvedEvent?._type === 'link') {
     Component = ExternalLink
   }
 
-  if (event?._type === 'internalLink') {
+  if (resolvedEvent?._type === 'internalLink') {
     Component = InternalLink
   }
 
@@ -31,7 +33,7 @@ const SanityButton = ({ className, event, title, size, type, children }) => {
     <StyledButton
       as={Component}
       className={className}
-      {...event}
+      {...resolvedEvent}
       {...buttonProps}
       size={size}
       type={type}
