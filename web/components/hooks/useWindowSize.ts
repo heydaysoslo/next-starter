@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react'
 import _debounce from 'lodash/debounce'
 
-/**
- * Usage
- *
- * const windowSize = useWindowSize({ debounce: 250 })
- * handleResize = () => {
- *    // do stuff on resize
- * }
- * useEffect(handleResize, [windowSize])
- *
- */
-
 const getSize = () => {
   return typeof window !== 'undefined'
     ? {
@@ -28,7 +17,28 @@ const getSize = () => {
       }
 }
 
-const useWindowSize = ({ debounce = 0 } = {}) => {
+/**
+ * Get size of window
+ *
+ * @example ´´´tsx
+ *
+ * const windowSize = useWindowSize({ debounce: 250 })
+ * handleResize = () => {
+ *    // do stuff on resize
+ * }
+ * useEffect(handleResize, [windowSize])
+ *```
+ */
+
+type Props = {
+  /**
+   * Debounce in miliseconds
+   * @default 100
+   */
+  debounce?: number
+}
+
+const useWindowSize = ({ debounce = 100 }: Props = {}) => {
   const [windowSize, setWindowSize] = useState(getSize())
 
   const handleResizeDebounce = _debounce(handleResize, debounce)

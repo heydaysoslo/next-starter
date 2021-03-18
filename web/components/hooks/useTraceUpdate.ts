@@ -1,6 +1,17 @@
 import { useEffect, useRef } from 'react'
 
-export default function useTraceUpdate(props) {
+/**
+ * Console logs updated props
+ *
+ * @example ```tsx
+ *  useTraceUpdate(props)
+ * ```
+ *
+ * @note not sure if this actually works
+ * @see https://github.com/damiangreen/use-trace-update
+ */
+
+export default function useTraceUpdate(props: any) {
   const prev = useRef(props)
   useEffect(() => {
     const changedProps = Object.entries(props).reduce((ps, [k, v]) => {
