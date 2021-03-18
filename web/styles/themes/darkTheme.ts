@@ -31,18 +31,19 @@ import defaultTheme from 'styles/themes/defaultTheme'
 const theme: DefaultTheme = {
   ...defaultTheme,
   colors: {
+    ...defaultTheme.colors,
     primary: 'green',
     secondary: 'orange',
     text: 'white',
     border: 'red',
-    background: 'rgba(0,0,0,.8)'
+    background: 'rgba(0,0,0,.8)',
   },
   // fonts: fontFactory({ responsiveFonts, bp: defaultTheme.bp }),
   defaultStyle: ({ theme }) => css`
     body {
       background: ${theme?.colors?.background};
     }
-  `
+  `,
 }
 
 export default theme
