@@ -3,9 +3,11 @@ Sanity:
 Preview:
   ✔ Remove usage of urlFor @done(21-02-22 13:19)
   ✔ Remove next-sanity @done(21-02-22 23:51)
-  ☐ Solve SanityButton event stuff
+  ✔ Solve SanityButton event stuff @done(21-03-10 12:57)
   ☐ Naming convention for article/blog and routes
   ☐ Improve preview with no reload after update
+General errors:
+    ✔ Fix framer-motion cornsilk error @done(21-03-10 14:35)
 Setup:
   ✔ Fix @cms errors @done(21-03-09 20:30)
 Typescript:
