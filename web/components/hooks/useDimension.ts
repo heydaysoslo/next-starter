@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import ResizeObserver from 'resize-observer-polyfill'
 
 const initialState = {
   width: 0,
